@@ -1,0 +1,20 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: aqua;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@font-face {
+    font-family: myFont;
+    src: url("./fonts/Genos-Italic-VariableFont_wght.ttf");
+}
+
+.container-clock{
+    font-size: 12rem;
+    text-align: center;
+    font-family: myFont;
+}
