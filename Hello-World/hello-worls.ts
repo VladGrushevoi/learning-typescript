@@ -13,12 +13,12 @@ const UserGreeting = (User : Greeting) => {
     console.log("User can not be greeted");
 }
 
-let user1 = {
+const user1 = {
     Message: "Allo",
     User: "Pitro",
     AllowGreeting: true
 }
-let user2 = {
+const user2 = {
     Message: "Hi",
     User: "Jopa",
     AllowGreeting: false
