@@ -1,43 +1,44 @@
-class Dll{
-    Root : DllNode
+class Dll {
+    Root: DllNode = null;
 
-    Push(value: number){
+    Push(value: number) {
         var node = new DllNode(value);
 
         node.Next = this.Root;
         node.Prev = null;
 
-        if (this.Root != null)
-        {
+        if (this.Root != null) {
             this.Root.Prev = node;
         }
 
         this.Root = node;
     }
 
-    AddNode(value : number){
-        let node = new DllNode(value);
+    AddNode(value: number) {
+        let newNode = new DllNode(value);
+
         let last : DllNode = this.Root;
 
-        node.Next = null;
+        newNode.Next = null;
 
-        if(this.Root === null){
+        if (this.Root == null)
+        {
             this.Push(value);
             return;
         }
 
-        while(last?.Next !== null){
+        while (last?.Next != null)
+        {
             last = last.Next;
         }
 
-        last.Next = node;
-        node.Prev = last;
-    
+        last.Next = newNode;
+        newNode.Prev = last;
     }
 
-    Print(){
+    Print() {
         let head = this.Root;
-        while(head.Next !== null){
+        while (head) {
             console.log(head.Value)
             head = head.Next
         }

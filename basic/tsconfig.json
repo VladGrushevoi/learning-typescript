@@ -1,7 +1,12 @@
 {
     "compilerOptions": {
-        "target": "ES5",
-        "outDir": "DLL/ts-built",
-        "rootDir": "dll"
-    }
-}
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "outDir": "./DLL/Build",
+      "outFile": "./DLL/Build/app.js"
+    },
+    "include": ["./**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
+  }

@@ -1,7 +1,8 @@
 let dll : Dll = new Dll();
 
 for(let i = 0; i < 15; i++){
-    dll.AddNode(Math.random());
+    console.log("Add ==>" + i);
+    dll.AddNode(i);
 }
 
 dll.Print();
