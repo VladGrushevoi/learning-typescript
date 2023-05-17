@@ -14,9 +14,7 @@ body{
 }
 
 .container-clock{
-    padding: 0;
     font-size: 14rem;
     font-weight: bold;
-    text-align: center;
     font-family: myFont;
 }
