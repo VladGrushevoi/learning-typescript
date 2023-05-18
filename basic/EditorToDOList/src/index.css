@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.todos-container {
+    padding: 1rem;
+    background-color: #afbdf7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+}
+
+.todo-item {
+    display: flex;
+    font-size: 2rem
+}
+
+.todo-title{
+    color: #a867ee;
+    margin-right: 1ch;
+}
+
+.todo-description{
+    color: #eb4c64;
+    margin-right: 1ch;
+}
+
+.todo-isDone{
+    color: #2814e4;
+    margin-right: 1ch;
+}
+
+.todo-checkbox {
+    height: 1rem;
+    width: 1rem;
+}
+
+.todo-edit-button{
+    margin-right: 1rem;
+}
