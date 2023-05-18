@@ -1,4 +1,4 @@
-let dll : Dll = new Dll();
+let dll: Dll = new Dll();
 
 for(let i = 0; i < 15; i++){
     console.log("Add ==>" + i);
