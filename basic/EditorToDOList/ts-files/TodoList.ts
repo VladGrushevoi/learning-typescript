@@ -1,4 +1,4 @@
-interface Todo{
+interface Todo {
     Id: number,
     Tittle: string,
     Description: string,
@@ -30,7 +30,7 @@ let Todos: Todo[] = [
     },
 ]
 
-const onEditButtonClick = (todoId : number) => {
+const onEditButtonClick = (todoId: number) => {
     console.log("Tdod is" + todoId);
     Todos.forEach(td => td.Id === todoId ? td.isEditing = true : td.isEditing = false)
 
@@ -40,8 +40,25 @@ const onEditButtonClick = (todoId : number) => {
     form.addEventListener('submit', (event) => { submitFormHandler(event as SubmitEvent, todoId) });
 }
 
-const todosElements = () : string => {
-    let html : string = ``;
+const onDeleteHandler = (todoId: number) => {
+    Todos = Todos.filter(td => td.Id !== todoId).map((td, index) => {
+
+        return {
+            Id: index,
+            Tittle: td.Tittle,
+            Description: td.Description,
+            isDone: td.isDone,
+            isEditing: td.isEditing
+        }
+    })
+
+    console.log(Todos);
+
+    rootTodoDiv.innerHTML = todosElements();
+}
+
+const todosElements = (): string => {
+    let html: string = ``;
 
     Todos.forEach(td => {
         html += td.isEditing ? `<form id="todo-edit-form">
@@ -53,12 +70,12 @@ const todosElements = () : string => {
         </div>
         </form>
         ` :
-        `<div class="todo-item">
+            `<div class="todo-item">
             <div class="todo-title">Title: <span class="todo-tittle-text">${td.Tittle}</span></div>
             <div class="todo-description">Description: <span class="todo-tittle-text">${td.Description}</span></div>
             <div class="todo-isDone">Is done: <input class="todo-checkbox" type="checkbox" ${td.isDone ? "checked" : ""}></div>
             <button class="todo-edit-button" onclick='onEditButtonClick(${td.Id})'>Редагувати</button>
-            <button class="todo-delete-button">Видалити</button>
+            <button class="todo-delete-button" onclick='onDeleteHandler(${td.Id})'>Видалити</button>
         </div>`;
     });
 

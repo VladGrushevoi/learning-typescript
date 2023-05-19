@@ -28,6 +28,19 @@ const onEditButtonClick = (todoId) => {
     form = document.getElementById("todo-edit-form");
     form.addEventListener('submit', (event) => { submitFormHandler(event, todoId); });
 };
+const onDeleteHandler = (todoId) => {
+    Todos = Todos.filter(td => td.Id !== todoId).map((td, index) => {
+        return {
+            Id: index,
+            Tittle: td.Tittle,
+            Description: td.Description,
+            isDone: td.isDone,
+            isEditing: td.isEditing
+        };
+    });
+    console.log(Todos);
+    rootTodoDiv.innerHTML = todosElements();
+};
 const todosElements = () => {
     let html = ``;
     Todos.forEach(td => {
@@ -45,12 +58,13 @@ const todosElements = () => {
             <div class="todo-description">Description: <span class="todo-tittle-text">${td.Description}</span></div>
             <div class="todo-isDone">Is done: <input class="todo-checkbox" type="checkbox" ${td.isDone ? "checked" : ""}></div>
             <button class="todo-edit-button" onclick='onEditButtonClick(${td.Id})'>Редагувати</button>
-            <button class="todo-delete-button">Видалити</button>
+            <button class="todo-delete-button" onclick='onDeleteHandler(${td.Id})'>Видалити</button>
         </div>`;
     });
     return html;
 };
 let rootTodoDiv = document.getElementsByClassName("todos-container")[0];
+let addForm = document.getElementById("form-add-todo");
 let form;
 rootTodoDiv.innerHTML = todosElements();
 const submitFormHandler = (e, todoId) => {
@@ -72,4 +86,19 @@ const submitFormHandler = (e, todoId) => {
     console.log(Todos);
     rootTodoDiv.innerHTML = todosElements();
 };
+const addTodoSubmitHandler = (e) => {
+    e.preventDefault();
+    const title = addForm.getElementsByTagName("input")[0].value;
+    const description = addForm.getElementsByTagName("input")[1].value;
+    const todo = {
+        Id: Todos.length + 1,
+        Tittle: title,
+        Description: description,
+        isDone: false,
+        isEditing: false
+    };
+    Todos.push(todo);
+    rootTodoDiv.innerHTML = todosElements();
+};
+addForm.addEventListener('submit', addTodoSubmitHandler);
 //# sourceMappingURL=app.js.map

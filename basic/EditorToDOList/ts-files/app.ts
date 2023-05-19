@@ -1,4 +1,5 @@
 let rootTodoDiv : HTMLElement = document.getElementsByClassName("todos-container")[0] as HTMLElement;
+let addForm : HTMLFormElement = document.getElementById("form-add-todo") as HTMLFormElement;
 let form : HTMLFormElement | null;
 
 rootTodoDiv.innerHTML = todosElements();
@@ -23,5 +24,24 @@ const submitFormHandler = (e: Event, todoId : number) => {
     console.log(Todos);
     rootTodoDiv.innerHTML = todosElements();
 }
+
+const addTodoSubmitHandler = (e: SubmitEvent) => {
+    e.preventDefault();
+    const title : string = (addForm.getElementsByTagName("input")[0] as HTMLInputElement).value
+    const description : string = (addForm.getElementsByTagName("input")[1] as HTMLInputElement).value
+
+    const todo : Todo = {
+        Id: Todos.length + 1,
+        Tittle: title,
+        Description: description,
+        isDone: false,
+        isEditing: false
+    }
+
+    Todos.push(todo);
+
+    rootTodoDiv.innerHTML = todosElements();
+}
+addForm.addEventListener('submit', addTodoSubmitHandler)
 // form = document.getElementById("todo-edit-form") as HTMLFormElement;
 //form.addEventListener('submit',submitFormHandler)
