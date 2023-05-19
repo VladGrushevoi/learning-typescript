@@ -9,13 +9,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: fit-content;
     flex-direction: column;
 }
 
 .todo-item {
     display: flex;
-    font-size: 2rem
+    font-size: 2rem;
+    margin: 1rem;
 }
 
 .todo-title{
@@ -40,4 +40,15 @@ body {
 
 .todo-edit-button{
     margin-right: 1rem;
+}
+
+.add-form-container {
+    padding: 1rem;
+    background-color: #afbdf7;
+}
+
+.add-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
 }
