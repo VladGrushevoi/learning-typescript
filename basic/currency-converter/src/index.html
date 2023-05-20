@@ -4,9 +4,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
     <title>Currency converter</title>
 </head>
 <body>
-    
+    <div class="header">
+        <div class="currence-now">
+            <div class="name-currency">
+                USD
+            </div>
+            <div class="buy-currence">
+                37.50
+            </div>
+            <div class="divider-currency">
+                \
+            </div>
+            <div class="sell-currency">
+                37.60
+            </div>
+        </div>
+        <div class="currence-now">
+            <div class="name-currency">
+                EURO
+            </div>
+            <div class="buy-currence">
+                39.90
+            </div>
+            <div class="divider-currency">
+                \
+            </div>
+            <div class="sell-currency">
+                40.10
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="left">
+            <input type="number" id="input-uah">
+            <div class="UAH">
+                UAH
+            </div>
+        </div>
+        <button class="reverse-button">
+            <p>----------------></p>
+            <p><---------------</p>
+        </button>
+        <div class="right">
+            <input type="number" id="input-curency">
+            <select name="currency-selector" id="currency-selector">
+                <option value="USD">USD</option>
+                <option value="EURO">EURO</option>
+            </select>
+        </div>
+    </div>
 </body>
 </html>
