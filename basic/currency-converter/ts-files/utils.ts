@@ -1,4 +1,5 @@
 async function GetExchangesRate() {
+    const url : string = `https://api.monobank.ua/bank/currency`;
     const response = await fetch(url);
 
     if(!response.ok){
@@ -9,4 +10,5 @@ async function GetExchangesRate() {
     const fitlering = result.filter(er => er.currencyCodeB === 980 && currencyCodeA.includes(er.currencyCodeA))
     return fitlering
 }
+
 

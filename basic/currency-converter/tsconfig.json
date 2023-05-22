@@ -7,7 +7,7 @@
       "target": "es2017",
       "sourceMap": true,
       "rootDir": "./ts-files",
-      "outDir": "./src",
+      //"outDir": "./src/scripts",
       "outFile": "./src/app.js"
     },
     "include": ["./**/*"],
