@@ -1,4 +1,5 @@
 const HelloWord = (name) => {
     console.log("Hello " + name);
 };
-export { HelloWord };
+const data = ["allo", "allo"];
+export { HelloWord, data };
