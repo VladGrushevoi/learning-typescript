@@ -25,7 +25,7 @@ const updateGameData = (index: number) => {
 
 const changePlayer = () => {
     player = player === "X" ? "O" : "X";
-    playerDisplay.innerHTML = `Player <span class="player${player}">${player}</span>`;
+    playerDisplay.innerHTML = `Player <span class="player${player}">${player}</span>  turn`;
 }
 
 
