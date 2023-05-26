@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "rootDir": "./",
+        "target": "ES6",
+        "outFile": "./app.js"
+    }
+}
