@@ -1,9 +1,12 @@
 import './App.css';
-import { Title } from './components/title/title.tsx';
-
+import { Counter } from './components/counter/Counter.tsx';
+import { Title } from './components/title/Title.tsx'
 function App() {
   return (
-    <Title Name='Vlad' Age={23}/>
+    <>
+      <Title Name='Vlad' Age={23} />
+      <Counter />
+    </>
   );
 }
 
