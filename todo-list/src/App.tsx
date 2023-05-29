@@ -1,11 +1,12 @@
-
+import { Header } from "./components/Header/Header"
+import { TodoList } from "./components/TodoList/TodoList"
+import { Todos } from "./data/Todo"
 
 function App() {
   return (
     <>
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+     <Header />
+     <TodoList TodoList={Todos} />
     </>
   )
 }
