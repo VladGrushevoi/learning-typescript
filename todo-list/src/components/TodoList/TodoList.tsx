@@ -1,20 +1,43 @@
+import { useState, useContext } from "react"
 import { Todo } from "../../models/TodoModel"
 import { TodoCell } from "../Todo/Todo"
 import { TodoItemCell } from "../TodoItem/TodoItem"
+import { ModalContext } from "../../Context/ModalContext"
+import { Modal } from "../Modal/Modal"
+import { TodoItemEditForm } from "../todoItemEditFrom/TodoItemEditForm"
+import { Todos } from "../../data/Todo"
 
 interface TodoListProps {
     TodoList: Todo[]
 }
 
 export const TodoList = ({ TodoList }: TodoListProps) => {
+
+    const [todoId, setTodoId] = useState(TodoList[0].Id);
+    const [todoItemId, setTodoItemId] = useState(0);
+
+    const { modal, open, close } = useContext(ModalContext)
+
+    const chooseTodoItems = (todoId : number) => {
+        setTodoId(todoId);
+    }
+    
+    const onEditHandler = (todoItemId : number) => {
+        setTodoItemId(todoItemId);
+        open()
+    }
+
+    const onDeleteHandler = (todoItemId : number) => {
+        console.log("Deleting item " + todoItemId)
+    }
+
     return (
         <>
             <div className="h-full container flex flex-row py-6 px-4">
-                <div className="w-[200] bg-blue-300 flex flex-col border">
-                    {TodoList.map(item => <TodoCell Todo={item} key={item.Id} />)}
+                <div className="py-8 px-6 w-1/6 bg-blue-300 flex flex-col border">
+                    {TodoList.map(item => <TodoCell todoClick={chooseTodoItems} Todo={item} key={item.Id} />)}
                 </div>
                 <div className="w-full h-full py-6 px-4 border">
-                    {/* {TodoList[0].TodoItems.map(item => <TodoItemCell todoItem={item} key={item.Id}/>)} */}
                     <table className="table-auto min-w-full text-left text-lg">
                         <thead className="border-b font-medium dark:border-neutral-500">
                             <tr>
@@ -24,11 +47,19 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {TodoList[0].TodoItems.map(item => <TodoItemCell todoItem={item} key={item.Id}/>)}
+                            {
+                                TodoList.find(i => i.Id === todoId)?.TodoItems
+                                .map(item => <TodoItemCell onEdit={onEditHandler} onDelete={onDeleteHandler} todoItem={item}  key={item.Id}/>)
+                            }
                         </tbody>
                     </table>
                 </div>
             </div>
+            {modal && <Modal title="Edit todo item" onClose={close}>
+                    <TodoItemEditForm 
+                        todoItem={Todos.find(i => i.Id === todoId)?.TodoItems.find(i => i.Id === todoItemId)} 
+                    />
+                </Modal>}
         </>
     )
 }

@@ -1,10 +1,20 @@
 import { TodoItem } from "../../models/TodoModel"
 
 interface TodoItemProps {
-    todoItem : TodoItem
+    todoItem : TodoItem,
+    onEdit : (id : number) => void,
+    onDelete : (id : number) => void
 }
 
-export const TodoItemCell = ({ todoItem } : TodoItemProps) => {
+export const TodoItemCell = ({ todoItem, onEdit, onDelete } : TodoItemProps) => {
+
+    const onEditClickHandler = () => {
+        onEdit(todoItem.Id)
+    }
+
+    const onDeleteClickHandler = () => {
+        onDelete(todoItem.Id)
+    }
 
     return(
         <>
@@ -19,10 +29,16 @@ export const TodoItemCell = ({ todoItem } : TodoItemProps) => {
                     <input type="checkbox" checked={todoItem.isDone} className="w-6 h-4"/>
                 </td>
                 <td>
-                    <button className="px-6 py-4 text-xl bg-green-500 border-2 rounded-lg hover:text-yellow-300">Edit</button>
+                    <button 
+                    className="px-6 py-4 text-xl bg-green-500 border-2 rounded-lg hover:text-yellow-300"
+                    onClick={onEditClickHandler}
+                    >Edit</button>
                 </td>
                 <td>
-                    <button className="px-6 py-4 text-xl bg-red-500 border-2 rounded-lg hover:text-yellow-300">Delete</button>
+                    <button 
+                    className="px-6 py-4 text-xl bg-red-500 border-2 rounded-lg hover:text-yellow-300"
+                        onClick={onDeleteClickHandler}
+                    >Delete</button>
                 </td>
             </tr>
         </>
