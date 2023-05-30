@@ -12,10 +12,14 @@ interface TodoListProps {
 
 export const TodoList = ({ TodoList }: TodoListProps) => {
     const [todos, setTodos] = useState(TodoList)
-    const [todoId, setTodoId] = useState(TodoList[0].Id);
+    const [currentTodo, setTodoId] = useState(TodoList[0].Id);
     const [todoItemId, setTodoItemId] = useState(0);
+    const [typeModal, setTypeModal] = useState({Edit : false, AddTodo : false, AddTodoItem: false})
+    const [modalTitle, setModalTitle] = useState("");
 
-    const { modal, open, close } = useContext(ModalContext)
+    console.log(typeModal)
+
+    const modal = useContext(ModalContext)
 
     const chooseTodoItems = (todoId : number) => {
         setTodoId(todoId);
@@ -23,19 +27,38 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
     
     const onEditHandler = (todoItemId : number) => {
         setTodoItemId(todoItemId);
-        open()
+        setTypeModal({...typeModal, Edit: true});
+        setModalTitle("Edit todo item")
+        modal.open()
     }
 
     const onDeleteHandler = (todoItemId : number) => {
-        console.log("Deleting item " + todoItemId)
+        const newTodos = todos
+            .map(todo => todo.Id !== currentTodo ? todo 
+                : todo = {...todo, TodoItems: todo.TodoItems.filter(tdI => tdI.Id !== todoItemId)})
+
+        setTodos(newTodos)
     }
 
     const updateTodoItem = (upTodoItem : TodoItem) => {
         
         setTodos(prev => prev
-            .map(td => td.Id !== todoId ? td : td = {Id: td.Id, Title: td.Title, TodoItems : td.TodoItems
-                                                                                    .map(tdI => tdI.Id !== upTodoItem.Id ? tdI : upTodoItem)}))
-        close();
+            .map(td => td.Id !== currentTodo ? td : 
+                td = {Id: td.Id, Title: td.Title, TodoItems : td.TodoItems
+                                                            .map(tdI => tdI.Id !== upTodoItem.Id ? tdI : upTodoItem)}))
+            modal.close();
+            setTypeModal({...typeModal, Edit: false})
+    }
+
+    const addTodoHandler = () => {
+        setTypeModal({...typeModal, AddTodo: true})
+        setModalTitle("Add TODO")
+        modal.open();
+    }
+
+    const modalClose = () => {
+        setTypeModal({Edit : false, AddTodo : false, AddTodoItem: false})
+        modal.close()
     }
 
     return (
@@ -43,6 +66,10 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
             <div className="h-full container flex flex-row py-6 px-4">
                 <div className="py-8 px-6 w-1/6 bg-blue-300 flex flex-col border">
                     {TodoList.map(item => <TodoCell todoClick={chooseTodoItems} Todo={item} key={item.Id} />)}
+                    <button
+                        className="ml-16 mr-16 text-center font-bold pb-1.5 hover:text-yellow-300  text-2xl border rounded-full bg-red-500 text-white shadow-lg"
+                        onClick={addTodoHandler}
+                    >+</button>
                 </div>
                 <div className="w-full h-full py-6 px-4 border">
                     <table className="table-auto min-w-full text-left text-lg">
@@ -55,18 +82,26 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
                         </thead>
                         <tbody>
                             {
-                                todos.find(i => i.Id === todoId)?.TodoItems
+                                todos.find(i => i.Id === currentTodo)?.TodoItems
                                 .map(item => <TodoItemCell onEdit={onEditHandler} onDelete={onDeleteHandler} todoItem={item}  key={item.Id}/>)
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
-            {modal && <Modal title="Edit todo item" onClose={close}>
-                    <TodoItemEditForm 
-                        todoItem={todos.find(i => i.Id === todoId)?.TodoItems.find(i => i.Id === todoItemId)!}
+            {modal.modal && <Modal title={modalTitle} onClose={modalClose}>
+                    {
+                        typeModal.Edit && <TodoItemEditForm 
+                        todoItem={todos.find(i => i.Id === currentTodo)?.TodoItems.find(i => i.Id === todoItemId)!}
                         updateTodoItem={updateTodoItem} 
                     />
+                    }
+                    {
+                        typeModal.AddTodo && <h1>Adding todo</h1>
+                    }
+                    {
+                        typeModal.AddTodoItem && <h1>Adding todo item</h1>
+                    }
                 </Modal>}
         </>
     )
