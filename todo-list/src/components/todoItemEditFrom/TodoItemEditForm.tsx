@@ -1,18 +1,33 @@
+import { useCheckbox } from "../../hooks/checkboxHook"
 import { useInput } from "../../hooks/inputHook"
 import { TodoItem } from "../../models/TodoModel"
 
 interface TodoItemEditProps {
-    todoItem: TodoItem | undefined
+    todoItem: TodoItem,
+    updateTodoItem: (todoItem : TodoItem) => void
 }
 
-export const TodoItemEditForm = ({ todoItem }: TodoItemEditProps) => {
+export const TodoItemEditForm = ({ todoItem, updateTodoItem }: TodoItemEditProps) => {
 
     const titleInput = useInput(todoItem?.Title)
     const descriptionInput = useInput(todoItem?.Description)
+    const isDoneCheckbox = useCheckbox(todoItem?.isDone)
+
+    const handleSubmit = (e : React.FormEvent) => {
+        e.preventDefault();
+        const newTodoItem : TodoItem = {
+            Id: todoItem && todoItem?.Id,
+            Title: titleInput.value,
+            Description: descriptionInput.value,
+            isDone: isDoneCheckbox.checked 
+        }
+
+        updateTodoItem(newTodoItem);
+    }
 
     return (
         <>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label className="text-lg" htmlFor="editTitle">Title</label>
                 <input
                     id="editTitle"
@@ -36,7 +51,7 @@ export const TodoItemEditForm = ({ todoItem }: TodoItemEditProps) => {
                     id="edotIsDone"
                     type="checkbox"
                     placeholder="Enter the title..."
-                    checked={todoItem && todoItem.isDone}
+                    {...isDoneCheckbox}
                     className="border py-4 px-6 m-4"
                 />
 

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export const useInput = (initData : string | undefined) => {
+export const useInput = (initData : string) => {
     const [value, setValue] = useState(initData);
 
     return {

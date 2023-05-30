@@ -1,6 +1,6 @@
 import { Todo } from "../models/TodoModel";
 
-export const Todos : Todo[] = [
+export let Todos : Todo[] = [
     {
         Id : Math.random(),
         Title : 'Shopping',

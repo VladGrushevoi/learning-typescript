@@ -1,18 +1,17 @@
 import { useState, useContext } from "react"
-import { Todo } from "../../models/TodoModel"
+import { Todo, TodoItem } from "../../models/TodoModel"
 import { TodoCell } from "../Todo/Todo"
 import { TodoItemCell } from "../TodoItem/TodoItem"
 import { ModalContext } from "../../Context/ModalContext"
 import { Modal } from "../Modal/Modal"
 import { TodoItemEditForm } from "../todoItemEditFrom/TodoItemEditForm"
-import { Todos } from "../../data/Todo"
 
 interface TodoListProps {
     TodoList: Todo[]
 }
 
 export const TodoList = ({ TodoList }: TodoListProps) => {
-
+    const [todos, setTodos] = useState(TodoList)
     const [todoId, setTodoId] = useState(TodoList[0].Id);
     const [todoItemId, setTodoItemId] = useState(0);
 
@@ -29,6 +28,14 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
 
     const onDeleteHandler = (todoItemId : number) => {
         console.log("Deleting item " + todoItemId)
+    }
+
+    const updateTodoItem = (upTodoItem : TodoItem) => {
+        
+        setTodos(prev => prev
+            .map(td => td.Id !== todoId ? td : td = {Id: td.Id, Title: td.Title, TodoItems : td.TodoItems
+                                                                                    .map(tdI => tdI.Id !== upTodoItem.Id ? tdI : upTodoItem)}))
+        close();
     }
 
     return (
@@ -48,7 +55,7 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
                         </thead>
                         <tbody>
                             {
-                                TodoList.find(i => i.Id === todoId)?.TodoItems
+                                todos.find(i => i.Id === todoId)?.TodoItems
                                 .map(item => <TodoItemCell onEdit={onEditHandler} onDelete={onDeleteHandler} todoItem={item}  key={item.Id}/>)
                             }
                         </tbody>
@@ -57,7 +64,8 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
             </div>
             {modal && <Modal title="Edit todo item" onClose={close}>
                     <TodoItemEditForm 
-                        todoItem={Todos.find(i => i.Id === todoId)?.TodoItems.find(i => i.Id === todoItemId)} 
+                        todoItem={todos.find(i => i.Id === todoId)?.TodoItems.find(i => i.Id === todoItemId)!}
+                        updateTodoItem={updateTodoItem} 
                     />
                 </Modal>}
         </>
