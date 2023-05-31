@@ -4,7 +4,8 @@ import { TodoCell } from "../Todo/Todo"
 import { TodoItemCell } from "../TodoItem/TodoItem"
 import { ModalContext } from "../../Context/ModalContext"
 import { Modal } from "../Modal/Modal"
-import { TodoItemEditForm } from "../todoItemEditFrom/TodoItemEditForm"
+import { TodoItemEditForm } from "../forms/todoItemEditFrom/TodoItemEditForm"
+import { TodoAddForm } from "../forms/todoAddForm/TodoAddForm"
 
 interface TodoListProps {
     TodoList: Todo[]
@@ -16,8 +17,6 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
     const [todoItemId, setTodoItemId] = useState(0);
     const [typeModal, setTypeModal] = useState({Edit : false, AddTodo : false, AddTodoItem: false})
     const [modalTitle, setModalTitle] = useState("");
-
-    console.log(typeModal)
 
     const modal = useContext(ModalContext)
 
@@ -61,11 +60,18 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
         modal.close()
     }
 
+    const handleAddTodo = (todo : Todo) => {
+        setTypeModal({Edit : false, AddTodo : false, AddTodoItem: false})
+        modal.close()
+        setTodos(prev => [...prev, todo])
+        console.log(todos)
+    }
+
     return (
         <>
             <div className="h-full container flex flex-row py-6 px-4">
                 <div className="py-8 px-6 w-1/6 bg-blue-300 flex flex-col border">
-                    {TodoList.map(item => <TodoCell todoClick={chooseTodoItems} Todo={item} key={item.Id} />)}
+                    {todos.map(item => <TodoCell todoClick={chooseTodoItems} Todo={item} key={item.Id} />)}
                     <button
                         className="ml-16 mr-16 text-center font-bold pb-1.5 hover:text-yellow-300  text-2xl border rounded-full bg-red-500 text-white shadow-lg"
                         onClick={addTodoHandler}
@@ -97,7 +103,7 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
                     />
                     }
                     {
-                        typeModal.AddTodo && <h1>Adding todo</h1>
+                        typeModal.AddTodo && <TodoAddForm AddTodo={handleAddTodo} />
                     }
                     {
                         typeModal.AddTodoItem && <h1>Adding todo item</h1>
