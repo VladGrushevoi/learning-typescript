@@ -7,6 +7,7 @@ import { Modal } from "../Modal/Modal"
 import { TodoItemEditForm } from "../forms/todoItemEditFrom/TodoItemEditForm"
 import { TodoAddForm } from "../forms/todoAddForm/TodoAddForm"
 import { AddButton } from "../button/AddButton"
+import { TodoItemAddForm } from "../forms/todoItemAddForm/TodoItemAddForm"
 
 interface TodoListProps {
     TodoList: Todo[]
@@ -76,6 +77,16 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
         modal.open();
     }
 
+    const addTodoItem = (todoItem : TodoItem) => {
+        setTypeModal({ Edit: false, AddTodo: false, AddTodoItem: false })
+        modal.close()
+
+        const newTodos = todos.map(td => td.Id !== currentTodo ? 
+            td : 
+            td = {...td, TodoItems: [...td.TodoItems, todoItem]})
+        setTodos(newTodos);
+    }
+
     return (
         <>
             <div className="h-full container flex flex-row py-6 px-4">
@@ -121,7 +132,7 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
                     typeModal.AddTodo && <TodoAddForm AddTodo={handleAddTodo} />
                 }
                 {
-                    typeModal.AddTodoItem && <h1>Adding todo item</h1>
+                    typeModal.AddTodoItem && <TodoItemAddForm addTodoItem={addTodoItem} />
                 }
             </Modal>}
         </>
