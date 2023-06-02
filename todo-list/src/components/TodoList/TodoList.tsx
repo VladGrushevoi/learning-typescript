@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { Todo, TodoItem } from "../../models/TodoModel"
-import { TodoCell } from "../Todo/Todo"
 import { TodoItemCell } from "../TodoItem/TodoItem"
 import { Modal } from "../Modal/Modal"
 import { TodoItemEditForm } from "../forms/todoItemEditFrom/TodoItemEditForm"
@@ -8,6 +7,7 @@ import { TodoAddForm } from "../forms/todoAddForm/TodoAddForm"
 import { AddButton } from "../button/AddButton"
 import { TodoItemAddForm } from "../forms/todoItemAddForm/TodoItemAddForm"
 import { useModal } from "./useModal"
+import { NavTodos } from "../nav/NavTodos"
 
 interface TodoListProps {
     TodoList: Todo[]
@@ -87,15 +87,9 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
     return (
         <>
             <div className="h-full container flex flex-row py-6 px-4">
-                <div className="py-8 px-6 w-1/6 bg-blue-300 flex flex-col border">
-                    {
-                        todos.map(item => <TodoCell todoClick={chooseTodoItems} Todo={item} key={item.Id} />)
-                     }
-                    <AddButton 
-                        addTodoHandler={addTodoHandler} 
-                        classes="ml-16 mr-16 text-center font-bold pb-1.5 hover:text-yellow-300  text-2xl border rounded-full bg-red-500 text-white shadow-lg"
-                    />
-                </div>
+
+                <NavTodos todos={todos} addTodoHandler={addTodoHandler} chooseTodoItems={chooseTodoItems} />
+                
                 <div className="w-full flex flex-col items-center h-full py-6 px-4 border">
                     <table className="table-auto min-w-full text-left text-lg">
                         <thead className="border-b font-medium dark:border-neutral-500">
