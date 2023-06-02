@@ -1,13 +1,13 @@
-import { useState, useContext } from "react"
+import { useState } from "react"
 import { Todo, TodoItem } from "../../models/TodoModel"
 import { TodoCell } from "../Todo/Todo"
 import { TodoItemCell } from "../TodoItem/TodoItem"
-import { ModalContext } from "../../Context/ModalContext"
 import { Modal } from "../Modal/Modal"
 import { TodoItemEditForm } from "../forms/todoItemEditFrom/TodoItemEditForm"
 import { TodoAddForm } from "../forms/todoAddForm/TodoAddForm"
 import { AddButton } from "../button/AddButton"
 import { TodoItemAddForm } from "../forms/todoItemAddForm/TodoItemAddForm"
+import { useModal } from "./useModal"
 
 interface TodoListProps {
     TodoList: Todo[]
@@ -16,20 +16,20 @@ interface TodoListProps {
 export const TodoList = ({ TodoList }: TodoListProps) => {
     const [todos, setTodos] = useState(TodoList)
     const [currentTodo, setTodoId] = useState(TodoList[0].Id);
-    const [todoItemId, setTodoItemId] = useState(0);
-    const [typeModal, setTypeModal] = useState({ Edit: false, AddTodo: false, AddTodoItem: false })
-    const [modalTitle, setModalTitle] = useState("");
-
-    const modal = useContext(ModalContext)
+    const { modal, modalInfo, createModalInfo } = useModal()
 
     const chooseTodoItems = (todoId: number) => {
         setTodoId(todoId);
     }
 
     const onEditHandler = (todoItemId: number) => {
-        setTodoItemId(todoItemId);
-        setTypeModal({ ...typeModal, Edit: true });
-        setModalTitle("Edit todo item")
+        const editTodoItem = todos.find(td => td.Id === currentTodo)?.TodoItems.find(tdI => tdI.Id === todoItemId)!
+
+        createModalInfo({ 
+            title: "Edit TODO item", 
+            children: <TodoItemEditForm todoItem={editTodoItem} updateTodoItem={updateTodoItem} /> 
+        })
+
         modal.open()
     }
 
@@ -50,35 +50,32 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
                         .map(tdI => tdI.Id !== upTodoItem.Id ? tdI : upTodoItem)
                 }))
         modal.close();
-        setTypeModal({ ...typeModal, Edit: false })
     }
 
     const addTodoHandler = () => {
-        setTypeModal({ ...typeModal, AddTodo: true })
-        setModalTitle("Add TODO")
+        
+        createModalInfo({
+            title: "Add TODO",
+            children: <TodoAddForm AddTodo={handleAddTodo} />
+        })
         modal.open();
     }
 
-    const modalClose = () => {
-        setTypeModal({ Edit: false, AddTodo: false, AddTodoItem: false })
-        modal.close()
-    }
-
     const handleAddTodo = (todo: Todo) => {
-        setTypeModal({ Edit: false, AddTodo: false, AddTodoItem: false })
         modal.close()
         setTodos(prev => [...prev, todo])
         console.log(todos)
     }
 
     const openAddTodoItem = () => {
-        setTypeModal({ ...typeModal, AddTodoItem: true })
-        setModalTitle("Add TODO Item")
+        createModalInfo({
+            title: "Add TODO item",
+            children: <TodoItemAddForm addTodoItem={addTodoItem} />
+        })
         modal.open();
     }
 
     const addTodoItem = (todoItem : TodoItem) => {
-        setTypeModal({ Edit: false, AddTodo: false, AddTodoItem: false })
         modal.close()
 
         const newTodos = todos.map(td => td.Id !== currentTodo ? 
@@ -121,20 +118,11 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
                     />
                 </div>
             </div>
-            {modal.modal && <Modal title={modalTitle} onClose={modalClose}>
-                {
-                    typeModal.Edit && <TodoItemEditForm
-                        todoItem={todos.find(i => i.Id === currentTodo)?.TodoItems.find(i => i.Id === todoItemId)!}
-                        updateTodoItem={updateTodoItem}
-                    />
-                }
-                {
-                    typeModal.AddTodo && <TodoAddForm AddTodo={handleAddTodo} />
-                }
-                {
-                    typeModal.AddTodoItem && <TodoItemAddForm addTodoItem={addTodoItem} />
-                }
-            </Modal>}
+            {
+            modal.modal && 
+                <Modal title={modalInfo.title} onClose={modal.close} children={modalInfo.children}/>
+            
+            }
         </>
     )
 }
