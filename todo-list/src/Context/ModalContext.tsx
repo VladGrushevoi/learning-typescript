@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react"
  
-interface IModalContext {
+export interface IModalContext {
     modal : boolean,
     open : () => void,
     close : () => void

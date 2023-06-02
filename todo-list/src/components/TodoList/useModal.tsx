@@ -1,12 +1,18 @@
 import { useState, useContext } from 'react'
-import { ModalContext } from '../../Context/ModalContext';
+import { IModalContext, ModalContext } from '../../Context/ModalContext';
 
 interface ModalProps {
     title: string,
     children: React.ReactElement | null
 }
 
-export const useModal = () => {
+export interface ModalInfo {
+    modal : IModalContext,
+    modalInfo : ModalProps,
+    createModal : (info : ModalProps) => void
+}
+
+export const useModal = () : ModalInfo => {
     const [modalInfo, setModalInfo] = useState({
         title: "",
         children: null
@@ -14,13 +20,13 @@ export const useModal = () => {
 
     const modal = useContext(ModalContext)
 
-    const createModalInfo = (info : ModalProps) => {
+    const createModal = (info : ModalProps) => {
         setModalInfo(info)
     }
 
     return {
         modal,
         modalInfo,
-        createModalInfo
+        createModal
     }
 }
