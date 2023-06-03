@@ -30,7 +30,7 @@ export const NavTodos = ({ todos, chooseTodoItems, addTodoHandler } : NavTodosPr
                 }
                 <AddButton
                     addTodoHandler={addTodoHandler}
-                    classes="ml-16 mr-16 text-center font-bold pb-1.5 hover:text-yellow-300  text-2xl border rounded-full bg-red-500 text-white shadow-lg"
+                    className="ml-14 mr-14 w-1/3 text-center font-bold pb-1.5 hover:text-yellow-300  text-2xl border rounded-full bg-red-500 text-white shadow-lg"
                 />
             </div>
         </>

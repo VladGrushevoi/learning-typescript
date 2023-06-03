@@ -1,14 +1,14 @@
 interface AddButtonProps {
     addTodoHandler : (data : any) => void,
-    classes: string | undefined
+    className: string | undefined
 }
 
-export const AddButton = ({classes, addTodoHandler}:AddButtonProps) => {
+export const AddButton = ({className, addTodoHandler}:AddButtonProps) => {
 
     return (
         <>
             <button
-                className={classes}
+                className={className}
                 onClick={addTodoHandler}
             >+</button>
         </>)

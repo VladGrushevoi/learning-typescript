@@ -48,7 +48,7 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
                     </table>
                     <AddButton
                         addTodoHandler={openAddTodoItem}
-                        classes=" text-center w-1/6 mt-3 font-bold pb-1.5 hover:text-yellow-300  text-2xl border rounded-full bg-red-500 text-white shadow-lg"
+                        className=" text-center w-1/6 mt-3 font-bold pb-1.5 hover:text-yellow-300  text-2xl border rounded-full bg-red-500 text-white shadow-lg"
                     />
                 </div>
             </div>
