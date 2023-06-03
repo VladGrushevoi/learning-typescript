@@ -52,7 +52,6 @@ export const TodoList = ({ TodoList }: TodoListProps) => {
                     />
                 </div>
             </div>
-            {console.log(modal.modal.modal)}
             {
                 modal.modal.modal &&
                 <Modal title={modal.modalInfo.title} onClose={modal.modal.close} children={modal.modalInfo.children} />
