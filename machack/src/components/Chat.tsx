@@ -2,12 +2,17 @@ import { useState } from 'react'
 import { ChatForm } from "./ChatForm"
 import { Output } from "./Output"
 
-export const Chat = () => {
+interface ChatProps {
+    handleAiResult : (msg : string) => void,
+}
+
+export const Chat = ({handleAiResult}:ChatProps) => {
 
     const [messages, setMessages] = useState(Array<string>)
 
     const addMessage = (msg : string) => {
         setMessages(prev => [...prev, msg])
+        handleAiResult(msg)
     }
 
     return (
