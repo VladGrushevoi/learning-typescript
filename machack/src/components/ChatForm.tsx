@@ -20,12 +20,12 @@ export const ChatForm = ({addMessage} : ChatFormProps) => {
             >
                 <input 
                     type="text" 
-                    className="py-2 px-4 w-3/4 h-full rounded-sm outline-0"
+                    className="py-2 px-4 w-5/6 h-full rounded-sm outline-0"
                     {...msgInput}
                 />
                 <button 
                     type="submit"
-                    className="text-center bg-slate-400 w-1/4 h-full rounded-md"
+                    className="text-center bg-slate-400 w-1/6 h-full rounded-md"
                     >send</button>
             </form>
         </>
