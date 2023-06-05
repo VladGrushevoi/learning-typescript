@@ -8,7 +8,7 @@ import { openai } from './openAi/openAi'
 // }
 
 function App() {
-  const [responseAI, setResponseAi] = useState({__html: ""})
+  const [responseAI, setResponseAi] = useState<{__html: string | TrustedHTML}>({__html: ''})
 
   const handleAiResult = async (msg : string) => {
     const result = document.getElementById('result')
@@ -18,16 +18,17 @@ function App() {
     const response = await openai.createEdit({
       model: "code-davinci-edit-001",
       input: result?.outerHTML,
-      instruction: msg
+      instruction: msg,
+      temperature: 0.7,
     })
 
-    console.log(response.data)
+    console.log(response.data.choices[0].text)
 
-    setResponseAi({...responseAI, __html: response.data.choices[0].text!})
+    setResponseAi({__html: response.data.choices[0].text!})
   }
   return (
     <>
-      <div id="result">
+      <div id="result" dangerouslySetInnerHTML={{__html: responseAI.__html}}>
       </div>
       {/* <img src={responseAI?.url} alt="" /> */}
       <Chat handleAiResult={handleAiResult}/>
