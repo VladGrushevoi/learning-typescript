@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "target": "ES2015",
+      "sourceMap": true,
+      "rootDir": "./ts-files",
+      "outDir": "./src",
+      "outFile": "./src/app.js"
+    },
+    "include": ["./**/*"],
+    "exclude": ["node_modules", "**/*.spec.ts"]
+  }
