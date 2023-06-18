@@ -19,7 +19,7 @@ function App() {
       model: "code-davinci-edit-001",
       input: result?.outerHTML,
       instruction: msg,
-      temperature: 0.7,
+      temperature: 0.1,
     })
 
     console.log(response.data.choices[0].text)
