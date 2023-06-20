@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-purple-300 text-center text-3xl">
+<html lang="en" class="bg-slate-800 text-center text-3xl">
 
 <head>
     <meta charset="UTF-8">
@@ -8,27 +8,59 @@
     <link rel="stylesheet" href="output.css">
 </head>
 
-<body class="m-0 text-4xl flex flex-1 min-h-screen items-center justify-center">
-    <div id="clock" class="w-[700px] h-[700px] border rounded-full relative shadow-inner shadow-pink-900" >
-        <div id="main_hour_hor" class="h-full w-2 bg-black absolute left-[49%] rotate-90 rounded-2xl z-50">
-            <div class="h-[550px] w-full bg-purple-300 my-10"></div>
+<body class="m-0 text-4xl h-screen items-center justify-center -rotate-90">
+    <div id="clock" class="w-[700px] h-[700px] border rounded-full relative shadow-2xl shadow-green-400" >
+        <div class="h-full w-2 absolute left-[49%]">
+            <div class="h-1/8 w-full border rounded-lg relative"></div>
+            <span class="block h-6/8"></span>
+            <div class="h-1/8 w-full border rounded-lg relative"></div>
         </div>
-        <div id="main_hour_vert" class="h-full w-2 bg-black absolute left-[49%] rounded-2xl">
-            <div class="h-[550px] w-full bg-purple-300 my-10"></div>
+        <div class="h-full w-2 absolute left-[49%] rotate-90">
+            <div class="h-1/8 w-full border rounded-lg relative"></div>
+            <span class="block h-6/8"></span>
+            <div class="h-1/8 w-full border rounded-lg relative"></div>
         </div>
-        <div  class="h-full w-1 bg-slate-500 absolute left-[49%] rounded-2xl rotate-30">
-            <div class="h-[550px] w-full bg-purple-300 my-10 border-spacing-1 border-purple-300"></div>
+        <div class="h-full w-1 absolute left-[49%] rotate-30">
+            <div class="h-[10%] w-full border rounded-lg relative"></div>
+            <span class="block h-[79.5%]"></span>
+            <div class="h-[10%] w-full border rounded-lg relative"></div>
         </div>
-        <div  class="h-full w-1 bg-slate-500 absolute left-[49%] rounded-2xl rotate-60">
-            <div class="h-[550px] w-full bg-purple-300 my-10"></div>
+        <div class="h-full w-1 absolute left-[49%] rotate-60">
+            <div class="h-[10%] w-full border rounded-lg relative"></div>
+            <span class="block h-[79.5%]"></span>
+            <div class="h-[10%] w-full border rounded-lg relative"></div>
         </div>
-        <div  class="h-full w-1 bg-slate-500 absolute left-[49%] rounded-2xl rotate-120">
-            <div class="h-[550px] w-full bg-purple-300 my-10"></div>
+        <div class="h-full w-1 absolute left-[49%] rotate-120">
+            <div class="h-[10%] w-full border rounded-lg relative"></div>
+            <span class="block h-[79.5%]"></span>
+            <div class="h-[10%] w-full border rounded-lg relative"></div>
         </div>
-        <div  class="h-full w-1 bg-slate-500 absolute left-[49%] rounded-2xl rotate-150">
-            <div class="h-[550px] w-full bg-purple-300 my-10"></div>
+        <div class="h-full w-1 absolute left-[49%] rotate-150">
+            <div class="h-[10%] w-full border rounded-lg relative"></div>
+            <span class="block h-[79.5%]"></span>
+            <div class="h-[10%] w-full border rounded-lg relative"></div>
+        </div>
+        <div class="absolute left-[49%] top-[49%] w-2 h-2 rounded-full bg-yellow-200 blur-sm">
+
+        </div>
+        <div id="hour" class="h-full w-1 left-[49.5%] -z-10 absolute rotate-90">
+            <span class="h-2/8 block"></span>
+            <div class="h-2/8 w-full bg-green-400 rounded-md"></div>
+            <div class="h-4/8 block"></div>
+        </div>
+        <div id="minutes" class="h-full w-1 left-[49.5%] -z-10 absolute rotate-45">
+            <span class="h-1/8 block"></span>
+            <div class="h-3/8 w-full bg-blue-400 rounded-md"></div>
+            <div class="h-4/8 block"></div>
+        </div>
+        <div id="secondes" class="h-full w-1 left-[49.5%] -z-10 absolute rotate-12">
+            <span class="block"></span>
+            <div class="h-4/8 w-full bg-red-400 rounded-md"></div>
+            <div class="h-4/8 block"></div>
         </div>
     </div>
+
+    <script src="./app.js"></script>
 </body>
 
 </html>
