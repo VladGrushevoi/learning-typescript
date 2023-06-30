@@ -1,18 +1,22 @@
-import { Button, Stack } from 'react-bootstrap'
+import { Button, Card, Spinner, Stack } from 'react-bootstrap'
 import './App.css'
 
 function App() {
 
   return (
     <>
-      <Stack direction="horizontal" gap={2}>
-        <Button as="a" variant="primary">
-          Button as link
-        </Button>
-        <Button as="a" variant="success">
-          Button as link
-        </Button>
-      </Stack>
+      <Card style={{width: '20%'}}>
+      <Card.Header>
+        <Card.Title>PINUS</Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <Card.Img />
+        <Card.Text>
+          eckawjeabejabfjawbeeckawjeabejabfjawbeeckawjeabejabfjawbeeckawjeabejabfjawbeeckawjeabejabfjawbeeckawjeabejabfjawbeeckawjeabejabfjawbe
+        </Card.Text>
+        <Button variant='primary'>SOMETHING</Button>
+      </Card.Body>
+      </Card>
     </>
   )
 }
