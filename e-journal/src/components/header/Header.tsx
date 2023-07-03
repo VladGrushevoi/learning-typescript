@@ -5,7 +5,7 @@ export const Header = () => {
 
     return (
         <>
-            <Row className="h-[10vh] px-10 bg-gradient bg-primary text-center  rounded-b-2xl">
+            <Row className="h-[10vh] px-10 bg-gradient bg-slate-300 text-center rounded-b-2xl ">
                 <NavBar />
             </Row>
         </>

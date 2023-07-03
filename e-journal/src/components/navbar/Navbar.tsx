@@ -19,16 +19,19 @@ export const NavBar = () => {
                                     МЕНЮ
                                 </Offcanvas.Title>
                             </Offcanvas.Header>
-                            <Offcanvas.Body>
+                            <Offcanvas.Body >
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                                    <Nav.Link className="inline" href="#action1">
-                                        МІЙ ПРОФІЛЬ
-                                    </Nav.Link>
-                                    <Nav.Link href="#action2">
+                                    <Nav.Link
+                                        href="#action2"
+                                    >
                                         ГОЛОВНА
                                     </Nav.Link>
                                     <Nav.Link href="#action3">
                                         МОЇ ЗАПИСИ
+                                    </Nav.Link>
+                                    <Nav.Link
+                                        href="#action1">
+                                        МІЙ ПРОФІЛЬ
                                     </Nav.Link>
                                 </Nav>
                             </Offcanvas.Body>
