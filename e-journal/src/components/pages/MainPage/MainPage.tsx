@@ -7,19 +7,19 @@ export const MainPage = () => {
         <>
             <Row className=' px-6 py-8 text-center gap-3 h-[80vh]'>
                 <Col className='border-2 rounded-2xl border-orange-300 shadow-lg'>
-                    <Row className="gap-4 p-6">
+                    <Row className="gap-4">
                         <Col className="">
-                            <Nav className="">
+                            <Nav className="md:flex-row sm:flex-row">
                                 <DateButton />
                                 <DateButton />
                                 <DateButton />
+                                {/* <DateButton />
                                 <DateButton />
                                 <DateButton />
-                                <DateButton />
-                                <DateButton />
+                                <DateButton /> */}
                             </Nav>
                         </Col>
-                        <Col md={8} xs={8} lg={9} className="border bg-slate-200">
+                        <Col sm={12} md={12} xs={12} lg={12} className="border bg-slate-200">
                             <Table className="text-center" striped bordered hover size="sm">
                                 <thead>
                                     <tr>
