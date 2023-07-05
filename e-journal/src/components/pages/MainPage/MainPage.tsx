@@ -1,5 +1,7 @@
-import { Button, Col, Nav, Row, Table } from "react-bootstrap"
+import { Col, Nav, Row, Tab } from "react-bootstrap"
+import { WorkDays } from "../../../fake-data/work-days"
 import { DateButton } from "../../bottons/DateButton"
+import { DayInfoTable } from "../../dayInfoTable/DayInfoTable"
 
 export const MainPage = () => {
 
@@ -7,65 +9,24 @@ export const MainPage = () => {
         <>
             <Row className=' px-6 py-8 text-center gap-3 h-[80vh]'>
                 <Col className='border-2 rounded-2xl border-orange-300 shadow-lg'>
-                    <Row className="gap-4">
-                        <Col className="">
-                            <Nav className="md:flex-row sm:flex-row">
-                                <DateButton />
-                                <DateButton />
-                                <DateButton />
-                                {/* <DateButton />
-                                <DateButton />
-                                <DateButton />
-                                <DateButton /> */}
-                            </Nav>
-                        </Col>
-                        <Col sm={12} md={12} xs={12} lg={12} className="border bg-slate-200">
-                            <Table className="text-center" striped bordered hover size="sm">
-                                <thead>
-                                    <tr>
-                                        <th>ЧАС</th>
-                                        <th>Статус</th>
-                                        <th>Тут нопка</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>9:00</td>
-                                        <td>Вільно</td>
-                                        <td><Button variant="success">Записатися</Button></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>Записано</td>
-                                        <td><Button variant="error">Записатися</Button></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>11:00</td>
-                                        <td>Вільно</td>
-                                        <td><Button variant="success">Записатися</Button></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>12:00</td>
-                                        <td>Вільно</td>
-                                        <td><Button variant="success">Записатися</Button></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td>13:00</td>
-                                        <td>Вільно</td>
-                                        <td><Button variant="success">Записатися</Button></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </Table>
-                        </Col>
+                    <Row className="">
+                        <Tab.Container defaultActiveKey={WorkDays.filter(item => item.times.length !== 0)[0].day}>
+                            <Row className="gap-4 px-4">
+                                <Col sm={2} md={2}>
+                                    <Nav variant="pills" className="flex items-center" key={Math.random()}>
+                                        <DateButton  days={WorkDays}/>
+                                    </Nav>
+                                </Col>
+                                <Col sm={9} className="">
+                                    <Tab.Content>
+                                        <DayInfoTable data={WorkDays}/>
+                                    </Tab.Content>
+                                </Col>
+                            </Row>
+                        </Tab.Container>
                     </Row>
                 </Col>
-                <Col lg={2} className='bg-green-300 rounded-lg'>
+                <Col lg={2} className='bg-green-300 rounded-lg h-[20vh]'>
                 </Col>
             </Row>
         </>
