@@ -14,7 +14,7 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
     }
 
     const isFreeTime = (item: WorkTime): boolean => {
-        return item.status === Status.Free
+        return item.status !== Status.Free
     }
 
     return (
@@ -24,15 +24,15 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
 
                     return (
                         <>
-                            <Tab.Pane eventKey={item.day} key={Math.random()} >
-                                <Stack gap={2} direction="vertical" className="w-[100%]">
+                            <Tab.Pane eventKey={item.day} key={Math.random()}>
+                                <Stack gap={2} direction="vertical" className="w-[100%] p-0">
                                     {
                                         item.times.map(item => {
                                             return (
                                                 <>
-                                                    <Row className={`mt-2 ${typeTimeColor(item)} w-[100%]`}>
-                                                        <Col xs={2}>{item.time}</Col>
-                                                        <Col  className="text-center">{item.status}</Col>
+                                                    <Row className={`mt-2 ${typeTimeColor(item)} w-[100%] rounded-md`}>
+                                                        <Col xs={2} className="m-auto">{item.time}</Col>
+                                                        <Col  className="m-auto">{item.status}</Col>
                                                         <Col xs={4}>
                                                             <Button
                                                             disabled={isFreeTime(item)}

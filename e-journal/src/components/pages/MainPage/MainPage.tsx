@@ -12,12 +12,12 @@ export const MainPage = () => {
                     <Row className="">
                         <Tab.Container defaultActiveKey={WorkDays.filter(item => item.times.length !== 0)[0].day}>
                             <Row className="gap-3 py-4 m-0">
-                                <Col  className="border m-auto rounded-md ">
-                                    <Nav variant="" className="md:flex-col" key={Math.random()}>
+                                <Col  className="border-2 m-auto rounded-md  border-blue-400">
+                                    <Nav variant="pills" className="md:flex-col" key={Math.random()}>
                                         <DateButton  days={WorkDays}/>
                                     </Nav>
                                 </Col>
-                                <Col xs={10} sm={9} md={9} xl={9} className="pr-0">
+                                <Col xs={12} sm={12} md={9} xl={9} className="pr-0">
                                     <Tab.Content>
                                         <DayInfoTable data={WorkDays}/>
                                     </Tab.Content>
