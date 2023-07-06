@@ -14,7 +14,7 @@ export const DateButton = ({ days }: DateButtonProps) => {
                 days.map(item => {
                     return (
                         <>
-                            <Nav.Item key={Math.random()}>
+                            <Nav.Item key={Math.random()} className="hover:bg-slate-300">
                                 <Nav.Link eventKey={item.day} disabled={item.times.length === 0 ? true : false}>{item.day}</Nav.Link>
                             </Nav.Item>
                         </>
