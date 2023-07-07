@@ -10,11 +10,12 @@ import { participantToWhellData } from './utils/prepareDataForWheel'
 
 function App() {
 
-  //const [participants, setParticipant] = useState([] as Participant[])
   const [dataForWheel, setDataForWheel] = useState([] as WheelData[])
 
+  console.log(dataForWheel);
+
   const addParticipant = (newParticipant : Participant) => {
-    //setParticipant([...participants, newParticipant]);
+
     setDataForWheel([...dataForWheel, participantToWhellData(newParticipant)]);
   }
 

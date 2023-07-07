@@ -32,7 +32,7 @@ export const FormParticipant = ({AddParticipantAction} : FormParticipantProps) =
                     aria-label="Large"
                     aria-describedby="inputGroup-sizing-sm"
                     onChange={participentName.onChange}
-                    name={participentName.name}
+                    name=""
                     value={participentName.value}
                   />
                   <InputGroup.Text id="inputGroup-sizing-lg">$</InputGroup.Text>

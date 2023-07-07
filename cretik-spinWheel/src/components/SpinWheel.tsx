@@ -87,15 +87,15 @@ export const SpinWheel = ({ dataForWheel, setDefaultParticipant }: SpinWheelProp
                 </>
               )
           }
-          <Button 
-            className="absolute inline-block top-[24.5%] left-[56.75%] rounded-circle py-4 z-10 bg-white text-black font-bold"
+          {/* <Button 
+            className="absolute inline-block top-[25%] left-[57%] rounded-circle py-4  z-10 bg-white text-black font-bold"
             onClick={handleSpinClick}  
           >
-              Крутити
-          </Button>
+              ГРАТИ
+          </Button> */}
         </Col>
         <Col md={3} className="items-start mb-56 text-white">
-          <Timer />
+          <Timer play={handleSpinClick} dataForWheel={dataForWheel}/>
         </Col>
         <Col>
           {
