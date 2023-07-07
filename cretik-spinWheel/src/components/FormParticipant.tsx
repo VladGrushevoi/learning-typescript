@@ -20,8 +20,8 @@ export const FormParticipant = ({AddParticipantAction} : FormParticipantProps) =
         };
 
         AddParticipantAction(partisipantInfo);
-        participentName.setDefault();
-        amountPts.setDefault();
+        participentName.setdefault();
+        amountPts.setdefault();
     }
 
     return (
@@ -31,13 +31,17 @@ export const FormParticipant = ({AddParticipantAction} : FormParticipantProps) =
                   <Form.Control
                     aria-label="Large"
                     aria-describedby="inputGroup-sizing-sm"
-                    {...participentName}
+                    onChange={participentName.onChange}
+                    name={participentName.name}
+                    value={participentName.value}
                   />
                   <InputGroup.Text id="inputGroup-sizing-lg">$</InputGroup.Text>
                   <Form.Control
                     aria-label="Large"
                     aria-describedby="inputGroup-sizing-sm"
-                    {...amountPts}
+                    onChange={amountPts.onChange}
+                    name={amountPts.name}
+                    value={amountPts.value}
                   />
                   <Button type="submit" variant="primary">ДОДАТИ</Button>
                 </InputGroup>

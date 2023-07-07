@@ -3,6 +3,7 @@ import { Button, Col, Row } from "react-bootstrap"
 import { Wheel } from "react-custom-roulette";
 import { WheelData } from "react-custom-roulette/dist/components/Wheel/types";
 import { culculatePrizeNumber } from "../utils/prepareDataForWheel";
+import { Timer } from "./Timer";
 
 interface SpinWheelProps {
   dataForWheel: WheelData[],
@@ -13,25 +14,38 @@ export const SpinWheel = ({ dataForWheel, setDefaultParticipant }: SpinWheelProp
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [showWinner, setShowWinner] = useState(false)
+  const [showSpinnerInfo, setSpinnerInfo]= useState(false);
   const [oldWinner, setOldWinner] = useState({} as WheelData)
+  const totalBank = dataForWheel.length !== 0 ? 
+                    dataForWheel.map(i => i.optionSize).reduce((prev, next) => Number.parseFloat(prev!.toString()) + Number.parseFloat(next!.toString())) 
+                    : 0;
   const handleSpinClick = () => {
     const prizeNumber = culculatePrizeNumber(dataForWheel);
-    setPrizeNumber(prizeNumber);
+    setPrizeNumber(prizeNumber)
+    setSpinnerInfo(true)
     setMustSpin(true);
     setShowWinner(false)
   };
 
+  const handleClear = () => {
+    setDefaultParticipant();
+    setShowWinner(false);
+    setMustSpin(false);
+    setOldWinner({});
+  }
+
   return (
     <>
-      <Row md={10} className='px-56 pt-4'>
-        <Col className=" pb-20">
+      <Row className='justify-center items-center'>
+        <Col md={3}></Col>
+        <Col md={6} className="">
           {
             dataForWheel.length !== 0 ?
               (
                 <>
                   <Wheel
                     mustStartSpinning={mustSpin}
-                    spinDuration={0.4}
+                    spinDuration={0.6}
                     prizeNumber={prizeNumber}
                     data={dataForWheel}
                     outerBorderColor={"#ccc"}
@@ -44,8 +58,8 @@ export const SpinWheel = ({ dataForWheel, setDefaultParticipant }: SpinWheelProp
                     onStopSpinning={() => {
                       setMustSpin(false);
                       setShowWinner(true);
+                      setSpinnerInfo(false)
                       setOldWinner(dataForWheel[prizeNumber])
-                      setDefaultParticipant();
                     }}
                   />
                 </>
@@ -68,28 +82,37 @@ export const SpinWheel = ({ dataForWheel, setDefaultParticipant }: SpinWheelProp
                       setMustSpin(false);
                       setShowWinner(true);
                       setOldWinner(dataForWheel[prizeNumber])
-                      setDefaultParticipant();
                     }}
                   />
                 </>
               )
           }
           <Button 
-            className="absolute bottom-[61%] left-[52.5%] py-4 z-10 rounded-circle bg-white text-black"
+            className="absolute inline-block top-[24.5%] left-[56.75%] rounded-circle py-4 z-10 bg-white text-black font-bold"
             onClick={handleSpinClick}  
           >
               Крутити
           </Button>
+        </Col>
+        <Col md={3} className="items-start mb-56 text-white">
+          <Timer />
+        </Col>
+        <Col>
           {
-            !showWinner ? (
+            showSpinnerInfo && (
             <>
-              <Col className="font-bold text-2xl text-white ml-40 pt-2">КРУЧУ...</Col>
+              <Col className="font-bold text-2xl text-white pl-52">КРУЧУ...</Col>
             </>
-            ) 
-            :
-            (
+            )
+          }
+          {
+            showWinner && (
               <>
-                <Col className="font-bold text-2xl text-white ml-16 pt-2">ВИГРАВ УЧАСНИК: {oldWinner.option?.toUpperCase()}</Col>
+                <Row className="my-4 pl-44">
+                  <Col className="font-bold text-2xl text-yellow-500">ВИГРАВ УЧАСНИК: {oldWinner.option}</Col>
+                  <Col className="font-bold text-2xl text-yellow-500">СУМА ВИГРАШУ: <br></br> {(totalBank! * 0.9).toFixed().toString()} pts</Col>
+                  <Col md={5}><Button className="" onClick={handleClear}>ОЧИСТИТИ</Button></Col>
+                </Row>
               </>
             )
           }

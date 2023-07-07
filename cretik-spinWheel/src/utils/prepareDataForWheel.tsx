@@ -35,7 +35,8 @@ export const participantToWhellData = (partcipant : Participant) : WheelData => 
                                         + randomIntFromInterval(0, 9) 
                                         + randomIntFromInterval(0, 9) 
                                         + randomIntFromInterval(0, 9) 
-                                        + randomIntFromInterval(0, 9) }
+                                        + randomIntFromInterval(0, 9),
+                    textColor: "white" }
     }
 }
 

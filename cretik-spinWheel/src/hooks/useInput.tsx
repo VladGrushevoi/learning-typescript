@@ -11,6 +11,6 @@ export const useInput = (initValue: string, name: string) => {
         value: value,
         name: name,
         onChange: (e : React.ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value),
-        setDefault: setDefault,
+        setdefault: setDefault,
     }
 }

@@ -34,6 +34,7 @@ function App() {
             <Row className='h-[20vh]'>
               <Col>
                 <FormParticipant AddParticipantAction={addParticipant}/>
+                <h1 className='text-center pt-2 text-white'>НОМЕР КАРТИ: 4441 1111 5297 2141</h1>
               </Col>
             </Row>
           </Col>
