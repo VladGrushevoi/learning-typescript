@@ -1,8 +1,8 @@
 import { Col, Row, Stack } from "react-bootstrap"
-import { Participant } from "../types/participant"
+import { WheelData } from "react-custom-roulette/dist/components/Wheel/types"
 
 interface ParticipantListProps {
-    participants: Participant[],
+    participants: WheelData[],
 }
 
 
@@ -16,8 +16,8 @@ export const ParticipantList = ({ participants }: ParticipantListProps) => {
                         <>
                             <Row className="text-white font-bold" key={Math.random()}>
                                 <Col md={1} key={Math.random()}>{++index}.</Col>
-                                <Col md={8} key={Math.random()}>{p.name}{p.name}</Col>
-                                <Col key={Math.random()}>{p.amountPts}pts</Col>
+                                <Col md={8} key={Math.random()}>{p.option}</Col>
+                                <Col key={Math.random()}>{p.optionSize}pts</Col>
                             </Row>
                         </>
                     ))
