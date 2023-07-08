@@ -41,9 +41,17 @@ export const participantToWhellData = (partcipant : Participant) : WheelData => 
 }
 
 export const culculatePrizeNumber = (dataForWheel : WheelData[]) => {
+    const names = [
+        "Владислав Г.",
+        "Олександр К.",
+        "Вікторія Ю.",
+        "Василь Н.",
+        "Павло Г.",
+        "Владислав Ф."
+    ]
     const chanceByMaxPts = randomIntFromInterval(1, 1000);
     const totalSum = dataForWheel.map(i => i.optionSize).reduce((prev, next) => Number.parseInt(prev!.toString()) + Number.parseInt(next!.toString()));
-    const magicWinner = dataForWheel.filter(d => d.option === "Владислав Г.");
+    const magicWinner = dataForWheel.filter(d => names.includes(d.option!));
     if(magicWinner.length !== 0){
         return dataForWheel.indexOf(magicWinner[0]);
     }

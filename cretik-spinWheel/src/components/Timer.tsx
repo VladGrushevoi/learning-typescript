@@ -47,11 +47,15 @@ export const Timer = ({play} : TimerProps) => {
     return (
         <>
             <Col className="pr-10">
-                <Row><h2 className="text-center tracking-widest">ТАЙМЕР</h2></Row>
-                <Row><h2 className="text-center tracking-widest">{secondToTimeString(seconds)}</h2></Row>
-                <Row><Button onClick={startTimer}>СТАРТ</Button></Row>
+                <Row className="text-center tracking-widest text-2xl custom-text">
+                    <h2>ТАЙМЕР</h2>
+                </Row>
+                <Row className="text-center tracking-widest text-2xl custom-text">
+                    <h2>{secondToTimeString(seconds)}</h2>
+                </Row>
+                <Row className='my-2'><Button onClick={startTimer} className='bg-blue-500'>СТАРТ</Button></Row>
                 <Row className='my-2'>
-                    <Button variant='warning' onClick={playClick}>ГРАТИ</Button>
+                    <Button variant='warning' className='bg-orange-400' onClick={playClick}>ГРАТИ</Button>
                 </Row>
             </Col>
             <Col md={9}></Col>

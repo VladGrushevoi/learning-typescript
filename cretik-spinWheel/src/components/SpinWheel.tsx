@@ -94,7 +94,7 @@ export const SpinWheel = ({ dataForWheel, setDefaultParticipant }: SpinWheelProp
               ГРАТИ
           </Button> */}
         </Col>
-        <Col md={3} className="items-start mb-56 text-white">
+        <Col md={3} className="items-start mb-56 text-white text-2xl">
           <Timer play={handleSpinClick} dataForWheel={dataForWheel}/>
         </Col>
         <Col>
