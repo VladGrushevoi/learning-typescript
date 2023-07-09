@@ -17,8 +17,8 @@ export const MainPage = () => {
                                         <DateButton  days={WorkDays}/>
                                     </Nav>
                                 </Col>
-                                <Col xs={12} sm={12} md={9} xl={9} className="pr-0">
-                                    <Tab.Content>
+                                <Col xs={12} sm={12} md={9} xl={9} className="pr-0 m-auto">
+                                    <Tab.Content className="mr-0">
                                         <DayInfoTable data={WorkDays}/>
                                     </Tab.Content>
                                 </Col>

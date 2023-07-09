@@ -24,13 +24,13 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
 
                     return (
                         <>
-                            <Tab.Pane eventKey={item.day} key={Math.random()}>
-                                <Stack gap={2} direction="vertical" className="w-[100%] p-0">
+                            <Tab.Pane eventKey={item.day} key={Math.random()} className="mr-0 pr-0">
+                                <Stack gap={2} direction="vertical" className="w-[100%] p-0 mr-0 pr-0">
                                     {
                                         item.times.map(item => {
                                             return (
                                                 <>
-                                                    <Row className={`mt-2 ${typeTimeColor(item)} w-[100%] rounded-md`}>
+                                                    <Row className={`mt-0 ${typeTimeColor(item)} w-[100%] rounded-md mr-0 pr-0`}>
                                                         <Col xs={2} className="m-auto">{item.time}</Col>
                                                         <Col  className="m-auto">{item.status}</Col>
                                                         <Col xs={4}>
