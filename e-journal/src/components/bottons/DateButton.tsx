@@ -18,7 +18,6 @@ export const DateButton = ({ days }: DateButtonProps) => {
                                 <Nav.Link 
                                 eventKey={item.day} 
                                 disabled={item.times.length === 0 ? true : false}
-                                className="sm:w-4"
                                 >{item.day}</Nav.Link>
                             </Nav.Item>
                         </>

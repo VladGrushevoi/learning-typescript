@@ -1,4 +1,4 @@
-import { Col, Nav, Row, Tab } from "react-bootstrap"
+import { Col, Nav, Row, Stack, Tab } from "react-bootstrap"
 import { WorkDays } from "../../../fake-data/work-days"
 import { DateButton } from "../../bottons/DateButton"
 import { DayInfoTable } from "../../dayInfoTable/DayInfoTable"
@@ -7,7 +7,7 @@ export const MainPage = () => {
 
     return (
         <>
-            <Row className=' px-6 py-8 text-center gap-3 h-[90vh]'>
+            <Row className=' px-6 py-8 text-center gap-3 md:h-[90vh] h-[150vh]'>
                 <Col className='border-2 rounded-2xl border-orange-300 shadow-lg'>
                     <Row className="">
                         <Tab.Container defaultActiveKey={WorkDays.filter(item => item.times.length !== 0)[0].day}>
@@ -27,6 +27,20 @@ export const MainPage = () => {
                     </Row>
                 </Col>
                 <Col lg={3} className='bg-green-300 rounded-lg'>
+                    <Stack gap={2} className="py-4">
+                        <h1 className="underline">
+                            КОРИСНА ІНФОРМАЦІЯ
+                        </h1>
+                        <h2 className="text-center border rounded-md border-blue-600 shadow-lg">
+                            ПРИХОДЬТЕ ЗІ СВОЇМИ СЕРВЕТКАМИ
+                        </h2>
+                        <h2 className="border rounded-md border-blue-600 shadow-lg">
+                            ПРИХОДЬТЕ ЗІ СВОЇМИ СЕРВЕТКАМИ
+                        </h2>
+                        <h2 className="border rounded-md border-blue-600 shadow-lg">
+                            ПРИХОДЬТЕ ЗІ СВОЇМИ СЕРВЕТКАМИ
+                        </h2>
+                    </Stack>
                 </Col>
             </Row>
         </>
