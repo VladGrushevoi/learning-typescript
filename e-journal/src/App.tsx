@@ -1,6 +1,7 @@
 import { Container } from 'react-bootstrap'
 import './App.css'
-import { MainPage } from './components/pages/MainPage/MainPage'
+import {RouterProvider} from 'react-router-dom'
+import { getRoutes } from './router'
 import { Header } from './components/header/Header'
 
 function App() {
@@ -9,8 +10,7 @@ function App() {
     <>
       <Container className='h-full bg-pink-200 min-h-screen' fluid>
         <Header />
-        <MainPage />
-        {/* <Footer /> */}
+        <RouterProvider router={getRoutes()}/>
       </Container>
     </>
   )
