@@ -7,7 +7,7 @@ export const NavBar = () => {
             {['md'].map((expand) => (
                 <Navbar key={Math.random()} expand={expand} className="">
                     <Container fluid>
-                        <Navbar.Brand href="#">ЛІЧИТЬ ЗУБИ</Navbar.Brand>
+                        <Navbar.Brand href="/">ЛІЧИТЬ ЗУБИ</Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-${expand}`}
@@ -22,15 +22,12 @@ export const NavBar = () => {
                             <Offcanvas.Body >
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
                                     <Nav.Link
-                                        href="#action2"
+                                        href="/"
                                     >
                                         ГОЛОВНА
                                     </Nav.Link>
-                                    <Nav.Link href="#action3">
-                                        МОЇ ЗАПИСИ
-                                    </Nav.Link>
                                     <Nav.Link
-                                        href="#action1">
+                                        href="/user/1111">
                                         МІЙ ПРОФІЛЬ
                                     </Nav.Link>
                                 </Nav>
