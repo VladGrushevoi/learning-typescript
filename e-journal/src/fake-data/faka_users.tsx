@@ -1,20 +1,64 @@
-export const FakeUsers = [
+import { User } from "../types/User";
+import { Status } from "../types/dayInfoType";
+
+export const FakeUsers : User[] = [
     {
-        firstName: "",
-        secondName: "",
-        phoneNumber: "",
-        isActiveRecords : [
+        firstName: "Petro",
+        secondName: "Petrenko",
+        phoneNumber: "+380966051501",
+        isActiveRecords: [
             {
-                date: "",
-                time: "",
-            }
+                date: "15.07.2023",
+                status: Status.Reserv,
+                time: "11:00"
+            },
+            {
+                date: "15.07.2023",
+                status: Status.Reserv,
+                time: "11:00"
+            },
+            {
+                date: "15.07.2023",
+                status: Status.Reserv,
+                time: "11:00"
+            },
+            {
+                date: "15.07.2023",
+                status: Status.Reserv,
+                time: "11:00"
+            },
+            {
+                date: "15.07.2023",
+                status: Status.Reserv,
+                time: "11:00"
+            },
         ],
         isDoneRecords: [
             {
-                date: "",
-                time: ""
-            }
-        ]
-
+                time: "11:00",
+                date: "15.07.2023",
+                status: Status.Done,
+            },
+            {
+                time: "11:00",
+                date: "15.07.2023",
+                status: Status.Done,
+            },
+            {
+                time: "11:00",
+                date: "15.07.2023",
+                status: Status.Done,
+            },
+            {
+                time: "11:00",
+                date: "15.07.2023",
+                status: Status.Done,
+            },
+            {
+                time: "11:00",
+                date: "15.07.2023",
+                status: Status.Done,
+            },
+        ],
     }
 ]

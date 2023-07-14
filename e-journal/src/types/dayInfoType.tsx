@@ -11,5 +11,6 @@ export interface WorkTime {
 export enum Status {
     Free = "Вільно",
     TemporaryHold = "Очікує підтвердження",
-    Reserv = "Підтверджено"
+    Reserv = "Підтверджено",
+    Done = "Виконано"
 }
