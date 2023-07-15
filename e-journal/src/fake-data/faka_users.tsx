@@ -32,8 +32,38 @@ export const FakeUsers : User[] = [
                 status: Status.Reserv,
                 time: "11:00"
             },
+            {
+                date: "15.07.2023",
+                status: Status.Reserv,
+                time: "11:00"
+            },
+            {
+                date: "15.07.2023",
+                status: Status.Reserv,
+                time: "11:00"
+            },
+            {
+                date: "15.07.2023",
+                status: Status.Reserv,
+                time: "11:00"
+            },
         ],
         isDoneRecords: [
+            {
+                time: "11:00",
+                date: "15.07.2023",
+                status: Status.Done,
+            },
+            {
+                time: "11:00",
+                date: "15.07.2023",
+                status: Status.Done,
+            },
+            {
+                time: "11:00",
+                date: "15.07.2023",
+                status: Status.Done,
+            },
             {
                 time: "11:00",
                 date: "15.07.2023",
