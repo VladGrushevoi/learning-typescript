@@ -10,10 +10,10 @@ export const ProfileItem = ({ title, value } : ProfileItemProps) => {
     return (
         <>
             <Row className="py-2">
-                <Col md={4} className="text-gray-500 font-extrabold tracking-widest text-2xl">
+                <Col md={4} sm={2} xs={2} className="text-gray-500 font-extrabold tracking-widest text-2xl">
                     <span>{title}:</span>
                 </Col>
-                <Col>
+                <Col className="md:text-left text-center">
                     <h3>{value}</h3>
                 </Col>
             </Row>

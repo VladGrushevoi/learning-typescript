@@ -1,7 +1,8 @@
-import { Row, Table } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 import { Record } from "../../types/User"
 import { TablePagination } from "./TablePagination"
 import { useState } from "react"
+import { Status } from "../../types/dayInfoType"
 
 interface RecordTableProps {
     records: Record[]
@@ -25,36 +26,50 @@ export const Recordtable = ({ records }: RecordTableProps) => {
         }
     }
 
+    const getColorFromStatus = (status: Status) => {
+        switch(status){
+            case Status.Done:
+                return "bg-green-500";
+            case Status.Free:
+                return "bg-blue-400";
+            case Status.Reserv:
+                return "bg-red-400";
+            case Status.TemporaryHold:
+                return "bg-orange-400";
+        }
+    }
+
     return (
         <>
-            <Row className="pt-6 px-4 mb-0">
-                <Table responsive className="text-xl" color={"red"} size="sm">
-                    <thead className="rounded-md">
-                        <tr>
-                            <td>#</td>
-                            <td>ЧАС</td>
-                            <td>ДАТА</td>
-                            <td>СТАТУС</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            records && records.slice(offSet * row, (offSet * row) + row).map((item, index) => {
+            <Row className="pt-6 justify-center gap-2 px-4">
+                <Row className="font-bold text-center tracking-widest text-xl border-b-2 border-blue-400">
+                    <Col xs={1} sm={1} md={1} lg={1}>#</Col>
+                    <Col xs={2} sm={2} md={2} lg={2}>ЧАС</Col>
+                    <Col xs={4} sm={4} md={4} lg={4}>ДАТА</Col>
+                    <Col xs={5} sm={5} md={5} lg={5}>СТАТУС</Col>
+                </Row>
 
-                                return (
-                                    <>
-                                        <tr className="fill-green-400 p-4">
-                                            <td>{offSet * row + index + 1}</td>
-                                            <td>{item.time}</td>
-                                            <td>{item.date}</td>
-                                            <td>{item.status}</td>
-                                        </tr>
-                                    </>
-                                )
-                            })
-                        }
-                    </tbody>
-                </Table>
+                {
+                    records && records.slice(offSet * row, (offSet * row) + row).map((item, index) => {
+
+                        return (
+                            <>
+                                <Row className={`text-center 
+                                                py-1 
+                                                tracking-widest 
+                                                border-2 
+                                                rounded-lg
+                                                ${getColorFromStatus(item.status)}
+                                                `}>
+                                    <Col xs={1} sm={1} md={1} lg={1}>{offSet * row + index + 1}</Col>
+                                    <Col xs={2} sm={2} md={2} lg={2}>{item.time}</Col>
+                                    <Col xs={4} sm={4} md={4} lg={4}>{item.date}</Col>
+                                    <Col xs={5} sm={5} md={5} lg={5}>{item.status}</Col>
+                                </Row>
+                            </>
+                        )
+                    })
+                }
             </Row>
             <TablePagination 
                 amountPage={amountPage}  

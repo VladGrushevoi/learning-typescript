@@ -9,7 +9,7 @@ interface TablePaginationProps {
 export const TablePagination = ({ amountPage, setOffset, activePage }: TablePaginationProps) => {
     return (
         <>
-            <Row className="px-9 py-0 mt-0">
+            <Row className="px-4 mt-2">
                 <Pagination className="m-auto">
                     <Pagination.Prev onClick={() => setOffset(activePage - 1)} />
                         {
