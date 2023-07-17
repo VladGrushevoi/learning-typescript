@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { User } from "../types/User";
 import { Status } from "../types/dayInfoType";
 
-export const FakeUsers : User[] = [
+export const FakeUser : User = 
     {
+        id: "1111",
         firstName: "Petro",
         secondName: "Petrenko",
         phoneNumber: "+380966051501",
@@ -91,4 +93,16 @@ export const FakeUsers : User[] = [
             },
         ],
     }
-]
+
+export const useFakeUser = () => {
+    const [fakeUser, setFakeUser] = useState(FakeUser);
+
+    const updateUser = (newUserData: User) => {
+        setFakeUser(newUserData);
+    }
+
+    return {
+        fakeUser,
+        updateUser
+    }
+}

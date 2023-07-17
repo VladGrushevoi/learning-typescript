@@ -1,6 +1,7 @@
 import { Status } from "./dayInfoType"
 
 export interface User {
+    id: string,
     firstName: string,
     secondName: string,
     phoneNumber: string,

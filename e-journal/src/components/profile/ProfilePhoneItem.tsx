@@ -1,21 +1,20 @@
-import { useState } from 'react'
 import { Button, ButtonGroup, Col, Form, InputGroup, Row } from "react-bootstrap"
-import { User } from "../../types/User";
+import { User } from "../../types/User"
 import { PenFill, CheckSquareFill, XSquareFill } from 'react-bootstrap-icons';
-import { useInput } from '../../hooks/useInput';
+import { useState } from "react";
+import { useInput } from "../../hooks/useInput";
 
-interface ProfileItemProps {
+interface ProfilePhoneItemProps {
     title: string,
     value: string,
     isEditable: boolean,
     updateUser: (newUserData: User) => void
 }
 
-export const ProfileItem = ({ title, value, isEditable, updateUser }: ProfileItemProps) => {
+export const ProfilePhoneItem = ({ title, value, updateUser, isEditable } : ProfilePhoneItemProps) => {
 
     const [isUpdating, setIsUpdating] = useState(false)
-    const firstnameInput = useInput(value.split(' ')[0], "firstName")
-    const secondNameInput = useInput(value.split(' ')[1], "secondName")
+    const phoneInput = useInput(value, "phoneNumber");
 
     const onEditClick = (isEdit: boolean) => {
         setIsUpdating(isEdit);
@@ -23,14 +22,13 @@ export const ProfileItem = ({ title, value, isEditable, updateUser }: ProfileIte
 
     const handleSubmit = (e : React.FormEvent) => {
         e.preventDefault();
-        console.log(firstnameInput.value)
-        console.log(secondNameInput.value)
+        console.log(phoneInput.value)
         setIsUpdating(false);
     }
 
     return (
         <>
-            <Row className="py-2">
+           <Row className="py-2">
                 <Col md={4} sm={2} xs={2} className="text-gray-500 font-extrabold tracking-widest text-2xl">
                     <span>{title}:</span>
                 </Col>
@@ -59,16 +57,11 @@ export const ProfileItem = ({ title, value, isEditable, updateUser }: ProfileIte
                                         <Form.Control
                                             aria-label="Small"
                                             aria-describedby="inputGroup-sizing-sm"
-                                            {...firstnameInput}
-                                        />
-                                        <Form.Control
-                                            aria-label="Small"
-                                            aria-describedby="inputGroup-sizing-sm"
-                                            {...secondNameInput}
+                                            {...phoneInput}
                                         />
                                         <Button 
                                             className='bg-transparent p-0 m-0 px-1 border-0'
-                                            type='submit'
+                                            type="submit"
                                         >
                                             <CheckSquareFill 
                                                 size={24}
@@ -94,7 +87,7 @@ export const ProfileItem = ({ title, value, isEditable, updateUser }: ProfileIte
                             </>
                     }
                 </Col>
-            </Row>
+            </Row> 
         </>
     )
 }

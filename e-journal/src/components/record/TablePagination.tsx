@@ -17,6 +17,7 @@ export const TablePagination = ({ amountPage, setOffset, activePage }: TablePagi
                                 return (
                                     <>
                                         <Pagination.Item 
+                                            key={index}
                                             active={ index === activePage }
                                             onClick={() => setOffset(index)}
                                         >
