@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-      <Container className='h-full bg-pink-200 min-h-screen' fluid>
+      <Container className=' bg-pink-200 min-h-screen max-h-[200vh]' fluid>
         <Header />
         <RouterProvider router={getRoutes()}/>
       </Container>

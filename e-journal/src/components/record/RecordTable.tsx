@@ -41,7 +41,7 @@ export const Recordtable = ({ records }: RecordTableProps) => {
 
     return (
         <>
-            <Row className="pt-6 justify-center gap-2 px-4">
+            <Row className="pt-6 justify-center gap-2 px-1">
                 <Row className="font-bold text-center tracking-widest text-xl border-b-2 border-blue-400">
                     <Col xs={1} sm={1} md={1} lg={1}>#</Col>
                     <Col xs={2} sm={2} md={2} lg={2}>ЧАС</Col>
