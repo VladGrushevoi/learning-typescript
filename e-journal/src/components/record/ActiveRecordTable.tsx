@@ -16,7 +16,7 @@ export const ActiveRecordsTable = () => {
     return (
         <>
             {
-                Array.from({ length: 5 }).map((i, index) => {
+                Array.from({ length: 5 }).map((_, index) => {
                     return (
                         <>
                             <p>User {index + 1} <Button onClick={() => handleShowInfoUser({ name: "Allo yopta" + index, phone: "34234243444323" })}>Info</Button></p>
