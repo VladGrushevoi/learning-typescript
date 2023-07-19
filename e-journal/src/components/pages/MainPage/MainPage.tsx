@@ -7,18 +7,18 @@ export const MainPage = () => {
 
     return (
         <>
-            <Row className=' px-6 py-8 text-center gap-3 md:h-[90vh] h-[150vh]'>
+            <Row className=' px-3 py-8 text-center gap-3 md:h-[90vh] h-[150vh]'>
                 <Col className='border-2 rounded-2xl border-orange-300 shadow-lg'>
                     <Row className="">
                         <Tab.Container defaultActiveKey={WorkDays.filter(item => item.times.length !== 0)[0].day}>
-                            <Row className="gap-3 py-4 m-0">
+                            <Row className="gap-3 py-3 m-0">
                                 <Col  className="border-2 m-auto rounded-md  border-blue-400">
                                     <Nav variant="pills" className="md:flex-col" key={Math.random()}>
                                         <DateButton  days={WorkDays}/>
                                     </Nav>
                                 </Col>
-                                <Col xs={12} sm={12} md={9} xl={9} className="pr-0 m-auto">
-                                    <Tab.Content className="mr-0">
+                                <Col xs={12} sm={12} md={9} xl={9} className="p-0">
+                                    <Tab.Content className="m-0">
                                         <DayInfoTable data={WorkDays}/>
                                     </Tab.Content>
                                 </Col>
