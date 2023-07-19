@@ -68,7 +68,7 @@ export const Recordtable = ({ records }: RecordTableProps) => {
 
                         return (
                             <>
-                                <Row className={`text-center 
+                                <Row key={Math.random()} className={`text-center 
                                                 py-1 
                                                 tracking-widest 
                                                 border-2 

@@ -30,6 +30,10 @@ export const NavBar = () => {
                                         href="/user/1111">
                                         МІЙ ПРОФІЛЬ
                                     </Nav.Link>
+                                    <Nav.Link
+                                        href="/administrator/2222">
+                                        АДМІНКА
+                                    </Nav.Link>
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>
