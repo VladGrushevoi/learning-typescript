@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Button, Col, Row, Modal } from "react-bootstrap"
-import { CheckSquareFill, XSquareFill } from "react-bootstrap-icons"
+import { CheckSquareFill, PersonCircle, XSquareFill } from "react-bootstrap-icons"
 
 export const ActiveRecordsTable = () => {
 
@@ -17,21 +17,28 @@ export const ActiveRecordsTable = () => {
     return (
         <>
             <Row>
-                <Col xs={5} sm={5} md={5}>ПАЦІЄНТ</Col>
-                <Col xs={3} sm={3} md={3}>ДАТА</Col>
+                <Col xs={2} sm={2} md={5}>ПАЦІЄНТ</Col>
+                <Col xs={5} sm={3} md={3}>ДАТА</Col>
                 <Col>ЧАС</Col>
-                <Col ></Col>
                 <Col ></Col>
             </Row>
             {
                 Array.from({ length: 5 }).map((_, index) => {
                     return (
                         <>
-                            <Row className="">
-                                <Col xs={5} sm={5} md={5}>
-                                    {"PETRO PETRENKO" + index}
+                            <Row className="my-2">
+                                <Col xs={2} sm={2} md={5}>
+                                    <span className="md:inline-block hidden">
+                                        {"PETRO PETRENKO" + index}
+                                    </span>
+                                    <span
+                                        className="md:hidden inline-block border border-black p-1 hover:bg-blue-400 rounded-xl cursor-pointer" 
+                                        onClick={() => handleShowInfoUser({name:`PETRO ${index}`, phone:`${index}${index}`})}
+                                    >
+                                        <PersonCircle size={20} />
+                                    </span>
                                 </Col>
-                                <Col xs={3} sm={3} md={3}>
+                                <Col xs={5} sm={3} md={3}>
                                     Вівт., 18.07.23
                                 </Col>
                                 <Col>
