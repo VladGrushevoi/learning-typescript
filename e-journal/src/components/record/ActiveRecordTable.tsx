@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { Button, Modal } from "react-bootstrap"
+import { Button, Col, Row, Modal } from "react-bootstrap"
+import { CheckSquareFill, XSquareFill } from "react-bootstrap-icons"
 
 export const ActiveRecordsTable = () => {
 
@@ -15,11 +16,32 @@ export const ActiveRecordsTable = () => {
 
     return (
         <>
+            <Row>
+                <Col xs={5} sm={5} md={5}>ПАЦІЄНТ</Col>
+                <Col xs={3} sm={3} md={3}>ДАТА</Col>
+                <Col>ЧАС</Col>
+                <Col ></Col>
+                <Col ></Col>
+            </Row>
             {
                 Array.from({ length: 5 }).map((_, index) => {
                     return (
                         <>
-                            <p>User {index + 1} <Button onClick={() => handleShowInfoUser({ name: "Allo yopta" + index, phone: "34234243444323" })}>Info</Button></p>
+                            <Row className="">
+                                <Col xs={5} sm={5} md={5}>
+                                    {"PETRO PETRENKO" + index}
+                                </Col>
+                                <Col xs={3} sm={3} md={3}>
+                                    Вівт., 18.07.23
+                                </Col>
+                                <Col>
+                                    11:00
+                                </Col>
+                                <Col className="flex gap-2  items-center">
+                                    <CheckSquareFill size={20} className="hover:fill-green-400" />
+                                    <XSquareFill size={20} className="hover:fill-red-400" />
+                                </Col>
+                            </Row>
                         </>
                     )
                 })

@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 import { Profile } from "../../profile/Profile"
 import { useFakeUser } from "../../../fake-data/faka_users"
 import { Recordtable } from "../../record/RecordTable"
@@ -13,8 +13,7 @@ export const ProfilePage = ({ }: ProfilePageProps) => {
 
     return (
         <>
-            <Container fluid className="px-6 py-4">
-                <Row className="gap-4 justify-center">
+                <Row className="gap-4 justify-center px-6 py-4">
                     <Col md={5} className="border-2 border-black rounded-lg md:h-[80vh] h-[50vh] text-xl shadow-2xl" >
                         <Profile userData={fakeUser} updateUser={updateUser} />
                     </Col>
@@ -28,7 +27,6 @@ export const ProfilePage = ({ }: ProfilePageProps) => {
                             <Recordtable records={[...fakeUser.isDoneRecords, ...fakeUser.isActiveRecords]} />
                     </Col>
                 </Row>
-            </Container>
         </>
     )
 }
