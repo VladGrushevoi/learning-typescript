@@ -10,11 +10,11 @@ export const AdminPage = ({} : AdminPageProps) => {
     return (
         <>
             <Row className="md:h-[90vh] gap-4 py-4 justify-center h-[150vh] px-2">
-                <Col sm={12} md={11}  className="border border-black text-center rounded-lg">
+                <Col sm={12} md={12} lg={6}  className="border border-black text-left rounded-lg">
                     <h1 className="text-center">АКТИВНІ ЗАПИСИ</h1>
                     <ActiveRecordsTable />
                 </Col>
-                <Col sm={12} md={11} className="border border-black rounded-lg">
+                <Col sm={12} md={12} lg={5} className="border border-black rounded-lg">
                     <h1 className="text-center">НАЛАШТУВАННЯ РОБОЧОГО ДНЯ</h1>
                     <ActiveRecordsTable />
                 </Col>
