@@ -26,7 +26,7 @@ export const ActiveRecordsTable = () => {
                 Array.from({ length: 5 }).map((_, index) => {
                     return (
                         <>
-                            <Row className="my-2 text-center">
+                            <Row className="my-2 text-center justify-center items-center">
                                 <Col xs={2} sm={2} md={5}>
                                     <Col md={10} className="md:inline-block hidden">
                                         <Row md={8} className="justify-center items-center">

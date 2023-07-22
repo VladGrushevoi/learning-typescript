@@ -1,5 +1,6 @@
 import { Col, Row } from "react-bootstrap"
 import { ActiveRecordsTable } from "../../record/ActiveRecordTable"
+import { ConfiGuratorWorkDays } from "../../ConfiguratorWorkDays/ConfiguratorWorkDays"
 
 interface AdminPageProps {
 
@@ -16,7 +17,7 @@ export const AdminPage = ({} : AdminPageProps) => {
                 </Col>
                 <Col sm={12} md={12} lg={5} className="border border-black rounded-lg">
                     <h1 className="text-center">НАЛАШТУВАННЯ РОБОЧОГО ДНЯ</h1>
-                    <ActiveRecordsTable />
+                    <ConfiGuratorWorkDays />
                 </Col>
             </Row>
         </>
