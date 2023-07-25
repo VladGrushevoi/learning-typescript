@@ -1,5 +1,6 @@
-import { Button, Col, Form, InputGroup, Row, Tab, Tabs } from "react-bootstrap"
-import { CheckSquareFill, PencilSquare, PlusCircle, XSquareFill } from "react-bootstrap-icons"
+import { Col, Row, Tab, Tabs } from "react-bootstrap"
+import { PencilSquare } from "react-bootstrap-icons"
+import { AddWorkHourForm } from "./AddWorkHourForm"
 
 interface ConfiGuratorWorkDaysProps {
 
@@ -21,7 +22,7 @@ export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
                     className="px-4 text-lg"
                 >
                     {
-                        Array.from({length:5}).map((_, index) => {
+                        Array.from({ length: 5 }).map((_, index) => {
                             return (
                                 <>
                                     <Row key={Math.random()} className="text-center my-2 justify-center items-center">
@@ -39,44 +40,25 @@ export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
                             )
                         })
                     }
-                    <Form className="justify-center items-center">
-                        <Form.Check label="Робочий день" />
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text id="basic-addon1">ЧАС</InputGroup.Text>
-                            <Form.Control
-                                placeholder="Година на прийом"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                            />
-                            <Button className="bg-transparent px-1 py-0 border-0">
-                                <CheckSquareFill className="hover:fill-green-600" size={40}/>
-                            </Button>
-                            <Button className="bg-transparent px-1 py-0 border-0">
-                                <XSquareFill className="hover:fill-red-600" size={40} />
-                            </Button>
-                        </InputGroup>
-                        <Button type="submit" className="">
-                            <PlusCircle />
-                        </Button>
-                    </Form>
+                    <AddWorkHourForm />
                 </Tab>
                 <Tab eventKey="Tuesday" title="Вівторок">
-                    Tab content for Profile
+                    <AddWorkHourForm />
                 </Tab>
                 <Tab eventKey="Wednesday" title="Середа">
-                    Tab content for Loooonger Tab
+                    <AddWorkHourForm />
                 </Tab>
                 <Tab eventKey="Thursday" title="Четвер" >
-                    Tab content for Contact
+                    <AddWorkHourForm />
                 </Tab>
                 <Tab eventKey="Friday" title="П'ятниця" >
-                    Tab content for Contact
+                    <AddWorkHourForm />
                 </Tab>
                 <Tab eventKey="Saturday" title="Субота" >
-                    Tab content for Contact
+                    <AddWorkHourForm />
                 </Tab>
                 <Tab eventKey="Sunday" title="Неділя" >
-                    Tab content for Contact
+                    <AddWorkHourForm />
                 </Tab>
             </Tabs>
         </>
