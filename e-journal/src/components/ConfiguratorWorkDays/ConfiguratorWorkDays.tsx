@@ -1,12 +1,15 @@
 import { Col, Row, Tab, Tabs } from "react-bootstrap"
 import { PencilSquare } from "react-bootstrap-icons"
 import { AddWorkHourForm } from "./AddWorkHourForm"
+import { useFakeWorkHour } from "../../fake-data/fake-workHour"
 
 interface ConfiGuratorWorkDaysProps {
 
 }
 
 export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
+
+    const {addNewWorkHour, updateExistingWorkHour, workHour} = useFakeWorkHour();
 
     return (
         <>
@@ -22,7 +25,7 @@ export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
                     className="px-4 text-lg"
                 >
                     {
-                        Array.from({ length: 5 }).map((_, index) => {
+                        workHour[0] && workHour[0].map((_, index) => {
                             return (
                                 <>
                                     <Row key={Math.random()} className="text-center my-2 justify-center items-center">
@@ -40,25 +43,25 @@ export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
                             )
                         })
                     }
-                    <AddWorkHourForm />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} />
                 </Tab>
                 <Tab eventKey="Tuesday" title="Вівторок">
-                    <AddWorkHourForm />
+                    <AddWorkHourForm  addNewHour={addNewWorkHour}/>
                 </Tab>
                 <Tab eventKey="Wednesday" title="Середа">
-                    <AddWorkHourForm />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} />
                 </Tab>
                 <Tab eventKey="Thursday" title="Четвер" >
-                    <AddWorkHourForm />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} />
                 </Tab>
                 <Tab eventKey="Friday" title="П'ятниця" >
-                    <AddWorkHourForm />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} />
                 </Tab>
                 <Tab eventKey="Saturday" title="Субота" >
-                    <AddWorkHourForm />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} />
                 </Tab>
                 <Tab eventKey="Sunday" title="Неділя" >
-                    <AddWorkHourForm />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} />
                 </Tab>
             </Tabs>
         </>
