@@ -25,7 +25,7 @@ export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
                     className="px-4 text-lg"
                 >
                     <ListWorkHour workHours={workHour[0]} dayIndex={0} />
-                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={1} />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={0} />
                 </Tab>
                 <Tab eventKey="Wednesday" title="Середа">
                     <ListWorkHour workHours={workHour[2]} dayIndex={2} />
