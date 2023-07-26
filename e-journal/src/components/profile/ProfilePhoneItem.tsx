@@ -11,7 +11,7 @@ interface ProfilePhoneItemProps {
     updateUser: (newUserData: User) => void
 }
 
-export const ProfilePhoneItem = ({ title, value, updateUser, isEditable } : ProfilePhoneItemProps) => {
+export const ProfilePhoneItem = ({ title, value, isEditable } : ProfilePhoneItemProps) => {
 
     const [isUpdating, setIsUpdating] = useState(false)
     const phoneInput = useInput(value, "phoneNumber");

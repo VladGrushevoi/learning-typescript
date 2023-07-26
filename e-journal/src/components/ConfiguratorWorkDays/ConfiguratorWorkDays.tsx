@@ -9,7 +9,7 @@ interface ConfiGuratorWorkDaysProps {
 
 export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
 
-    const { addNewWorkHour, updateExistingWorkHour, workHour } = useFakeWorkHour();
+    const { addNewWorkHour, workHour } = useFakeWorkHour();
 
     return (
         <>
@@ -25,10 +25,6 @@ export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
                     className="px-4 text-lg"
                 >
                     <ListWorkHour workHours={workHour[0]} dayIndex={0} />
-                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={0} />
-                </Tab>
-                <Tab eventKey="Tuesday" title="Вівторок">
-                    <ListWorkHour workHours={workHour[1]} dayIndex={1} />
                     <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={1} />
                 </Tab>
                 <Tab eventKey="Wednesday" title="Середа">

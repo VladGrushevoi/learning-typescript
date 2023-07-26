@@ -11,7 +11,7 @@ interface ProfileItemProps {
     updateUser: (newUserData: User) => void
 }
 
-export const ProfileItem = ({ title, value, isEditable, updateUser }: ProfileItemProps) => {
+export const ProfileItem = ({ title, value, isEditable }: ProfileItemProps) => {
 
     const [isUpdating, setIsUpdating] = useState(false)
     const firstnameInput = useInput(value.split(' ')[0], "firstName")
