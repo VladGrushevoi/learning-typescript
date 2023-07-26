@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { WorkHour } from "../types/work-hour";
 
-const fake_workHour: WorkHour[][] = [[], [], [], [], [], [], []];
 
 export const useFakeWorkHour = () => {
-    const [workHour, setWorkHour] = useState(fake_workHour)
+    const [workHour, setWorkHour] = useState([[], [], [], [], [], [], []] as WorkHour[][])
 
     const timeComparer = (a: WorkHour, b: WorkHour) => {
         const aTimeValue = parseInt(a.hour.split(':')[0]);
@@ -18,12 +17,9 @@ export const useFakeWorkHour = () => {
             return;
         }
         let updWorkHours = workHour;
-        console.log(workHour)
-        updWorkHours[dayIndex] = [...updWorkHours[dayIndex], newWorkHour];
+        updWorkHours[dayIndex].push(newWorkHour);
         updWorkHours[dayIndex].sort(timeComparer)
-
-        setWorkHour(updWorkHours)
-
+        setWorkHour(prev => [...prev, ...updWorkHours])
     }
 
     const updateExistingWorkHour = (dayIndex: number, id: number, newTime: string) => {

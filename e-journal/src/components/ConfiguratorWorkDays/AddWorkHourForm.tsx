@@ -4,10 +4,11 @@ import { WorkHour } from "../../types/work-hour"
 import { useInput } from "../../hooks/useInput"
 
 interface AddWorkHourFormProps {
-    addNewHour: (index: number, newHourData: WorkHour) => void
+    addNewHour: (index: number, newHourData: WorkHour) => void,
+    dayIndex: number
 }
 
-export const AddWorkHourForm = ({ addNewHour }: AddWorkHourFormProps) => {
+export const AddWorkHourForm = ({ addNewHour, dayIndex }: AddWorkHourFormProps) => {
 
     const timeInput = useInput("", "time");
     const minutesInput = useInput("", "minutes");
@@ -19,7 +20,7 @@ export const AddWorkHourForm = ({ addNewHour }: AddWorkHourFormProps) => {
             hour: timeInput.value + ":" + minutesInput.value
         }
 
-        addNewHour(0,newWorkHour)
+        addNewHour(dayIndex,newWorkHour)
     }
 
     return (

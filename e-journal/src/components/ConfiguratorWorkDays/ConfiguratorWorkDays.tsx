@@ -1,7 +1,7 @@
-import { Col, Row, Tab, Tabs } from "react-bootstrap"
-import { PencilSquare } from "react-bootstrap-icons"
+import { Tab, Tabs } from "react-bootstrap"
 import { AddWorkHourForm } from "./AddWorkHourForm"
 import { useFakeWorkHour } from "../../fake-data/fake-workHour"
+import { ListWorkHour } from "./ListWorkHour"
 
 interface ConfiGuratorWorkDaysProps {
 
@@ -9,7 +9,7 @@ interface ConfiGuratorWorkDaysProps {
 
 export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
 
-    const {addNewWorkHour, updateExistingWorkHour, workHour} = useFakeWorkHour();
+    const { addNewWorkHour, updateExistingWorkHour, workHour } = useFakeWorkHour();
 
     return (
         <>
@@ -24,44 +24,32 @@ export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
                     title="Понеділок"
                     className="px-4 text-lg"
                 >
-                    {
-                        workHour[0] && workHour[0].map((_, index) => {
-                            return (
-                                <>
-                                    <Row key={Math.random()} className="text-center my-2 justify-center items-center">
-                                        <Col xs={1} sm={1} md={1}>
-                                            {index + 1}
-                                        </Col>
-                                        <Col>
-                                            {"11:00"}
-                                        </Col>
-                                        <Col xs={2} sm={2} md={2}>
-                                            <PencilSquare size={18} className="hover:fill-orange-500 cursor-pointer" />
-                                        </Col>
-                                    </Row>
-                                </>
-                            )
-                        })
-                    }
-                    <AddWorkHourForm addNewHour={addNewWorkHour} />
+                    <ListWorkHour workHours={workHour[0]} dayIndex={0} />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={0} />
                 </Tab>
                 <Tab eventKey="Tuesday" title="Вівторок">
-                    <AddWorkHourForm  addNewHour={addNewWorkHour}/>
+                    <ListWorkHour workHours={workHour[1]} dayIndex={1} />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={1} />
                 </Tab>
                 <Tab eventKey="Wednesday" title="Середа">
-                    <AddWorkHourForm addNewHour={addNewWorkHour} />
+                    <ListWorkHour workHours={workHour[2]} dayIndex={2} />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={2} />
                 </Tab>
                 <Tab eventKey="Thursday" title="Четвер" >
-                    <AddWorkHourForm addNewHour={addNewWorkHour} />
+                    <ListWorkHour workHours={workHour[3]} dayIndex={3} />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={3} />
                 </Tab>
                 <Tab eventKey="Friday" title="П'ятниця" >
-                    <AddWorkHourForm addNewHour={addNewWorkHour} />
+                    <ListWorkHour workHours={workHour[4]} dayIndex={4} />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={4} />
                 </Tab>
                 <Tab eventKey="Saturday" title="Субота" >
-                    <AddWorkHourForm addNewHour={addNewWorkHour} />
+                    <ListWorkHour workHours={workHour[5]} dayIndex={5} />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={5} />
                 </Tab>
                 <Tab eventKey="Sunday" title="Неділя" >
-                    <AddWorkHourForm addNewHour={addNewWorkHour} />
+                    <ListWorkHour workHours={workHour[6]} dayIndex={6} />
+                    <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={6} />
                 </Tab>
             </Tabs>
         </>
