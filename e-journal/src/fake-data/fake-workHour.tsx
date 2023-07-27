@@ -16,10 +16,12 @@ export const useFakeWorkHour = () => {
         if (dayIndex < 0 || dayIndex > 6) {
             return;
         }
-        let updWorkHours = workHour;
-        updWorkHours[dayIndex].push(newWorkHour);
-        updWorkHours[dayIndex].sort(timeComparer)
-        setWorkHour(prev => [...prev, ...updWorkHours])
+        setWorkHour(prevWorkHour => {
+            const updWorkHours = [...prevWorkHour];
+            updWorkHours[dayIndex] = [...updWorkHours[dayIndex], newWorkHour];
+            updWorkHours[dayIndex].sort(timeComparer);
+            return updWorkHours;
+        });
     }
 
     const updateExistingWorkHour = (dayIndex: number, id: number, newTime: string) => {
@@ -27,17 +29,17 @@ export const useFakeWorkHour = () => {
             return;
         }
 
-        let updWorkHours = workHour;
-        updWorkHours[dayIndex] = updWorkHours[dayIndex].map((hour) => {
-            if (hour.id === id) {
-                hour.hour = newTime;
+        setWorkHour(prevWorkHour => {
+            const updWorkHours = [...prevWorkHour];
+            updWorkHours[dayIndex] = updWorkHours[dayIndex].map((hour) => {
+                if (hour.id === id) {
+                    return { ...hour, hour: newTime };
+                }
                 return hour;
-            }
-            return hour;
+            });
+            updWorkHours[dayIndex].sort(timeComparer);
+            return updWorkHours;
         });
-        updWorkHours[dayIndex].sort(timeComparer)
-
-        setWorkHour(updWorkHours)
     }
 
     return {
