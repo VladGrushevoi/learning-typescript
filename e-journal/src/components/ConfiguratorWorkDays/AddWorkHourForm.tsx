@@ -2,6 +2,7 @@ import { Button, Col, Form, InputGroup } from "react-bootstrap"
 import { CheckSquareFill, PlusCircle, XSquareFill } from "react-bootstrap-icons"
 import { WorkHour } from "../../types/work-hour"
 import { useInput } from "../../hooks/useInput"
+import { useCheckbox } from "../../hooks/useCheckbox"
 
 interface AddWorkHourFormProps {
     addNewHour: (index: number, newHourData: WorkHour) => void,
@@ -12,6 +13,7 @@ export const AddWorkHourForm = ({ addNewHour, dayIndex }: AddWorkHourFormProps) 
 
     const timeInput = useInput("", "time");
     const minutesInput = useInput("", "minutes");
+    const isWorkDay = useCheckbox(false, "isWorkDayChkBx");
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -26,7 +28,7 @@ export const AddWorkHourForm = ({ addNewHour, dayIndex }: AddWorkHourFormProps) 
     return (
         <>
             <Form className="justify-center items-center" onSubmit={handleSubmit}>
-                <Form.Check label="Робочий день" checked />
+                <Form.Check label="Робочий день" {...isWorkDay} />
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">ЧАС</InputGroup.Text>
                     <Form.Control

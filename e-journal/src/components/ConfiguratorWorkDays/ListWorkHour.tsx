@@ -14,7 +14,6 @@ export const ListWorkHour = ({ workHours }: ListWorkHourProps) => {
             {
                 workHours && workHours.map((item, index) => {
                     return (
-                        <>
                             <Row key={item.id} className="text-center my-2 justify-center items-center">
                                 <Col xs={1} sm={1} md={1}>
                                     {index + 1}
@@ -27,7 +26,6 @@ export const ListWorkHour = ({ workHours }: ListWorkHourProps) => {
                                     <Trash3Fill size={18} className="hover:fill-gray-400 cursor-pointer"/>
                                 </Col>
                             </Row>
-                        </>
                     )
                 })
             }

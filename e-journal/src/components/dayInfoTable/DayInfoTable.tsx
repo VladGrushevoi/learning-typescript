@@ -24,7 +24,6 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
                 data.map(item => {
 
                     return (
-                        <>
                             <Tab.Pane eventKey={item.day} key={Math.random()} className="gap-4 tracking-widest">
                                 <Row key={Math.random()} className="gap-2 m-auto justify-center">
                                     <Row className="border-b-2 border-blue-300">
@@ -35,7 +34,6 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
                                 {
                                     item.times.map(item => {
                                         return (
-                                            <>
                                                 <Row key={Math.random()} className={`${typeTimeColor(item)} rounded-md items-center py-2`}>
                                                     <Col xs={2} sm={2} md={2} className="m-auto">{item.time}</Col>
                                                     <Col className="m-auto">{item.status}</Col>
@@ -58,13 +56,11 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
                                                         </Button>
                                                     </Col>
                                                 </Row>
-                                            </>
                                         )
                                     })
                                 }
                                 </Row>
                             </Tab.Pane>
-                        </>
                     )
                 })
             }

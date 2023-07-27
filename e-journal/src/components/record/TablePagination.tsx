@@ -15,7 +15,6 @@ export const TablePagination = ({ amountPage, setOffset, activePage }: TablePagi
                         {
                             Array.from({ length: amountPage }).map((_, index) => {
                                 return (
-                                    <>
                                         <Pagination.Item 
                                             key={Math.random()}
                                             active={ index === activePage }
@@ -23,7 +22,6 @@ export const TablePagination = ({ amountPage, setOffset, activePage }: TablePagi
                                         >
                                             {index + 1}
                                         </Pagination.Item>
-                                    </>
                                 )
                             })
                         }

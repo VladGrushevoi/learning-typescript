@@ -67,7 +67,6 @@ export const Recordtable = ({ records }: RecordTableProps) => {
                     records && records.slice(offSet * row, (offSet * row) + row).map((item, index) => {
 
                         return (
-                            <>
                                 <Row key={Math.random()} className={`text-center 
                                                 py-1 
                                                 tracking-widest 
@@ -89,7 +88,6 @@ export const Recordtable = ({ records }: RecordTableProps) => {
                                         </span>
                                     </Col>
                                 </Row>
-                            </>
                         )
                     })
                 }

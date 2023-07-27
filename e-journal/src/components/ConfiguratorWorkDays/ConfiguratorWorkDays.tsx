@@ -24,9 +24,8 @@ export const ConfiGuratorWorkDays = ({ }: ConfiGuratorWorkDaysProps) => {
                 {
                     days.map((day, index) => {
                         return (
-                            <Col>
-                                <Button 
-                                    key={index+day} 
+                            <Col key={index+day}>
+                                <Button  
                                     onClick={() => handleChooseDay(index)}
                                     className=""
                                     variant={chooseDayIndex !== index ? 'secondary' : 'success'}
