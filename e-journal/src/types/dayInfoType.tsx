@@ -1,10 +1,13 @@
+import { WorkHour } from "./work-hour"
+
 export interface DayInfoType {
     day: string,
+    isWorkingDay: boolean,
     times: WorkTime[]
 }
 
 export interface WorkTime {
-    time: string,
+    workHour: WorkHour[],
     status: Status
 }
 

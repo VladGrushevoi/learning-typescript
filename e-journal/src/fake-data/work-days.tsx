@@ -1,107 +1,40 @@
-import { DayInfoType, Status } from "../types/dayInfoType";
+import { DayInfoType } from "../types/dayInfoType";
 
 export const WorkDays : DayInfoType[] = [
     {
         day: "Понеділок",
+        isWorkingDay: false,
         times: []
     },
     {
         day: "Вівторок",
-        times: [
-            {
-                status: Status.Free,
-                time: "9:00",
-            },
-            {
-                status: Status.Free,
-                time: "10:00",
-            },
-            {
-                status: Status.TemporaryHold,
-                time: "11:00",
-            },
-            {
-                status: Status.Reserv,
-                time: "12:00",
-            },
-            {
-                status: Status.Free,
-                time: "13:00",
-            },
-            {
-                status: Status.Free,
-                time: "14:00",
-            }
-        ]
+        isWorkingDay: false,
+        times: []
     },
     {
         day: "Середа",
+        isWorkingDay: false,
         times: []
     },
     {
         day: "Четвер",
-        times: [
-            {
-                status: Status.Reserv,
-                time: "9:00",
-            },
-            {
-                status: Status.TemporaryHold,
-                time: "10:00",
-            },
-            {
-                status: Status.Free,
-                time: "11:00",
-            },
-            {
-                status: Status.Reserv,
-                time: "12:00",
-            },
-            {
-                status: Status.Free,
-                time: "13:00",
-            },
-            {
-                status: Status.Free,
-                time: "14:00",
-            }
-        ]
+        isWorkingDay: false,
+        times: []
     },
     {
         day: "П'ятниця",
+        isWorkingDay: false,
         times: []
     },
     {
         day: "Субота",
-        times: [
-            {
-                status: Status.Reserv,
-                time: "9:00",
-            },
-            {
-                status: Status.TemporaryHold,
-                time: "10:00",
-            },
-            {
-                status: Status.Free,
-                time: "11:00",
-            },
-            {
-                status: Status.Reserv,
-                time: "12:00",
-            },
-            {
-                status: Status.Free,
-                time: "13:00",
-            },
-            {
-                status: Status.Free,
-                time: "14:00",
-            }
-        ]
+        isWorkingDay: false,
+        times: []
     },
     {
         day: "Неділя",
+        isWorkingDay: false,
         times: []
     },
+    
 ]
