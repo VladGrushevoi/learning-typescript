@@ -1,20 +1,24 @@
 import { Button, Col, Row, Tab } from "react-bootstrap"
-import { DayInfoType, Status, WorkTime } from "../../types/dayInfoType"
+import { Status } from "../../types/dayInfoType"
 import { PersonPlusFill, PersonFillSlash } from "react-bootstrap-icons"
+import { WorkHour } from "../../types/work-hour"
 
 interface DayInfoTableProps {
-    data: DayInfoType[]
+    data: {
+        name: string, 
+        times: WorkHour[]
+    }[]
 }
 
 export const DayInfoTable = ({ data }: DayInfoTableProps) => {
 
-    const typeTimeColor = (item: WorkTime) => {
+    const typeTimeColor = (item: WorkHour) => {
         return `${item.status === Status.Free ? 'bg-green-300'
                 : item.status === Status.TemporaryHold ? 'bg-orange-300'
                     : 'bg-red-300'}`
     }
 
-    const isFreeTime = (item: WorkTime): boolean => {
+    const isFreeTime = (item: WorkHour): boolean => {
         return item.status !== Status.Free
     }
 
@@ -24,7 +28,7 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
                 data.map(item => {
 
                     return (
-                            <Tab.Pane eventKey={item.day} key={Math.random()} className="gap-4 tracking-widest">
+                            <Tab.Pane eventKey={item.name} key={Math.random()} className="gap-4 tracking-widest">
                                 <Row key={Math.random()} className="gap-2 m-auto justify-center">
                                     <Row className="border-b-2 border-blue-300">
                                         <Col xs={2} sm={2} md={2}>ЧАС</Col>
@@ -35,7 +39,7 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
                                     item.times.map(item => {
                                         return (
                                                 <Row key={Math.random()} className={`${typeTimeColor(item)} rounded-md items-center py-2`}>
-                                                    <Col xs={2} sm={2} md={2} className="m-auto">{item.time}</Col>
+                                                    <Col xs={2} sm={2} md={2} className="m-auto">{item.hour}</Col>
                                                     <Col className="m-auto">{item.status}</Col>
                                                     <Col xs={2} sm={2} md={4}>
                                                         <Button

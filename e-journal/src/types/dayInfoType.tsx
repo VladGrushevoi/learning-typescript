@@ -3,12 +3,7 @@ import { WorkHour } from "./work-hour"
 export interface DayInfoType {
     day: string,
     isWorkingDay: boolean,
-    times: WorkTime[]
-}
-
-export interface WorkTime {
-    workHour: WorkHour[],
-    status: Status
+    times: WorkHour[]
 }
 
 export enum Status {

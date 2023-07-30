@@ -1,23 +1,25 @@
 import { Nav } from "react-bootstrap"
-import { DayInfoType } from "../../types/dayInfoType"
 interface DateButtonProps {
-    days: DayInfoType[],
+    workingDays: {
+        name: string,
+        isWorking: boolean
+    }[]
 }
 
 
 
-export const DateButton = ({ days }: DateButtonProps) => {
+export const DateButton = ({ workingDays }: DateButtonProps) => {
 
     return (
         <>
             {
-                days.map(item => {
+                workingDays.map(item => {
                     return (
                             <Nav.Item key={Math.random()} className="hover:bg-slate-300">
                                 <Nav.Link 
-                                eventKey={item.day} 
-                                disabled={item.times.length === 0 ? true : false}
-                                >{item.day}</Nav.Link>
+                                eventKey={item.name} 
+                                disabled={!item.isWorking}
+                                >{item.name}</Nav.Link>
                             </Nav.Item>
                     )
                 })

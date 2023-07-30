@@ -4,10 +4,11 @@ import { PencilSquare, Trash3Fill } from "react-bootstrap-icons"
 
 interface ListWorkHourProps {
     workHours: WorkHour[],
-    dayIndex: number
 }
 
 export const ListWorkHour = ({ workHours }: ListWorkHourProps) => {
+
+    console.log(workHours, "LIST WORK HOURS")
 
     return (
         <>

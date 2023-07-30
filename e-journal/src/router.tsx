@@ -2,17 +2,35 @@ import { createBrowserRouter } from "react-router-dom"
 import { MainPage } from "./components/pages/MainPage/MainPage"
 import { ProfilePage } from "./components/pages/ProfilePage/ProfilePage"
 import { AdminPage } from "./components/pages/AdminPage/AdminPage"
+import { useFakeWorkHour } from "./fake-data/fake-workHour"
 
 export const getRoutes = () => {
+    const { workDays, addNewWorkHour } = useFakeWorkHour();
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <MainPage />,
+            element: <MainPage
+                days={workDays.map(item => {
+                    return {
+                        name: item.day,
+                        isWorkingDay: item.isWorkingDay,
+                        times: item.times
+                    }
+                })}
+            />,
             errorElement: <div>ERROR</div>
         },
         {
             path: "/main",
-            element: <MainPage />,
+            element: <MainPage
+                days={workDays.map(item => {
+                    return {
+                        name: item.day,
+                        isWorkingDay: item.isWorkingDay,
+                        times: item.times
+                    }
+                })}
+            />,
             errorElement: <div>ERROR</div>
         },
         {
@@ -22,7 +40,17 @@ export const getRoutes = () => {
         },
         {
             path: "/administrator/:guid",
-            element: <AdminPage />,
+            element: <AdminPage 
+                addNewHour={addNewWorkHour}
+                days={
+                    workDays.map(item => {
+                        return {
+                            name: item.day,
+                            times: item.times
+                        }
+                    })
+                }
+            />,
             errorElement: <div>ERROR</div>
         }
     ])

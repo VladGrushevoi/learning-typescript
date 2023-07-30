@@ -1,12 +1,16 @@
 import { Col, Row } from "react-bootstrap"
 import { ActiveRecordsTable } from "../../record/ActiveRecordTable"
 import { ConfiGuratorWorkDays } from "../../ConfiguratorWorkDays/ConfiguratorWorkDays"
+import { WorkHour } from "../../../types/work-hour"
 
 interface AdminPageProps {
-
+    days: {name: string, times: WorkHour[]}[],
+    addNewHour: (dayIndex: number, newhour: WorkHour) => void, 
 }
 
-export const AdminPage = ({} : AdminPageProps) => {
+export const AdminPage = ({ days, addNewHour } : AdminPageProps) => {
+
+    console.log(days, "ADMIN PAGE")
 
     return (
         <>
@@ -17,7 +21,7 @@ export const AdminPage = ({} : AdminPageProps) => {
                 </Col>
                 <Col sm={12} md={12} lg={5} className="border border-black rounded-lg">
                     <h1 className="text-center">НАЛАШТУВАННЯ РОБОЧОГО ДНЯ</h1>
-                    <ConfiGuratorWorkDays />
+                    <ConfiGuratorWorkDays days={days} addNewWorkHour={addNewHour}/>
                 </Col>
             </Row>
         </>

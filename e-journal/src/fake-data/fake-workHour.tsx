@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { WorkHour } from "../types/work-hour";
+import { WorkDays } from "./work-days";
 
 
 export const useFakeWorkHour = () => {
-    const [workHour, setWorkHour] = useState([[], [], [], [], [], [], []] as WorkHour[][])
+    const [workDays, setWorkDays] = useState(WorkDays)
 
     const timeComparer = (a: WorkHour, b: WorkHour) => {
         const aTimeValue = parseInt(a.hour.split(':')[0]);
@@ -16,11 +17,12 @@ export const useFakeWorkHour = () => {
         if (dayIndex < 0 || dayIndex > 6) {
             return;
         }
-        setWorkHour(prevWorkHour => {
-            const updWorkHours = [...prevWorkHour];
-            updWorkHours[dayIndex] = [...updWorkHours[dayIndex], newWorkHour];
-            updWorkHours[dayIndex].sort(timeComparer);
-            return updWorkHours;
+        console.log()
+        setWorkDays(prev => {
+            const days = [...prev];
+            days[dayIndex].times.push(newWorkHour)
+            days[dayIndex].times.sort(timeComparer)
+            return [...days];
         });
     }
 
@@ -29,22 +31,23 @@ export const useFakeWorkHour = () => {
             return;
         }
 
-        setWorkHour(prevWorkHour => {
-            const updWorkHours = [...prevWorkHour];
-            updWorkHours[dayIndex] = updWorkHours[dayIndex].map((hour) => {
+        setWorkDays(prevWorkHour => {
+            let updWorkHours = [...prevWorkHour[dayIndex].times];
+            updWorkHours = updWorkHours.map((hour) => {
                 if (hour.id === id) {
                     return { ...hour, hour: newTime };
                 }
                 return hour;
             });
-            updWorkHours[dayIndex].sort(timeComparer);
-            return updWorkHours;
+            updWorkHours.sort(timeComparer);
+            prevWorkHour[dayIndex].times = updWorkHours;
+            return prevWorkHour;
         });
     }
 
     return {
         addNewWorkHour,
         updateExistingWorkHour,
-        workHour
+        workDays: workDays
     }
 }

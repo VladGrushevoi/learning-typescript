@@ -1,25 +1,52 @@
 import { Col, Nav, Row, Stack, Tab } from "react-bootstrap"
-import { WorkDays } from "../../../fake-data/work-days"
 import { DateButton } from "../../bottons/DateButton"
 import { DayInfoTable } from "../../dayInfoTable/DayInfoTable"
+import { WorkHour } from "../../../types/work-hour"
 
-export const MainPage = () => {
+
+interface MainPaheProps {
+    days: {
+        name: string, 
+        isWorkingDay: boolean, 
+        times: WorkHour[]
+    }[]
+}
+
+
+export const MainPage = ({days} : MainPaheProps) => {
+
+    console.log(days, "MAIN PAGE")
 
     return (
         <>
             <Row className=' px-3 py-8 text-center gap-3 md:h-[90vh] h-[150vh]'>
                 <Col className='border-2 rounded-2xl border-orange-300 shadow-lg'>
                     <Row className="">
-                        <Tab.Container defaultActiveKey={WorkDays.filter(item => item.times.length !== 0)[0].day}>
+                        <Tab.Container defaultActiveKey={days[1].name}>
                             <Row className="gap-3 py-3 m-0">
                                 <Col  className="border-2 m-auto rounded-md  border-blue-400">
                                     <Nav variant="pills" className="md:flex-col" key={Math.random()}>
-                                        <DateButton  days={WorkDays}/>
+                                        <DateButton  
+                                        workingDays={days.map(item => {
+                                            return {
+                                                name: item.name,
+                                                isWorking: item.isWorkingDay
+                                            }
+                                        })}
+                                        />
                                     </Nav>
                                 </Col>
                                 <Col xs={12} sm={12} md={9} xl={9} className="p-0">
                                     <Tab.Content className="m-0">
-                                        <DayInfoTable data={WorkDays}/>
+                                        <DayInfoTable data={
+                                            days.map(item => {
+                                                return {
+                                                    name: item.name,
+                                                    times: item.times
+                                                }
+                                            })
+                                        }
+                                        />
                                     </Tab.Content>
                                 </Col>
                             </Row>

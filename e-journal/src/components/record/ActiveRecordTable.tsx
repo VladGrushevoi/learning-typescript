@@ -2,7 +2,11 @@ import { useState } from "react"
 import { Button, Col, Row, Modal } from "react-bootstrap"
 import { ChatLeftText, CheckSquareFill, PersonCircle, XSquareFill } from "react-bootstrap-icons"
 
-export const ActiveRecordsTable = () => {
+interface ActiveRecordsTableProps {
+
+}
+
+export const ActiveRecordsTable = ({  } : ActiveRecordsTableProps) => {
 
     const [modalInfoUser, setModalInfoUser] = useState({ show: false, user: { name: "", phone: "", comment: "" } })
 
