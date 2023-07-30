@@ -102,9 +102,9 @@ function App() {
 
   return (
     <>
-      <Container fluid className='h-[100vh] w-[100%] bg-blue-900 px-16 py-20 gap-2'>
+      <Container fluid className='md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-16 py-20 gap-2'>
         <Row className='gap-4'>
-          <Col md={2} className='h-[50vh] border rounded-lg shadow-lg shadow-red-400'>
+          <Col sm={11} md={2} className='h-[50vh] border rounded-lg shadow-lg shadow-red-400'>
             <Row className='text-center '>
               <h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>ПОЗИЦІЇ</h1>
             </Row>
@@ -116,11 +116,11 @@ function App() {
               </Col>
             </Row>
           </Col>
-          <Col md={6} className='border text-center rounded-lg px-4'>
+          <Col sm={11} md={6} className='border text-center rounded-lg px-4'>
             <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>ПІК</h1></Row>
             <Row className='text-gray-200 font-bold text-xl'>
-              <Col md={1}>#</Col>
-              <Col md={2}>Позиція</Col>
+              <Col xs={1} sm={1} md={1}>#</Col>
+              <Col xs={3} sm={3} md={3}>Позиція</Col>
               <Col>Герой</Col>
             </Row>
             <Row>
@@ -128,10 +128,10 @@ function App() {
                 heroes.map((hero, index) => {
                   return (
                     <Row key={Math.random()} className='text-gray-200  text-xl'>
-                      <Col md={1}>{index + 1}</Col>
-                      <Col md={3}>{hero.position}</Col>
+                      <Col xs={1} sm={1} md={1}>{index + 1}</Col>
+                      <Col xs={3} sm={3} md={3}>{hero.position}</Col>
                       <Col className='flex justify-start my-1'>
-                        <Col md={6} className='text-right'>
+                        <Col xs={6} sm={6} md={6} className='text-right'>
                           <img src={hero.imgSrc!} className='h-[40px] inline-block' />
                         </Col>
                         <Col md={1}></Col>
@@ -148,7 +148,7 @@ function App() {
               <Button className='bg-red-500' onClick={clearHero}>ОЧИСТИТИ</Button>
             </Row>
           </Col>
-          <Col md={3} className='border text-center rounded-lg px-4 pb-2'>
+          <Col sm={11} md={3} className='border text-center rounded-lg px-4 pb-2'>
             <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>РАНДОМНИЙ ГЕРОЙ</h1></Row>
             <Row className='py-4'>
               <Card style={{ width: '18rem' }} className='m-auto px-0'>
