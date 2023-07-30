@@ -102,9 +102,9 @@ function App() {
 
   return (
     <>
-      <Container fluid className='md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-16 py-20 gap-2'>
+      <Container fluid className='md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-8 py-20 gap-2'>
         <Row className='gap-4'>
-          <Col sm={11} md={2} className='h-[50vh] border rounded-lg shadow-lg shadow-red-400'>
+          <Col sm={12} md={2} className='h-[50vh] border rounded-lg shadow-lg shadow-red-400'>
             <Row className='text-center '>
               <h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>ПОЗИЦІЇ</h1>
             </Row>
@@ -116,7 +116,7 @@ function App() {
               </Col>
             </Row>
           </Col>
-          <Col sm={11} md={6} className='border text-center rounded-lg px-4'>
+          <Col sm={12} md={6} className='border text-center rounded-lg px-4'>
             <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>ПІК</h1></Row>
             <Row className='text-gray-200 font-bold text-xl'>
               <Col xs={1} sm={1} md={1}>#</Col>
@@ -148,7 +148,7 @@ function App() {
               <Button className='bg-red-500' onClick={clearHero}>ОЧИСТИТИ</Button>
             </Row>
           </Col>
-          <Col sm={11} md={3} className='border text-center rounded-lg px-4 pb-2'>
+          <Col sm={12} md={3} className='border text-center rounded-lg px-4 pb-2'>
             <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>РАНДОМНИЙ ГЕРОЙ</h1></Row>
             <Row className='py-4'>
               <Card style={{ width: '18rem' }} className='m-auto px-0'>
