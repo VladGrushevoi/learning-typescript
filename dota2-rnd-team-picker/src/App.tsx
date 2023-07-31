@@ -5,16 +5,23 @@ import { FormChecks } from './components/FormChecks';
 import { useCheckForm } from './utils/useCheckForm';
 import { useState } from 'react';
 import { Hero } from './types/hero';
-import H5AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
+import AudioPlayer from 'react-h5-audio-player';
 import { randomHero } from './utils/randomHero';
 import 'rrp-graceful-lines-plugin/dist/index.css';
 import { Roulette } from './components/Roulette';
+
+const musicList = [
+  "http://stream.zeno.fm/71ntub27u18uv",
+  "https://us-tuna-sounds-files.voicemod.net/a56a691f-7524-444c-8d92-24e3f2860193-1673968519904.mp3"
+]
 
 function App() {
 
   const formChecks = useCheckForm();
   const [heroes, setHero] = useState([] as Hero[])
   const [currHero, setCurrHero] = useState({} as Hero);
+  const [currTrack, setCurrTrack] = useState(0)
   const getRandomHero = () => {
     const hero = randomHero(formChecks)!;
     if (hero) {
@@ -42,6 +49,20 @@ function App() {
     }])
   }
 
+  const handleNext = (iter: number) => {
+    console.log("next")
+    if(iter + currTrack < 0){
+      setCurrTrack(musicList.length - 1)
+      return;
+    }
+    if(iter + currTrack > musicList.length){
+      setCurrTrack(0)
+      return;
+    }
+    console.log(currTrack);
+    setCurrTrack(iter + currTrack);
+  }
+
   //bg bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.hTnQKM7cWTpuETxqbOBb1wHaEo%26pid%3DApi&f=1&ipt=3f22bd8d48024cbcc22f7424e121b33ebc7d2edbebfdad61ff8439cc486370e5&ipo=images')]
 
   return (
@@ -62,8 +83,8 @@ function App() {
                 />
               </Col>
             </Row>
-            <Row className='flex'>
-              <H5AudioPlayer
+            <Row className=''>
+              {/* <H5AudioPlayer
                 className='even:inline-block'
                 autoPlay={true}
                 src='http://stream.zeno.fm/71ntub27u18uv'
@@ -74,6 +95,15 @@ function App() {
                 showFilledVolume={false}
                 defaultCurrentTime={<div></div>}
                 defaultDuration={<div></div>}
+              /> */}
+              <AudioPlayer 
+                autoPlay={true}
+                src={musicList[currTrack]}
+                onPlay={_ => console.log("onPlay")}
+                showJumpControls={true}
+                showSkipControls={true}
+                onClickNext={() => handleNext(1)}
+                onClickPrevious={() => handleNext(-1)}
               />
             </Row>
           </Col>
