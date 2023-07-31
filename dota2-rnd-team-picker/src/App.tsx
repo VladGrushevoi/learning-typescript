@@ -9,16 +9,12 @@ import H5AudioPlayer from 'react-h5-audio-player';
 import { randomHero } from './utils/randomHero';
 import 'rrp-graceful-lines-plugin/dist/index.css';
 import { Roulette } from './components/Roulette';
-import { carry, hard_support, midlaner, offlaner, soft_support } from './data/heros';
-import { randomIntFromInterval } from './utils/randomFromInterval';
-import { Position } from './types/positionEnum';
 
 function App() {
 
   const formChecks = useCheckForm();
   const [heroes, setHero] = useState([] as Hero[])
   const [currHero, setCurrHero] = useState({} as Hero);
-  const [currListHero, setCurrListHero] = useState(carry)
   const getRandomHero = () => {
     const hero = randomHero(formChecks)!;
     if (hero) {
@@ -27,59 +23,22 @@ function App() {
     }
   }
 
-  const setNewListHero = () => {
-    const choisenPos = formChecks.checks.filter(i => i.checked).map(i => i.name);
-    const rndPosIndx = randomIntFromInterval(0, choisenPos.length - 1);
-    const namePos = choisenPos[rndPosIndx];
-    setCurrHero({
-      isPick: true,
-      position: namePos,
-      imgSrc: "",
-      name: ""
-    })
-    console.log(namePos)
-    switch (namePos) {
-      case Position.Carry:
-        setCurrListHero(_ => [...carry]);
-        break;
-      case Position.HardLane:
-        setCurrListHero(_ => [...offlaner]);
-        break;
-      case Position.HardSupport:
-        setCurrListHero(_ => [...hard_support]);
-        break;
-      case Position.MidLane:
-        setCurrListHero(_ => [...midlaner]);
-        break;
-      case Position.SoftSupport:
-        setCurrListHero(_ => [...soft_support]);
-        break;
-    }
-    console.log(currListHero)
-    formChecks.setDefault(namePos)
-  }
-
   const clearHero = () => {
     setHero([] as Hero[])
   }
 
-
-
-  const handleSpin = (heroName: string) => {
-    if(!currHero.position && currHero.position !== ""){
-      return;
-    }
+  const handleSpin = (heroName: string, position: string) => {
     setCurrHero({
       isPick: true,
       imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName}.png`,
       name: heroName,
-      position: currHero.position
+      position: position
     })
     setHero(prev => [...prev, {
       imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName}.png`,
       isPick: true,
       name: heroName,
-      position: currHero.position
+      position: position
     }])
   }
 
@@ -87,14 +46,16 @@ function App() {
 
   return (
     <>
-      <Container fluid className="md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-8 py-10 gap-2 text-center"
+      <Container fluid className="md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-8 py-10 gap-2 text-center
+                        bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.hTnQKM7cWTpuETxqbOBb1wHaEo%26pid%3DApi&f=1&ipt=3f22bd8d48024cbcc22f7424e121b33ebc7d2edbebfdad61ff8439cc486370e5&ipo=images')]
+                        "
       >
         <Row className='gap-4'>
           <Col sm={12} md={2} className='h-[55vh] border rounded-lg shadow-lg shadow-red-400'>
             <Row className='text-center '>
               <h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>ПОЗИЦІЇ</h1>
             </Row>
-            <Row className=' py-8 tracking-widest font-bold text-xl text-green-500'>
+            <Row className=' py-8 tracking-widest font-bold text-xl text-green-300'>
               <Col className='gap-2 justify-center items-center flex'>
                 <FormChecks
                   checks={formChecks.checks}
@@ -165,15 +126,8 @@ function App() {
         </Row>
         <Row className='roulette horizontal'>
           <Roulette
-            items={currListHero.map((i, index) => {
-              return {
-                id: index + i,
-                image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${i}.png`,
-                text: i
-              }
-            })}
             handleSpin={handleSpin}
-            setNewListHero={setNewListHero}
+            formChecks={formChecks}
           />
         </Row>
       </Container>
