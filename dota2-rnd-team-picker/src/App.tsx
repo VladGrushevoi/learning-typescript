@@ -66,6 +66,9 @@ function App() {
 
 
   const handleSpin = (heroName: string) => {
+    if(!currHero.position && currHero.position !== ""){
+      return;
+    }
     setCurrHero({
       isPick: true,
       imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName}.png`,

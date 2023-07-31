@@ -18,7 +18,7 @@ export interface Prize {
 interface RouletteProps {
     items: Prize[],
     handleSpin: (prizeIndex: string) => void,
-    setNewListHero: () => void
+    setNewListHero: () => void,
 }
 
 export const Roulette = ({ items, handleSpin, setNewListHero } : RouletteProps) => {
@@ -121,7 +121,6 @@ export const Roulette = ({ items, handleSpin, setNewListHero } : RouletteProps) 
 
   const handleStart = () => {
     setNewListHero()
-    console.log("allo")
     setSpinning(true);
   };
 
