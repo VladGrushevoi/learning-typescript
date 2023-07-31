@@ -5,111 +5,89 @@ import { FormChecks } from './components/FormChecks';
 import { useCheckForm } from './utils/useCheckForm';
 import { useState } from 'react';
 import { Hero } from './types/hero';
-import { Position } from './types/positionEnum';
-import { carry, hard_support, midlaner, offlaner, soft_support } from './data/heros';
 import H5AudioPlayer from 'react-h5-audio-player';
+import { randomHero } from './utils/randomHero';
+import 'rrp-graceful-lines-plugin/dist/index.css';
+import { Roulette } from './components/Roulette';
+import { carry, hard_support, midlaner, offlaner, soft_support } from './data/heros';
+import { randomIntFromInterval } from './utils/randomFromInterval';
+import { Position } from './types/positionEnum';
 
 function App() {
 
   const formChecks = useCheckForm();
   const [heroes, setHero] = useState([] as Hero[])
   const [currHero, setCurrHero] = useState({} as Hero);
-  function randomIntFromInterval(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
+  const [currListHero, setCurrListHero] = useState(carry)
+  const getRandomHero = () => {
+    const hero = randomHero(formChecks)!;
+    if (hero) {
+      setHero(prev => [...prev, hero])
+      setCurrHero(hero)
+    }
   }
 
-  const getRandomHero = () => {
-    //https://cdn.dota2.com/apps/dota2/images/heroes/antimage_full.png
+  const setNewListHero = () => {
     const choisenPos = formChecks.checks.filter(i => i.checked).map(i => i.name);
     const rndPosIndx = randomIntFromInterval(0, choisenPos.length - 1);
     const namePos = choisenPos[rndPosIndx];
-    let rndHero = 0;
-    let heroName = "";
-    let hero: Hero = {
+    setCurrHero({
+      isPick: true,
+      position: namePos,
       imgSrc: "",
-      isPick: false,
-      name: "",
-      position: namePos
-    }
+      name: ""
+    })
+    console.log(namePos)
     switch (namePos) {
       case Position.Carry:
-        rndHero = randomIntFromInterval(0, carry.length - 1);
-        heroName = carry[rndHero];
-        hero = {
-          name: heroName,
-          position: Position.Carry,
-          imgSrc: `https://cdn.dota2.com/apps/dota2/images/heroes/${heroName}_full.png`,
-          isPick: true,
-        }
-        setHero(prev => [...prev, hero]);
-        formChecks.setDefault(namePos);
+        setCurrListHero(_ => [...carry]);
         break;
       case Position.HardLane:
-        rndHero = randomIntFromInterval(0, offlaner.length - 1);
-        heroName = offlaner[rndHero];
-        hero = {
-          name: heroName,
-          position: Position.HardLane,
-          imgSrc: `https://cdn.dota2.com/apps/dota2/images/heroes/${heroName}_full.png`,
-          isPick: true,
-        }
-        setHero(prev => [...prev, hero]);
-        formChecks.setDefault(namePos);
+        setCurrListHero(_ => [...offlaner]);
         break;
       case Position.HardSupport:
-        rndHero = randomIntFromInterval(0, hard_support.length - 1);
-        heroName = hard_support[rndHero];
-        hero = {
-          name: heroName,
-          position: Position.HardSupport,
-          imgSrc: `https://cdn.dota2.com/apps/dota2/images/heroes/${heroName}_full.png`,
-          isPick: true,
-        }
-        setHero(prev => [...prev, hero]);
-        formChecks.setDefault(namePos);
+        setCurrListHero(_ => [...hard_support]);
         break;
       case Position.MidLane:
-        rndHero = randomIntFromInterval(0, midlaner.length - 1);
-        heroName = midlaner[rndHero];
-        hero = {
-          name: heroName,
-          position: Position.MidLane,
-          imgSrc: `https://cdn.dota2.com/apps/dota2/images/heroes/${heroName}_full.png`,
-          isPick: true,
-        }
-        setHero(prev => [...prev, hero]);
-        formChecks.setDefault(namePos);
+        setCurrListHero(_ => [...midlaner]);
         break;
       case Position.SoftSupport:
-        rndHero = randomIntFromInterval(0, soft_support.length - 1);
-        heroName = soft_support[rndHero];
-        hero = {
-          name: heroName,
-          position: Position.SoftSupport,
-          imgSrc: `https://cdn.dota2.com/apps/dota2/images/heroes/${heroName}_full.png`,
-          isPick: true,
-        }
-        setHero(prev => [...prev, hero]);
-        formChecks.setDefault(namePos);
+        setCurrListHero(_ => [...soft_support]);
         break;
     }
-
-    setCurrHero(hero)
+    console.log(currListHero)
+    formChecks.setDefault(namePos)
   }
 
   const clearHero = () => {
     setHero([] as Hero[])
   }
 
+
+
+  const handleSpin = (heroName: string) => {
+    setCurrHero({
+      isPick: true,
+      imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName}.png`,
+      name: heroName,
+      position: currHero.position
+    })
+    setHero(prev => [...prev, {
+      imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName}.png`,
+      isPick: true,
+      name: heroName,
+      position: currHero.position
+    }])
+  }
+
+  //bg bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.hTnQKM7cWTpuETxqbOBb1wHaEo%26pid%3DApi&f=1&ipt=3f22bd8d48024cbcc22f7424e121b33ebc7d2edbebfdad61ff8439cc486370e5&ipo=images')]
+
   return (
     <>
-      <Container fluid className="md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-8 py-20 gap-2 
-                          bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.hTnQKM7cWTpuETxqbOBb1wHaEo%26pid%3DApi&f=1&ipt=3f22bd8d48024cbcc22f7424e121b33ebc7d2edbebfdad61ff8439cc486370e5&ipo=images')]
-                          "
-
-        >
+      <Container fluid className="md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-8 py-10 gap-2 text-center"
+      >
         <Row className='gap-4'>
-          <Col sm={12} md={2} className='h-[50vh] border rounded-lg shadow-lg shadow-red-400'>
+          <Col sm={12} md={2} className='h-[55vh] border rounded-lg shadow-lg shadow-red-400'>
             <Row className='text-center '>
               <h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>ПОЗИЦІЇ</h1>
             </Row>
@@ -122,20 +100,17 @@ function App() {
             </Row>
             <Row className='flex'>
               <H5AudioPlayer
-              className='even:inline-block'
-              autoPlay={true}
-              src='http://stream.zeno.fm/71ntub27u18uv'
-              showSkipControls={false}
-              showJumpControls={false}
-              showFilledProgress={false}
-              showDownloadProgress={false}
-              showFilledVolume={false}
-              defaultCurrentTime={<div></div>}
-              defaultDuration={<div></div>}
+                className='even:inline-block'
+                autoPlay={true}
+                src='http://stream.zeno.fm/71ntub27u18uv'
+                showSkipControls={false}
+                showJumpControls={false}
+                showFilledProgress={false}
+                showDownloadProgress={false}
+                showFilledVolume={false}
+                defaultCurrentTime={<div></div>}
+                defaultDuration={<div></div>}
               />
-              <audio src='http://stream.zeno.fm/71ntub27u18uv' autoPlay={true} preload='auto'>
-
-              </audio>
             </Row>
           </Col>
           <Col sm={12} md={6} className='border text-center rounded-lg px-4'>
@@ -184,6 +159,19 @@ function App() {
               <Button className='bg-green-600' onClick={getRandomHero}>КРУТАНУТЬ</Button>
             </Row>
           </Col>
+        </Row>
+        <Row className='roulette horizontal'>
+          <Roulette
+            items={currListHero.map((i, index) => {
+              return {
+                id: index + i,
+                image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${i}.png`,
+                text: i
+              }
+            })}
+            handleSpin={handleSpin}
+            setNewListHero={setNewListHero}
+          />
         </Row>
       </Container>
     </>
