@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { Hero } from './types/hero';
 import { Position } from './types/positionEnum';
 import { carry, hard_support, midlaner, offlaner, soft_support } from './data/heros';
+import H5AudioPlayer from 'react-h5-audio-player';
 
 function App() {
 
@@ -102,7 +103,11 @@ function App() {
 
   return (
     <>
-      <Container fluid className='md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-8 py-20 gap-2'>
+      <Container fluid className="md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-8 py-20 gap-2 
+                          bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.hTnQKM7cWTpuETxqbOBb1wHaEo%26pid%3DApi&f=1&ipt=3f22bd8d48024cbcc22f7424e121b33ebc7d2edbebfdad61ff8439cc486370e5&ipo=images')]
+                          "
+
+        >
         <Row className='gap-4'>
           <Col sm={12} md={2} className='h-[50vh] border rounded-lg shadow-lg shadow-red-400'>
             <Row className='text-center '>
@@ -114,6 +119,23 @@ function App() {
                   checks={formChecks.checks}
                 />
               </Col>
+            </Row>
+            <Row className='flex'>
+              <H5AudioPlayer
+              className='even:inline-block'
+              autoPlay={true}
+              src='http://stream.zeno.fm/71ntub27u18uv'
+              showSkipControls={false}
+              showJumpControls={false}
+              showFilledProgress={false}
+              showDownloadProgress={false}
+              showFilledVolume={false}
+              defaultCurrentTime={<div></div>}
+              defaultDuration={<div></div>}
+              />
+              <audio src='http://stream.zeno.fm/71ntub27u18uv' autoPlay={true} preload='auto'>
+
+              </audio>
             </Row>
           </Col>
           <Col sm={12} md={6} className='border text-center rounded-lg px-4'>
