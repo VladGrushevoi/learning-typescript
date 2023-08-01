@@ -13,7 +13,7 @@ import { Roulette } from './components/Roulette';
 
 const musicList = [
   "http://stream.zeno.fm/71ntub27u18uv",
-  "https://us-tuna-sounds-files.voicemod.net/a56a691f-7524-444c-8d92-24e3f2860193-1673968519904.mp3"
+  "https://download.xn--41a.wiki/listen_6555612_456244947_1_e3387fcd83c38b14e8e79904a0a05b91/Huby-Danika%20House.mp3"
 ]
 
 function App() {
