@@ -66,11 +66,11 @@ function App() {
 
   return (
     <>
-      <Container fluid className="md:h-max-[200vh] h-max-[200vh] w-[100%] bg-blue-900 py-10 text-center items-center
+      <Container fluid className="md:h-max-[200vh] h-max-[200vh] h-[100vh] w-[100%] bg-blue-900  px-4 text-center items-center
                         bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.hTnQKM7cWTpuETxqbOBb1wHaEo%26pid%3DApi&f=1&ipt=3f22bd8d48024cbcc22f7424e121b33ebc7d2edbebfdad61ff8439cc486370e5&ipo=images')]
                         "
       >
-        <Row className='gap-3 m-auto justify-center'>
+        <Row className='gap-2 justify-center pt-12'>
           <Col sm={12} md={2} className='h-[55vh] border rounded-lg shadow-lg shadow-red-400 bg-black bg-opacity-75'>
             <Row className='text-center '>
               <h1 className='text-2xl text-slate-200 tracking-widest font-extrabold mt-2'>ПОЗИЦІЇ</h1>
