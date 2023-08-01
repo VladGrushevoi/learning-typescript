@@ -63,18 +63,17 @@ function App() {
     setCurrTrack(iter + currTrack);
   }
 
-  //bg bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.hTnQKM7cWTpuETxqbOBb1wHaEo%26pid%3DApi&f=1&ipt=3f22bd8d48024cbcc22f7424e121b33ebc7d2edbebfdad61ff8439cc486370e5&ipo=images')]
 
   return (
     <>
-      <Container fluid className="md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 px-8 py-10 gap-2 text-center
+      <Container fluid className="md:h-[100vh] h-[200vh] w-[100%] bg-blue-900 py-10 text-center items-center
                         bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.hTnQKM7cWTpuETxqbOBb1wHaEo%26pid%3DApi&f=1&ipt=3f22bd8d48024cbcc22f7424e121b33ebc7d2edbebfdad61ff8439cc486370e5&ipo=images')]
                         "
       >
-        <Row className='gap-4'>
-          <Col sm={12} md={2} className='h-[55vh] border rounded-lg shadow-lg shadow-red-400'>
+        <Row className='gap-4 m-auto'>
+          <Col sm={12} md={3} className='h-[55vh] ml-6 border rounded-lg shadow-lg shadow-red-400 bg-black bg-opacity-75'>
             <Row className='text-center '>
-              <h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>ПОЗИЦІЇ</h1>
+              <h1 className='text-2xl text-slate-200 tracking-widest font-extrabold mt-2'>ПОЗИЦІЇ</h1>
             </Row>
             <Row className=' py-8 tracking-widest font-bold text-xl text-green-300'>
               <Col className='gap-2 justify-center items-center flex'>
@@ -84,31 +83,19 @@ function App() {
               </Col>
             </Row>
             <Row className=''>
-              {/* <H5AudioPlayer
-                className='even:inline-block'
-                autoPlay={true}
-                src='http://stream.zeno.fm/71ntub27u18uv'
-                showSkipControls={false}
-                showJumpControls={false}
-                showFilledProgress={false}
-                showDownloadProgress={false}
-                showFilledVolume={false}
-                defaultCurrentTime={<div></div>}
-                defaultDuration={<div></div>}
-              /> */}
               <AudioPlayer 
                 autoPlay={true}
                 src={musicList[currTrack]}
                 onPlay={_ => console.log("onPlay")}
-                showJumpControls={true}
+                showJumpControls={false}
                 showSkipControls={true}
                 onClickNext={() => handleNext(1)}
                 onClickPrevious={() => handleNext(-1)}
               />
             </Row>
           </Col>
-          <Col sm={12} md={6} className='border text-center rounded-lg px-4'>
-            <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>ПІК</h1></Row>
+          <Col sm={12} md={6} className='border text-center rounded-lg px-4 bg-black bg-opacity-75'>
+            <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold mt-2'>ПІК</h1></Row>
             <Row className='text-gray-200 font-bold text-xl'>
               <Col xs={1} sm={1} md={1}>#</Col>
               <Col xs={3} sm={3} md={3}>Позиція</Col>
@@ -139,8 +126,8 @@ function App() {
               <Button className='bg-red-500' onClick={clearHero}>ОЧИСТИТИ</Button>
             </Row>
           </Col>
-          <Col sm={12} md={3} className='border text-center rounded-lg px-4 pb-2'>
-            <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold'>РАНДОМНИЙ ГЕРОЙ</h1></Row>
+          <Col sm={12} md={2} className='border text-center rounded-lg px-4 pb-2 bg-black bg-opacity-75'>
+            <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold mt-2'>РАНДОМНИЙ ГЕРОЙ</h1></Row>
             <Row className='py-4'>
               <Card style={{ width: '18rem' }} className='m-auto px-0'>
                 <Card.Img variant="top" src={`https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${currHero.name}.png`} />
@@ -154,7 +141,7 @@ function App() {
             </Row>
           </Col>
         </Row>
-        <Row className='roulette horizontal'>
+        <Row className='roulette horizontal py-2 pl-0 pr-5'>
           <Roulette
             handleSpin={handleSpin}
             formChecks={formChecks}

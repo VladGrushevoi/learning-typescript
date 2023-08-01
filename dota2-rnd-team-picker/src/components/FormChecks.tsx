@@ -24,6 +24,7 @@ export const FormChecks = ({ checks }: FormChecksProps) => {
           checks.map(i => {
             return (
               <Form.Check
+              className="text-left"
                 key={Math.random()}
                 type="switch"
                 id="custom-switch"
