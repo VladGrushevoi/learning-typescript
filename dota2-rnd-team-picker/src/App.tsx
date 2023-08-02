@@ -10,6 +10,7 @@ import AudioPlayer from 'react-h5-audio-player';
 import { randomHero } from './utils/randomHero';
 import 'rrp-graceful-lines-plugin/dist/index.css';
 import { Roulette } from './components/Roulette';
+import { fixImageName } from './data/heros';
 
 const musicList = [
   "http://stream.zeno.fm/71ntub27u18uv",
@@ -36,16 +37,18 @@ function App() {
   }
 
   const handleSpin = (heroName: string, position: string) => {
+    const fixNameForImage = heroName.split(" ").join("_").toLowerCase();
+    const fixImageNameOther = fixImageName[fixNameForImage] ? fixImageName[fixNameForImage] : fixNameForImage;
     setCurrHero({
       isPick: true,
-      imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName}.png`,
-      name: heroName,
+      imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageNameOther}.png`,
+      name: heroName.split("_").join(" ").toUpperCase(),
       position: position
     })
     setHero(prev => [...prev, {
-      imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroName}.png`,
+      imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageNameOther}.png`,
       isPick: true,
-      name: heroName,
+      name: heroName.split("_").join(" ").toUpperCase(),
       position: position
     }])
   }
@@ -131,9 +134,16 @@ function App() {
             <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold mt-2'>РАНДОМНИЙ ГЕРОЙ</h1></Row>
             <Row className='py-4'>
               <Card style={{ width: '18rem' }} className='m-auto px-0'>
-                <Card.Img variant="top" src={`https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${currHero.name}.png`} />
+                <Card.Img 
+                  variant="top"  
+                  src={currHero.name ? 
+                    currHero.imgSrc!
+                  :
+                    `https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.cloudflare.steamstatic.com%2Fapps%2Fdota2%2Fimages%2Fdota2_social.jpg&f=1&nofb=1&ipt=a86aa2766cff2cc8ff6edaf63a42452d4acaaa71939cdf0019535fc54e24bd23&ipo=images`} 
+                  
+                  />
                 <Card.Body>
-                  <Card.Title>{currHero.name}</Card.Title>
+                  <Card.Title>{currHero.name ? currHero.name : "DOTA 2"}</Card.Title>
                 </Card.Body>
               </Card>
             </Row>

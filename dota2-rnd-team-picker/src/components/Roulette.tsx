@@ -9,7 +9,7 @@ import reproductionArray from "../utils/reproductionArray"
 import { randomIntFromInterval } from '../utils/randomFromInterval';
 import { CheckInfo } from '../hooks/useCheck';
 import { Position } from '../types/positionEnum';
-import { carry, hard_support, midlaner, offlaner, soft_support } from '../data/heros';
+import { carry, fixImageName, hard_support, midlaner, offlaner, soft_support } from '../data/heros';
 
 export interface Prize {
     id: string,
@@ -68,10 +68,11 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
         },
     };
     const [items, setItems] = useState(carry.map((i, index )=> {
+        const heroImageOther = fixImageName[i] ? fixImageName[i] : i;
         return {
             id: i + index,
-            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${i}.png`,
-            text: i
+            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
+            text: i.split("_").join(" ").toUpperCase()
         }
     }) as Prize[])
     const [prizeList, setPrizeList] = useState([] as Prize[]);
@@ -135,13 +136,15 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
         const namePos = choisenPos[rndPosIndx];
         setItems(_ => {
             let heroes = [] as Prize[];
+            let fixImageHero = "";
             switch (namePos) {
                 case Position.Carry:
                     heroes = carry.map((i, index) => {
+                        fixImageHero = fixImageName[i] ? fixImageName[i] : i;
                         return {
                             id: i + index,
-                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${i}.png`,
-                            text: i
+                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageHero}.png`,
+                            text: i.split("_").join(" ").toUpperCase()
                         }
                     })
                     formChecks.setDefault(namePos)
@@ -149,10 +152,11 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
                     break;
                 case Position.HardLane:
                     heroes = offlaner.map((i, index) => {
+                        fixImageHero = fixImageName[i] ? fixImageName[i] : i;
                         return {
                             id: i + index,
-                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${i}.png`,
-                            text: i
+                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageHero}.png`,
+                            text: i.split("_").join(" ").toUpperCase()
                         }
                     })
                     formChecks.setDefault(namePos)
@@ -160,10 +164,11 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
                     break;
                 case Position.HardSupport:
                     heroes = hard_support.map((i, index) => {
+                        fixImageHero = fixImageName[i] ? fixImageName[i] : i;
                         return {
                             id: i + index,
-                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${i}.png`,
-                            text: i
+                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageHero}.png`,
+                            text: i.split("_").join(" ").toUpperCase()
                         }
                     })
                     formChecks.setDefault(namePos)
@@ -171,10 +176,11 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
                     break;
                 case Position.MidLane:
                     heroes = midlaner.map((i, index) => {
+                        fixImageHero = fixImageName[i] ? fixImageName[i] : i;
                         return {
                             id: i + index,
-                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${i}.png`,
-                            text: i
+                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageHero}.png`,
+                            text: i.split("_").join(" ").toUpperCase()
                         }
                     })
                     formChecks.setDefault(namePos)
@@ -182,10 +188,11 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
                     break;
                 case Position.SoftSupport:
                     heroes = soft_support.map((i, index) => {
+                        fixImageHero = fixImageName[i] ? fixImageName[i] : i;
                         return {
                             id: i + index,
-                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${i}.png`,
-                            text: i
+                            image: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageHero}.png`,
+                            text: i.split("_").join(" ").toUpperCase()
                         }
                     })
                     formChecks.setDefault(namePos)
