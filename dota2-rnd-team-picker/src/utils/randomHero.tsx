@@ -24,65 +24,67 @@ export const randomHero = (
           rndHero = randomIntFromInterval(0, carry.length - 1);
           heroName = carry[rndHero];
           heroImageOther = fixImageName[heroName] ? fixImageName[heroName] : heroName;
+          heroImageOther.split(" ").join("_").toLowerCase();
           hero = {
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.Carry,
-            imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
+            imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther.toLowerCase()}.png`,
             isPick: true,
           }
-          //setHero(prev => [...prev, hero]);
           formChecks.setDefault(namePos);
           return hero;
         case Position.HardLane:
           rndHero = randomIntFromInterval(0, offlaner.length - 1);
           heroName = offlaner[rndHero];
           heroImageOther = fixImageName[heroName] ? fixImageName[heroName] : heroName;
+          heroImageOther.split(" ").join("_").toLowerCase();
           hero = {
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.HardLane,
             imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
             isPick: true,
           }
-          //setHero(prev => [...prev, hero]);
           formChecks.setDefault(namePos);
           return hero;
         case Position.HardSupport:
           rndHero = randomIntFromInterval(0, hard_support.length - 1);
           heroName = hard_support[rndHero];
           heroImageOther = fixImageName[heroName] ? fixImageName[heroName] : heroName;
+          heroImageOther.split(" ").join("_").toLowerCase();
           hero = {
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.HardSupport,
             imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
             isPick: true,
           }
-          //setHero(prev => [...prev, hero]);
           formChecks.setDefault(namePos);
           return hero;
         case Position.MidLane:
           rndHero = randomIntFromInterval(0, midlaner.length - 1);
           heroName = midlaner[rndHero];
           heroImageOther = fixImageName[heroName] ? fixImageName[heroName] : heroName;
+          heroImageOther.split(" ").join("_").toLowerCase();
           hero = {
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.MidLane,
             imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
             isPick: true,
           }
-          //setHero(prev => [...prev, hero]);
           formChecks.setDefault(namePos);
           return hero;
         case Position.SoftSupport:
           rndHero = randomIntFromInterval(0, soft_support.length - 1);
           heroName = soft_support[rndHero];
-          heroImageOther = fixImageName[heroName] !== null ? fixImageName[heroName] : heroName;
+          console.log(heroName, "SOFT SUPPORT FROM DATA")
+          heroImageOther = fixImageName[heroName] ? fixImageName[heroName] : heroName;
+          console.log(heroImageOther, "AND IMAGE")
+          heroImageOther.split(" ").join("_").toLowerCase();
           hero = {
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.SoftSupport,
             imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
             isPick: true,
           }
-          //setHero(prev => [...prev, hero]);
           formChecks.setDefault(namePos);
           return hero;
       }

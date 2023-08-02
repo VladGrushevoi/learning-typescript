@@ -240,7 +240,7 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
             </div>
             <div className="gray-block text-center">
                 <div className="button-wrapper ">
-                    <Button onClick={handleStart} className="spin-button bg-orange-500" type="button">
+                    <Button onClick={handleStart} className="spin-button bg-orange-500 mt-1" type="button">
                         Spin
                     </Button>
                 </div>
