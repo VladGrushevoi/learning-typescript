@@ -109,7 +109,7 @@ function App() {
               {
                 heroes.map((hero, index) => {
                   return (
-                    <Row key={Math.random()} className='text-gray-200  text-xl'>
+                    <Row key={Math.random()} className='text-gray-200 hero-row-animation text-xl'>
                       <Col xs={1} sm={1} md={1}>{index + 1}</Col>
                       <Col xs={3} sm={3} md={3}>{hero.position}</Col>
                       <Col className='flex justify-start my-1'>

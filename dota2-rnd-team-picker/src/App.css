@@ -1,0 +1,16 @@
+@keyframes row-hero {
+    0% {
+        transform: scale(0.01);
+        //translate: -100%
+    }
+    100% {
+        transform: scale(1);
+        //translate: 0%
+    }
+}
+
+.hero-row-animation {
+    animation-name: row-hero;
+    animation-duration: 3s;
+    position: relative;
+}
