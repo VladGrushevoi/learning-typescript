@@ -24,6 +24,7 @@ function App() {
   const [heroes, setHero] = useState([] as Hero[])
   const [currHero, setCurrHero] = useState({} as Hero);
   const [currTrack, setCurrTrack] = useState(0)
+
   const getRandomHero = () => {
     const hero = randomHero(formChecks)!;
     if (hero) {
@@ -105,11 +106,11 @@ function App() {
               <Col xs={3} sm={3} md={3}>Позиція</Col>
               <Col>Герой</Col>
             </Row>
-            <Row>
+            <Row className=''>
               {
                 heroes.map((hero, index) => {
                   return (
-                    <Row key={Math.random()} className='text-gray-200 hero-row-animation text-xl'>
+                    <Row key={Math.random()} className={`text-gray-200 text-xl ${index === heroes.length - 1 ? 'hero-row-animation':''}`}>
                       <Col xs={1} sm={1} md={1}>{index + 1}</Col>
                       <Col xs={3} sm={3} md={3}>{hero.position}</Col>
                       <Col className='flex justify-start my-1'>
