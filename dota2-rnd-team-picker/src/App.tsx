@@ -3,7 +3,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FormChecks } from './components/FormChecks';
 import { useCheckForm } from './utils/useCheckForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Hero } from './types/hero';
 import 'react-h5-audio-player/lib/styles.css';
 import AudioPlayer from 'react-h5-audio-player';
@@ -26,7 +26,15 @@ function App() {
   const [currTrack, setCurrTrack] = useState(0)
 
   const getRandomHero = () => {
+    setHero(prev => {
+      const oldHeroes = [...prev].map(i => {
+        i.isAnimated = false;
+        return i;
+      });
+      return oldHeroes;
+    })
     const hero = randomHero(formChecks)!;
+    hero.isAnimated = true;
     if (hero) {
       setHero(prev => [...prev, hero])
       setCurrHero(hero)
@@ -37,18 +45,55 @@ function App() {
     setHero([] as Hero[])
   }
 
+  useEffect(() => {
+    const setLastAnimatedTrue = () => {
+      setHero(prev => {
+        const oldHeroes = [...prev].map((i, index) => {
+          if(index === prev.length - 1){
+            i.isAnimated = true;
+          }
+          return i;
+        });
+        return oldHeroes;
+      })
+    }
+
+    setLastAnimatedTrue();
+  }, [currHero])
+
+  useEffect(() => {
+    const setAnimatedFalse = () => {
+      setHero(prev => {
+        const oldHeroes = [...prev].map((i) => {
+          i.isAnimated = false;
+          return i;
+        });
+        return oldHeroes;
+      })
+    }
+
+    setAnimatedFalse();
+  }, [...formChecks.checks.map(i => i.checked)])
+
   const handleSpin = (heroName: string, position: string) => {
+    setHero(prev => {
+      const oldHeroes = [...prev].map(i => {
+        i.isAnimated = false;
+        return i;
+      });
+      return oldHeroes;
+    })
     const fixNameForImage = heroName.split(" ").join("_").toLowerCase();
     const fixImageNameOther = fixImageName[fixNameForImage] ? fixImageName[fixNameForImage] : fixNameForImage;
     setCurrHero({
-      isPick: true,
+      isAnimated: true,
       imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageNameOther}.png`,
       name: heroName.split("_").join(" ").toUpperCase(),
       position: position
     })
     setHero(prev => [...prev, {
       imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageNameOther}.png`,
-      isPick: true,
+      isAnimated: true,
       name: heroName.split("_").join(" ").toUpperCase(),
       position: position
     }])
@@ -71,7 +116,7 @@ function App() {
 
   return (
     <>
-      <Container fluid className="md:h-min-[200vh] h-min-[200vh] w-[100%] bg-blue-900  px-4 text-center items-center
+      <Container fluid className="md:h-min-[200vh] h-[100vh] w-[100%] bg-blue-900  px-4 text-center items-center
                         bg-[url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.hTnQKM7cWTpuETxqbOBb1wHaEo%26pid%3DApi&f=1&ipt=3f22bd8d48024cbcc22f7424e121b33ebc7d2edbebfdad61ff8439cc486370e5&ipo=images')]
                         "
       >
@@ -110,7 +155,7 @@ function App() {
               {
                 heroes.map((hero, index) => {
                   return (
-                    <Row key={Math.random()} className={`text-gray-200 text-xl ${index === heroes.length - 1 ? 'hero-row-animation':''}`}>
+                    <Row key={Math.random()} className={`text-gray-200 text-xl ${hero.isAnimated ? 'hero-row-animation':''}`}>
                       <Col xs={1} sm={1} md={1}>{index + 1}</Col>
                       <Col xs={3} sm={3} md={3}>{hero.position}</Col>
                       <Col className='flex justify-start my-1'>

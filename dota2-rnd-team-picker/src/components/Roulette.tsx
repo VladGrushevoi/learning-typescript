@@ -147,8 +147,6 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
                             text: i.split("_").join(" ").toUpperCase()
                         }
                     })
-                    formChecks.setDefault(namePos)
-                    setPosition(namePos)
                     break;
                 case Position.HardLane:
                     heroes = offlaner.map((i, index) => {
@@ -159,8 +157,6 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
                             text: i.split("_").join(" ").toUpperCase()
                         }
                     })
-                    formChecks.setDefault(namePos)
-                    setPosition(namePos)
                     break;
                 case Position.HardSupport:
                     heroes = hard_support.map((i, index) => {
@@ -171,8 +167,6 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
                             text: i.split("_").join(" ").toUpperCase()
                         }
                     })
-                    formChecks.setDefault(namePos)
-                    setPosition(namePos)
                     break;
                 case Position.MidLane:
                     heroes = midlaner.map((i, index) => {
@@ -183,8 +177,6 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
                             text: i.split("_").join(" ").toUpperCase()
                         }
                     })
-                    formChecks.setDefault(namePos)
-                    setPosition(namePos)
                     break;
                 case Position.SoftSupport:
                     heroes = soft_support.map((i, index) => {
@@ -195,8 +187,6 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
                             text: i.split("_").join(" ").toUpperCase()
                         }
                     })
-                    formChecks.setDefault(namePos)
-                    setPosition(namePos)
                     break;
                 default:
                     return []
@@ -204,6 +194,8 @@ export const Roulette = ({ handleSpin, formChecks }: RouletteProps) => {
 
             return heroes;
         })
+        formChecks.setDefault(namePos)
+        setPosition(namePos)
         if (items.length === 0) {
             return;
         }

@@ -2,7 +2,7 @@ export interface Hero {
     name: string | null,
     position: string | null,
     imgSrc: string | null,
-    isPick: boolean
+    isAnimated: boolean
 }
 
 export interface ShortHero {

@@ -15,7 +15,7 @@ export const randomHero = (
     let heroImageOther = "";
     let hero: Hero = {
       imgSrc: "",
-      isPick: false,
+      isAnimated: false,
       name: "",
       position: namePos
     }
@@ -29,7 +29,7 @@ export const randomHero = (
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.Carry,
             imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther.toLowerCase()}.png`,
-            isPick: true,
+            isAnimated: true,
           }
           formChecks.setDefault(namePos);
           return hero;
@@ -42,7 +42,7 @@ export const randomHero = (
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.HardLane,
             imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
-            isPick: true,
+            isAnimated: true,
           }
           formChecks.setDefault(namePos);
           return hero;
@@ -55,7 +55,7 @@ export const randomHero = (
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.HardSupport,
             imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
-            isPick: true,
+            isAnimated: true,
           }
           formChecks.setDefault(namePos);
           return hero;
@@ -68,7 +68,7 @@ export const randomHero = (
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.MidLane,
             imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
-            isPick: true,
+            isAnimated: true,
           }
           formChecks.setDefault(namePos);
           return hero;
@@ -83,7 +83,7 @@ export const randomHero = (
             name: heroName.split("_").join(" ").toUpperCase(),
             position: Position.SoftSupport,
             imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${heroImageOther}.png`,
-            isPick: true,
+            isAnimated: true,
           }
           formChecks.setDefault(namePos);
           return hero;
