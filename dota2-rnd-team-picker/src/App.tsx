@@ -1,4 +1,4 @@
-import { Container, Col, Row, Card, Button } from 'react-bootstrap';
+import { Container, Col, Row, Button } from 'react-bootstrap';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FormChecks } from './components/FormChecks';
@@ -6,56 +6,41 @@ import { useCheckForm } from './utils/useCheckForm';
 import { useEffect, useState } from 'react';
 import { Hero } from './types/hero';
 import 'react-h5-audio-player/lib/styles.css';
-import AudioPlayer from 'react-h5-audio-player';
 import { randomHero } from './utils/randomHero';
 import 'rrp-graceful-lines-plugin/dist/index.css';
 import { Roulette } from './components/Roulette';
 import { fixImageName } from './data/heros';
+import { CustomAudioPlayer } from './components/AudioPlayer';
+import { useHeroesList } from './hooks/useHeroesList';
+import { HeroesList } from './components/HeroesList';
+import { HeroCard } from './components/HeroCard';
 
-const musicList = [
-  "http://stream.zeno.fm/71ntub27u18uv",
-  "https://download.xn--41a.wiki/cache/2/66d/6555612_456244947.mp3?filename=Huby-Danika%20House.mp3",
-  "https://download.xn--41a.wiki/cache/2/7e1/252581702_456243505.mp3?filename=%D0%9F%D0%BE%D0%BB%D0%B5%20%D0%A7%D1%83%D0%B4%D0%B5%D1%81-%D0%97%D0%B2%D1%83%D0%BA%20%D0%B2%D1%80%D0%B0%D1%89%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B1%D0%B0%D1%80%D0%B0%D0%B1%D0%B0%D0%BD%D0%B0%20%D0%B2%20%D0%9F%D0%BE%D0%BB%D0%B5%20%D0%A7%D1%83%D0%B4%D0%B5%D1%81.mp3"
-]
 
 function App() {
 
   const formChecks = useCheckForm();
-  const [heroes, setHero] = useState([] as Hero[])
+  const { 
+    addNewHeroToList,
+    setShowAnimationToFalse,
+    clearHeroesList,
+    setLastHeroAnimationTrue,
+    heroes
+  } = useHeroesList()
   const [currHero, setCurrHero] = useState({} as Hero);
-  const [currTrack, setCurrTrack] = useState(0)
 
   const getRandomHero = () => {
-    setHero(prev => {
-      const oldHeroes = [...prev].map(i => {
-        i.isAnimated = false;
-        return i;
-      });
-      return oldHeroes;
-    })
+    setShowAnimationToFalse();
     const hero = randomHero(formChecks)!;
     hero.isAnimated = true;
     if (hero) {
-      setHero(prev => [...prev, hero])
+      addNewHeroToList(hero)
       setCurrHero(hero)
     }
   }
 
-  const clearHero = () => {
-    setHero([] as Hero[])
-  }
-
   useEffect(() => {
     const setLastAnimatedTrue = () => {
-      setHero(prev => {
-        const oldHeroes = [...prev].map((i, index) => {
-          if(index === prev.length - 1){
-            i.isAnimated = true;
-          }
-          return i;
-        });
-        return oldHeroes;
-      })
+      setLastHeroAnimationTrue();
     }
 
     setLastAnimatedTrue();
@@ -63,54 +48,25 @@ function App() {
 
   useEffect(() => {
     const setAnimatedFalse = () => {
-      setHero(prev => {
-        const oldHeroes = [...prev].map((i) => {
-          i.isAnimated = false;
-          return i;
-        });
-        return oldHeroes;
-      })
+      setShowAnimationToFalse()
     }
 
     setAnimatedFalse();
   }, [...formChecks.checks.map(i => i.checked)])
 
   const handleSpin = (heroName: string, position: string) => {
-    setHero(prev => {
-      const oldHeroes = [...prev].map(i => {
-        i.isAnimated = false;
-        return i;
-      });
-      return oldHeroes;
-    })
+    setShowAnimationToFalse();
+
     const fixNameForImage = heroName.split(" ").join("_").toLowerCase();
     const fixImageNameOther = fixImageName[fixNameForImage] ? fixImageName[fixNameForImage] : fixNameForImage;
-    setCurrHero({
+    const hero : Hero = {
       isAnimated: true,
       imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageNameOther}.png`,
       name: heroName.split("_").join(" ").toUpperCase(),
       position: position
-    })
-    setHero(prev => [...prev, {
-      imgSrc: `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${fixImageNameOther}.png`,
-      isAnimated: true,
-      name: heroName.split("_").join(" ").toUpperCase(),
-      position: position
-    }])
-  }
-
-  const handleNext = (iter: number) => {
-    console.log("next")
-    if(iter + currTrack < 0){
-      setCurrTrack(musicList.length - 1)
-      return;
     }
-    if(iter + currTrack > musicList.length){
-      setCurrTrack(0)
-      return;
-    }
-    console.log(currTrack);
-    setCurrTrack(iter + currTrack);
+    setCurrHero(hero);
+    addNewHeroToList(hero);
   }
 
 
@@ -133,65 +89,19 @@ function App() {
               </Col>
             </Row>
             <Row className=''>
-              <AudioPlayer 
-                autoPlay={true}
-                src={musicList[currTrack]}
-                onPlay={_ => console.log("onPlay")}
-                showJumpControls={false}
-                showSkipControls={true}
-                onClickNext={() => handleNext(1)}
-                onClickPrevious={() => handleNext(-1)}
-              />
+              <CustomAudioPlayer />
             </Row>
           </Col>
           <Col sm={12} md={6} className='border text-center rounded-lg px-4 bg-black bg-opacity-75'>
-            <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold mt-2'>ПІК</h1></Row>
-            <Row className='text-gray-200 font-bold text-xl'>
-              <Col xs={1} sm={1} md={1}>#</Col>
-              <Col xs={3} sm={3} md={3}>Позиція</Col>
-              <Col>Герой</Col>
-            </Row>
-            <Row className=''>
-              {
-                heroes.map((hero, index) => {
-                  return (
-                    <Row key={Math.random()} className={`text-gray-200 text-xl ${hero.isAnimated ? 'hero-row-animation':''}`}>
-                      <Col xs={1} sm={1} md={1}>{index + 1}</Col>
-                      <Col xs={3} sm={3} md={3}>{hero.position}</Col>
-                      <Col className='flex justify-start my-1'>
-                        <Col xs={6} sm={6} md={6} className='text-right'>
-                          <img src={hero.imgSrc!} className='h-[40px] inline-block' />
-                        </Col>
-                        <Col md={1}></Col>
-                        <Col className='justify-start text-left'>
-                          {hero.name}
-                        </Col>
-                      </Col>
-                    </Row>
-                  )
-                })
-              }
-            </Row>
+              <HeroesList heroes={heroes}/>
             <Row>
-              <Button className='bg-red-500' onClick={clearHero}>ОЧИСТИТИ</Button>
+              <Button className='bg-red-500' onClick={() => clearHeroesList()}>ОЧИСТИТИ</Button>
             </Row>
           </Col>
           <Col sm={12} md={3} className='border text-center rounded-lg px-4 pb-2 bg-black bg-opacity-75'>
             <Row><h1 className='text-2xl text-slate-200 tracking-widest font-extrabold mt-2'>РАНДОМНИЙ ГЕРОЙ</h1></Row>
             <Row className='py-4'>
-              <Card style={{ width: '18rem' }} className='m-auto px-0'>
-                <Card.Img 
-                  variant="top"  
-                  src={currHero.name ? 
-                    currHero.imgSrc!
-                  :
-                    `https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.cloudflare.steamstatic.com%2Fapps%2Fdota2%2Fimages%2Fdota2_social.jpg&f=1&nofb=1&ipt=a86aa2766cff2cc8ff6edaf63a42452d4acaaa71939cdf0019535fc54e24bd23&ipo=images`} 
-                  
-                  />
-                <Card.Body>
-                  <Card.Title>{currHero.name ? currHero.name : "DOTA 2"}</Card.Title>
-                </Card.Body>
-              </Card>
+              <HeroCard currHero={currHero} />
             </Row>
             <Row>
               <Button className='bg-green-600' onClick={getRandomHero}>КРУТАНУТЬ</Button>
