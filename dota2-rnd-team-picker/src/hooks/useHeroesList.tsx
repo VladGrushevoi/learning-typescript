@@ -4,7 +4,7 @@ import { Hero } from "../types/hero"
 export const useHeroesList = () => {
     const [heroes, setHero] = useState([] as Hero[])
 
-    const addNewHeroToList = (hero: Hero) => {
+    const addNewHeroToList = (hero: Hero) : void => {
         setHero(prev => [...prev, hero])
     }
     const setShowAnimationToFalse = () => {
