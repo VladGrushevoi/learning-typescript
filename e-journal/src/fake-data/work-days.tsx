@@ -1,4 +1,4 @@
-import { DayInfoType } from "../types/dayInfoType";
+import { DayInfoType, Status } from "../types/dayInfoType";
 
 export const WorkDays : DayInfoType[] = [
     {
@@ -8,8 +8,15 @@ export const WorkDays : DayInfoType[] = [
     },
     {
         day: "Вівторок",
-        isWorkingDay: false,
-        times: []
+        isWorkingDay: true,
+        times: [
+            {
+                id: 1,
+                hour: "9:00",
+                status: Status.Free,
+                userId: ""
+            }
+        ]
     },
     {
         day: "Середа",

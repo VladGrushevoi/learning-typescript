@@ -15,8 +15,6 @@ interface MainPaheProps {
 
 export const MainPage = ({days} : MainPaheProps) => {
 
-    console.log(days, "MAIN PAGE")
-
     return (
         <>
             <Row className=' px-3 py-8 text-center gap-3 md:h-[90vh] h-[150vh]'>
