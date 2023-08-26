@@ -1,0 +1,49 @@
+@keyframes signIn-left-anime {
+    0% {
+        //transform: skew(60deg, 60deg);
+        transform: rotateZ(90deg);
+        transform: rotateX(90deg);
+        transform: rotateY(90deg);
+    }
+    100% {
+        //transform: skew(0deg, 0deg);
+        transform: rotateX(0deg);
+        transform: rotateY(0deg);
+        transform: rotateZ(0deg);
+    }
+}
+
+@keyframes signUp-left-anime {
+    0% {
+        transform: rotateZ(-90deg);
+        transform: rotateX(-90deg);
+        transform: rotateY(-90deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+        transform: rotateY(0deg);
+        transform: rotateZ(0deg);
+    }
+}
+
+.signIn-left-anime {
+    animation-name : signIn-left-anime;
+    animation-duration: 2s;
+    position: relative;
+}
+.signIn-right-anime {
+    animation-name : card-right;
+    animation-duration: 3s;
+    position: relative;
+}
+.signUp-left-anime {
+    animation-name : signUp-left-anime;
+    animation-duration: 2s;
+    animation-delay: 1s
+    position: relative;
+}
+.signUp-right-anime {
+    animation-name : card-right;
+    animation-duration: 3s;
+    position: relative;
+}

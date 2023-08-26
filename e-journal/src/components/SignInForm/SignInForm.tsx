@@ -1,14 +1,15 @@
-import { Button, Form, Row } from "react-bootstrap"
+import { Button, Form, InputGroup, Row } from "react-bootstrap"
 
 export const SignInForm = () => {
     return (
         <>
             <Form className="py-3 px-4">
+                <Form.Label>Номер мобільного телефону</Form.Label>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Номер мобільного телефону</Form.Label>
-                    <Form.Control type="email" placeholder="Мобільний номер" />
-                    <Form.Text className="text-muted">
-                    </Form.Text>
+                    <InputGroup>
+                        <InputGroup.Text id="basic-addon1">+380</InputGroup.Text>
+                        <Form.Control type="email" placeholder="Мобільний номер" />
+                    </InputGroup>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -19,9 +20,9 @@ export const SignInForm = () => {
                     <Form.Check type="checkbox" label="Запам'ятати мене" />
                 </Form.Group>
                 <Row>
-                <Button variant="primary" type="submit" className="">
-                    Submit
-                </Button>
+                    <Button variant="primary" type="submit" className="">
+                        Увійти
+                    </Button>
                 </Row>
             </Form>
         </>

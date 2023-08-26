@@ -1,5 +1,7 @@
 import { Col, Row, Tab, Tabs } from "react-bootstrap"
 import { SignInForm } from "../../SignInForm/SignInForm"
+import { SignUpForm } from "../../SignUpForm/SignUpForm"
+import "./AuthPage.css"
 
 interface AuthPageProps {
 
@@ -19,12 +21,16 @@ export const AuthPage = ({ }: AuthPageProps) => {
                     <Tab 
                         eventKey="signIn" 
                         title="АВТОРИЗАЦІЯ"
-                        className="justify-center content-center py-4 px-3 items-center border border-black rounded-2xl shadow-md shadow-green-500"
+                        className="justify-center signIn-left-anime content-center py-4 px-3 items-center border rounded-2xl shadow-md shadow-green-500"
                         >
                         <SignInForm />
                     </Tab>
-                    <Tab eventKey="signUp" title="РЕЄСТРАЦІЯ">
-                        РЕЄСТРАЦІЯ
+                    <Tab 
+                        eventKey="signUp" 
+                        title="РЕЄСТРАЦІЯ"
+                        className="justify-center signUp-left-anime content-center py-4 px-3 items-center border rounded-2xl shadow-md shadow-green-500"
+                        >
+                        <SignUpForm />
                     </Tab>
                 </Tabs>
                 </Col >
