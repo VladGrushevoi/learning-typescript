@@ -3,6 +3,7 @@ import { MainPage } from "./components/pages/MainPage/MainPage"
 import { ProfilePage } from "./components/pages/ProfilePage/ProfilePage"
 import { AdminPage } from "./components/pages/AdminPage/AdminPage"
 import { useFakeWorkHour } from "./fake-data/fake-workHour"
+import { AuthPage } from "./components/pages/AuthPage/AuthPage"
 
 export const getRoutes = () => {
     const { workDays, addNewWorkHour } = useFakeWorkHour();
@@ -19,6 +20,10 @@ export const getRoutes = () => {
                 })}
             />,
             errorElement: <div>ERROR</div>
+        },
+        {
+            path:'/auth',
+            element: <AuthPage />
         },
         {
             path: "/main",
