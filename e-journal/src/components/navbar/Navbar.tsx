@@ -34,6 +34,11 @@ export const NavBar = () => {
                                         href="/administrator/2222">
                                         АДМІНКА
                                     </Nav.Link>
+                                    <Nav.Link
+                                        className="rounded-xl shadow-lg shadow-blue-500"
+                                        href="/auth">
+                                        АВТОРИЗУВАТИСЯ
+                                    </Nav.Link>
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>
