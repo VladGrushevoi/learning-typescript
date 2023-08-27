@@ -14,3 +14,9 @@ export interface Record {
     date: string,
     status: Status
 }
+
+export enum UserRole{
+    Admin = 0,
+    User = 1,
+    Undefined = 2,
+}
