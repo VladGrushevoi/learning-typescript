@@ -19,7 +19,46 @@ export const getRoutes = () => {
                     }
                 })}
             />,
-            errorElement: <div>ERROR</div>
+            errorElement: <div>ERROR</div>,
+             children: [
+            //     {
+            //         path:'/auth',
+            //         element: <AuthPage />
+            //     },
+                {
+                    path: "/main",
+                    element: <MainPage
+                        days={workDays.map(item => {
+                            return {
+                                name: item.day,
+                                isWorkingDay: item.isWorkingDay,
+                                times: item.times
+                            }
+                        })}
+                    />,
+                    errorElement: <div>ERROR</div>
+                },
+                {
+                    path: "/user/:guid",
+                    element: <ProfilePage />,
+                    errorElement: <div>ERROR</div>
+                },
+            //     {
+            //         path: "/administrator/:guid",
+            //         element: <AdminPage 
+            //             addNewHour={addNewWorkHour}
+            //             days={
+            //                 workDays.map(item => {
+            //                     return {
+            //                         name: item.day,
+            //                         times: item.times
+            //                     }
+            //                 })
+            //             }
+            //         />,
+            //         errorElement: <div>ERROR</div>
+            //     }
+             ]
         },
         {
             path:'/auth',
@@ -38,11 +77,11 @@ export const getRoutes = () => {
             />,
             errorElement: <div>ERROR</div>
         },
-        {
-            path: "/user/:guid",
-            element: <ProfilePage />,
-            errorElement: <div>ERROR</div>
-        },
+        // {
+        //     path: "/user/:guid",
+        //     element: <ProfilePage />,
+        //     errorElement: <div>ERROR</div>
+        // },
         {
             path: "/administrator/:guid",
             element: <AdminPage 

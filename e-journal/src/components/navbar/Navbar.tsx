@@ -1,7 +1,9 @@
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap"
+import { RootState } from "../../Redux/store";
+import { useAppSelector } from "../../Redux/storehooks";
 
 export const NavBar = () => {
-
+    const user = useAppSelector((state: RootState) => state.user);
     return (
         <>
             {['md'].map((expand) => (
@@ -34,11 +36,20 @@ export const NavBar = () => {
                                         href="/administrator/2222">
                                         АДМІНКА
                                     </Nav.Link>
-                                    <Nav.Link
-                                        className="rounded-xl shadow-lg shadow-blue-500"
-                                        href="/auth">
-                                        АВТОРИЗУВАТИСЯ
-                                    </Nav.Link>
+                                    {
+                                        !user.isLogin ?
+                                            <Nav.Link
+                                                className="rounded-xl shadow-lg shadow-blue-500"
+                                                href="/auth">
+                                                АВТОРИЗУВАТИСЯ
+                                            </Nav.Link>
+                                            :
+                                            <Nav.Link
+                                                className="rounded-xl shadow-lg shadow-blue-500"
+                                                href="">
+                                                {user.Name +" "+ user.Surname[0]}.
+                                            </Nav.Link>
+                                    }
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>
