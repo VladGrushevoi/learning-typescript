@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./features/user/userSlice";
+import { weeklyScheduleSlice } from "./features/WorkDays/workDaysSlice";
 
 export const store = configureStore({
     reducer: {
-        user: userSlice
+        user: userSlice,
+        schedule: weeklyScheduleSlice.reducer
     },
 });
 

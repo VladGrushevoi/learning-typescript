@@ -2,14 +2,12 @@ import { Button, Col, Row } from "react-bootstrap";
 import { useState } from "react";
 import { ListWorkHour } from "./ListWorkHour";
 import { AddWorkHourForm } from "./AddWorkHourForm";
-import { WorkHour } from "../../types/work-hour";
+import { WorkTime } from "../../types/work-hour";
+import { DayInfoType } from "../../types/dayInfoType";
 
 interface ConfiGuratorWorkDaysProps {
-    days: {
-        name: string,
-        times: WorkHour[]
-    }[],
-    addNewWorkHour: (dayIndex: number, newWorkHour: WorkHour) => void, 
+    days: DayInfoType[],
+    addNewWorkHour: (dayIndex: number, newWorkHour: WorkTime) => void, 
 }
 
 
@@ -32,7 +30,7 @@ export const ConfiGuratorWorkDays = ({ days, addNewWorkHour }: ConfiGuratorWorkD
                                     className=""
                                     variant={chooseDayIndex !== index ? 'secondary' : 'success'}
                                 >
-                                    {day.name}
+                                    {day.day}
                                 </Button>
                             </Col>
                         )

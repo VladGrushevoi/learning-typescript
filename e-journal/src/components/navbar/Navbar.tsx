@@ -1,6 +1,7 @@
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap"
 import { RootState } from "../../Redux/store";
 import { useAppSelector } from "../../Redux/storehooks";
+import { NavLink } from "react-router-dom";
 
 export const NavBar = () => {
     const user = useAppSelector((state: RootState) => state.user);
@@ -23,32 +24,33 @@ export const NavBar = () => {
                             </Offcanvas.Header>
                             <Offcanvas.Body >
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                                    <Nav.Link
-                                        href="/"
+                                    <NavLink
+                                        to={"/"}
                                     >
                                         ГОЛОВНА
-                                    </Nav.Link>
-                                    <Nav.Link
-                                        href="/user/1111">
+                                    </NavLink>
+                                    <NavLink
+                                        to="/profile/1111"
+                                        >
                                         МІЙ ПРОФІЛЬ
-                                    </Nav.Link>
-                                    <Nav.Link
-                                        href="/administrator/2222">
+                                    </NavLink>
+                                    <NavLink
+                                        to="/admin/2222">
                                         АДМІНКА
-                                    </Nav.Link>
+                                    </NavLink>
                                     {
                                         !user.isLogin ?
-                                            <Nav.Link
+                                            <NavLink
                                                 className="rounded-xl shadow-lg shadow-blue-500"
-                                                href="/auth">
+                                                to="/auth">
                                                 АВТОРИЗУВАТИСЯ
-                                            </Nav.Link>
+                                            </NavLink>
                                             :
-                                            <Nav.Link
+                                            <NavLink
                                                 className="rounded-xl shadow-lg shadow-blue-500"
-                                                href="">
+                                                to="">
                                                 {user.Name +" "+ user.Surname[0]}.
-                                            </Nav.Link>
+                                            </NavLink>
                                     }
                                 </Nav>
                             </Offcanvas.Body>

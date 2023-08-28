@@ -1,34 +1,54 @@
+import { useEffect } from 'react'
 import { Col, Nav, Row, Stack, Tab } from "react-bootstrap"
 import { DateButton } from "../../bottons/DateButton"
 import { DayInfoTable } from "../../dayInfoTable/DayInfoTable"
-import { WorkHour } from "../../../types/work-hour"
+import { useAppDispatch, useAppSelector } from "../../../Redux/storehooks"
+import { RootState } from "../../../Redux/store"
+import { ActualWeeklyScheduleRsponse } from '../../../Redux/features/WorkDays/PayloadTypes/ActaulWeeklySchedule'
+import { appAxios } from '../../../appAxios/appAxios'
+import { getActaulWeeklySchedule } from '../../../Redux/features/WorkDays/workDaysSlice'
 
 
 interface MainPaheProps {
-    days: {
-        name: string, 
-        isWorkingDay: boolean, 
-        times: WorkHour[]
-    }[]
+    
 }
 
 
-export const MainPage = ({days} : MainPaheProps) => {
+export const MainPage = ({} : MainPaheProps) => {
+    const user = useAppSelector((state: RootState) => state.user);
+    console.log(user)
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        async function fetchActualWeeklySchedule(){
+            const response = await appAxios.get<ActualWeeklyScheduleRsponse>("/schedule/actual-schedule", {
+                headers: {
+                    "Authorization": "Bearer " + user.JwtToken
+                }
+            })
+            console.log(response);
+            dispatch(getActaulWeeklySchedule(response.data))
+        }
+        console.log("ALLLOOOOO")
+        fetchActualWeeklySchedule();
+    }, [])
 
+    const days = useAppSelector((state: RootState) => state.schedule);
+    console.log(days, "from redux")
     return (
         <>
             <Row className=' px-3 py-8 text-center gap-3 md:h-[90vh] h-[150vh]'>
                 <Col className='border-2 rounded-2xl border-orange-300 shadow-lg'>
                     <Row className="">
-                        <Tab.Container defaultActiveKey={days[1].name}>
+                        <Tab.Container defaultActiveKey={days.workDays[0].dayOfWeek}>
                             <Row className="gap-3 py-3 m-0">
                                 <Col  className="border-2 m-auto rounded-md  border-blue-400">
                                     <Nav variant="pills" className="md:flex-col" key={Math.random()}>
                                         <DateButton  
-                                        workingDays={days.map(item => {
+                                        workingDays={days.workDays.map(item => {
                                             return {
-                                                name: item.name,
-                                                isWorking: item.isWorkingDay
+                                                eventKey: item.dayOfWeek,
+                                                name: item.date,
+                                                isWorking: item.isWorkDay
                                             }
                                         })}
                                         />
@@ -37,9 +57,9 @@ export const MainPage = ({days} : MainPaheProps) => {
                                 <Col xs={12} sm={12} md={9} xl={9} className="p-0">
                                     <Tab.Content className="m-0">
                                         <DayInfoTable data={
-                                            days.map(item => {
+                                            days.workDays.map(item => {
                                                 return {
-                                                    name: item.name,
+                                                    name: item.dayOfWeek,
                                                     times: item.times
                                                 }
                                             })

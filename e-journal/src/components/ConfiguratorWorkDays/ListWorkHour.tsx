@@ -1,9 +1,9 @@
 import { Col, Row } from "react-bootstrap"
-import { WorkHour } from "../../types/work-hour"
+import { WorkTime } from "../../types/work-hour"
 import { PencilSquare, Trash3Fill } from "react-bootstrap-icons"
 
 interface ListWorkHourProps {
-    workHours: WorkHour[],
+    workHours: WorkTime[],
 }
 
 export const ListWorkHour = ({ workHours }: ListWorkHourProps) => {
@@ -20,7 +20,7 @@ export const ListWorkHour = ({ workHours }: ListWorkHourProps) => {
                                     {index + 1}
                                 </Col>
                                 <Col>
-                                    {item.hour}
+                                    {item.time}
                                 </Col>
                                 <Col xs={3} sm={3} md={3} className="flex gap-4">
                                     <PencilSquare size={18} className="hover:fill-orange-500 cursor-pointer" />

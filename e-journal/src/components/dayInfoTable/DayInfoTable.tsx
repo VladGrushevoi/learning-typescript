@@ -1,24 +1,24 @@
 import { Button, Col, Row, Tab } from "react-bootstrap"
 import { Status } from "../../types/dayInfoType"
 import { PersonPlusFill, PersonFillSlash } from "react-bootstrap-icons"
-import { WorkHour } from "../../types/work-hour"
+import { WorkTime } from "../../types/work-hour"
 
 interface DayInfoTableProps {
     data: {
-        name: string, 
-        times: WorkHour[]
+        name: number, 
+        times: WorkTime[]
     }[]
 }
 
 export const DayInfoTable = ({ data }: DayInfoTableProps) => {
-
-    const typeTimeColor = (item: WorkHour) => {
+    console.log(data)
+    const typeTimeColor = (item: WorkTime) => {
         return `${item.status === Status.Free ? 'bg-green-300'
                 : item.status === Status.TemporaryHold ? 'bg-orange-300'
                     : 'bg-red-300'}`
     }
 
-    const isFreeTime = (item: WorkHour): boolean => {
+    const isFreeTime = (item: WorkTime): boolean => {
         return item.status !== Status.Free
     }
 
@@ -39,7 +39,7 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
                                     item.times.map(item => {
                                         return (
                                                 <Row key={Math.random()} className={`${typeTimeColor(item)} rounded-md items-center py-2`}>
-                                                    <Col xs={2} sm={2} md={2} className="m-auto">{item.hour}</Col>
+                                                    <Col xs={2} sm={2} md={2} className="m-auto">{item.time}</Col>
                                                     <Col className="m-auto">{item.status}</Col>
                                                     <Col xs={2} sm={2} md={4}>
                                                         <Button

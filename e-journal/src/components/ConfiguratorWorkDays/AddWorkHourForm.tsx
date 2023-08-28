@@ -1,12 +1,12 @@
 import { Button, Col, Form, InputGroup } from "react-bootstrap"
 import { CheckSquareFill, PlusCircle, XSquareFill } from "react-bootstrap-icons"
-import { WorkHour } from "../../types/work-hour"
+import { WorkTime } from "../../types/work-hour"
 import { useInput } from "../../hooks/useInput"
 import { useCheckbox } from "../../hooks/useCheckbox"
 import { Status } from "../../types/dayInfoType"
 
 interface AddWorkHourFormProps {
-    addNewHour: (index: number, newHourData: WorkHour) => void,
+    addNewHour: (index: number, newHourData: WorkTime) => void,
     dayIndex: number
 }
 
@@ -18,9 +18,9 @@ export const AddWorkHourForm = ({ addNewHour, dayIndex }: AddWorkHourFormProps) 
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const newWorkHour : WorkHour = {
+        const newWorkHour : WorkTime = {
             id: Math.random(),
-            hour: timeInput.value + ":" + minutesInput.value,
+            time: timeInput.value + ":" + minutesInput.value,
             status: Status.Free,
             userId: null
         }

@@ -1,8 +1,8 @@
 import { Status } from "./dayInfoType";
 
-export interface WorkHour {
+export interface WorkTime {
     id: number,
-    hour: string,
+    time: string,
     status: Status,
     userId: string | null
 }

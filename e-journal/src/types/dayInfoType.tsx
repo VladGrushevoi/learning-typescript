@@ -1,14 +1,17 @@
-import { WorkHour } from "./work-hour"
+import { WorkTime } from "./work-hour"
 
 export interface DayInfoType {
     day: string,
-    isWorkingDay: boolean,
-    times: WorkHour[]
+    isWorkDay: boolean,
+    dayOfWeek: number,
+    date: string,
+    times: WorkTime[]
 }
 
 export enum Status {
-    Free = "Вільно",
-    TemporaryHold = "Очікує підтвердження",
-    Reserv = "Підтверджено",
-    Done = "Виконано"
+    Free = 0,
+    TemporaryHold = 1,
+    Reserv = 2,
+    Done = 3,
+    Canceled = 4
 }

@@ -3,16 +3,16 @@ import { DayInfoType, Status } from "../types/dayInfoType";
 export const WorkDays : DayInfoType[] = [
     {
         day: "Понеділок",
-        isWorkingDay: false,
+        isWorkDay: false,
         times: []
     },
     {
         day: "Вівторок",
-        isWorkingDay: true,
+        isWorkDay: true,
         times: [
             {
                 id: 1,
-                hour: "9:00",
+                time: "9:00",
                 status: Status.Free,
                 userId: ""
             }
@@ -20,27 +20,27 @@ export const WorkDays : DayInfoType[] = [
     },
     {
         day: "Середа",
-        isWorkingDay: false,
+        isWorkDay: false,
         times: []
     },
     {
         day: "Четвер",
-        isWorkingDay: false,
+        isWorkDay: false,
         times: []
     },
     {
         day: "П'ятниця",
-        isWorkingDay: false,
+        isWorkDay: false,
         times: []
     },
     {
         day: "Субота",
-        isWorkingDay: false,
+        isWorkDay: false,
         times: []
     },
     {
         day: "Неділя",
-        isWorkingDay: false,
+        isWorkDay: false,
         times: []
     },
     
