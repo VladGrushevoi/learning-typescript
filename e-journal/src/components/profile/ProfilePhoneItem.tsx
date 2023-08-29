@@ -3,6 +3,11 @@ import { User } from "../../types/User"
 import { PenFill, CheckSquareFill, XSquareFill } from 'react-bootstrap-icons';
 import { useState } from "react";
 import { useInput } from "../../hooks/useInput";
+import { UpdateUserInfoRequest, UpdateUserInfoResponse } from "../../Redux/features/user/PayloadTypes/UserUpdate";
+import { appAxios } from "../../appAxios/appAxios";
+import { useAppDispatch, useAppSelector } from "../../Redux/storehooks";
+import { RootState } from "../../Redux/store";
+import { updateUser } from "../../Redux/features/user/userSlice";
 
 interface ProfilePhoneItemProps {
     title: string,
@@ -12,7 +17,8 @@ interface ProfilePhoneItemProps {
 }
 
 export const ProfilePhoneItem = ({ title, value, isEditable } : ProfilePhoneItemProps) => {
-
+    const user = useAppSelector((state: RootState) => state.user)
+    const dispatch = useAppDispatch();
     const [isUpdating, setIsUpdating] = useState(false)
     const phoneInput = useInput(value, "phoneNumber");
 
@@ -20,9 +26,21 @@ export const ProfilePhoneItem = ({ title, value, isEditable } : ProfilePhoneItem
         setIsUpdating(isEdit);
     }
 
-    const handleSubmit = (e : React.FormEvent) => {
+    const handleSubmit = async (e : React.FormEvent) => {
         e.preventDefault();
-        console.log(phoneInput.value)
+        const infoToUpdate : UpdateUserInfoRequest = {
+            firstName: user.Name,
+            surname: user.Surname,
+            phoneNumber: phoneInput.value
+        }
+
+        const response = await appAxios.post<UpdateUserInfoResponse>("/user/update-information", infoToUpdate,{
+            headers:{
+                "Authorization": "Bearer " + user.JwtToken
+            }
+        });
+
+        dispatch(updateUser(response.data))
         setIsUpdating(false);
     }
 

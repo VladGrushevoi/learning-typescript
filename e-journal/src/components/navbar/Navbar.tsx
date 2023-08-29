@@ -10,7 +10,7 @@ export const NavBar = () => {
             {['md'].map((expand) => (
                 <Navbar key={Math.random()} expand={expand} className="">
                     <Container fluid>
-                        <Navbar.Brand href="/">ЛІЧИТЬ ЗУБИ</Navbar.Brand>
+                        <Navbar.Brand as={NavLink} to="/">ЛІЧИТЬ ЗУБИ</Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
                             id={`offcanvasNavbar-expand-${expand}`}

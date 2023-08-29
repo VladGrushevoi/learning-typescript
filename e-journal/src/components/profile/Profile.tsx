@@ -1,13 +1,14 @@
-import { User } from "../../types/User"
+import { useAppSelector } from "../../Redux/storehooks"
 import { ProfileItem } from "./ProfileItem"
 import { ProfilePhoneItem } from "./ProfilePhoneItem"
 
 interface ProfileProps {
-    userData : User,
-    updateUser: (newUserData: User) => void,
+
 }
 
-export const Profile = ({ userData, updateUser }: ProfileProps) => {
+export const Profile = ({  }: ProfileProps) => {
+    const user = useAppSelector(state => state.user);
+    
     return (
         <>
             <h1
@@ -18,21 +19,21 @@ export const Profile = ({ userData, updateUser }: ProfileProps) => {
             
             <ProfileItem 
                 title="Ім'я" 
-                value={userData.firstName + ' ' + userData.secondName}
+                value={user.Name + ' ' + user.Surname}
                 isEditable={true}
-                updateUser={updateUser}
+                updateUser={() => console.log("UPDATE")}
             />
             <ProfilePhoneItem 
                 title="Моб. номер" 
-                value={userData.phoneNumber}
+                value={user.PhoneNumber}
                 isEditable={true}
-                updateUser={updateUser}
+                updateUser={() => console.log("Update")}
             />
             <ProfileItem 
                 title="Кількість сеансів" 
-                value={(userData.isActiveRecords.length + userData.isDoneRecords.length).toString()}
+                value={user.RecordHistory.length.toString()}
                 isEditable={false}
-                updateUser={updateUser}
+                updateUser={() => console.log("Not update")}
             />
         </>
     )

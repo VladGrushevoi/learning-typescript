@@ -1,4 +1,4 @@
-import { UserLoginInfoRequest, userLoginInfoResponse } from "../../Redux/features/user/PayloadTypes/userLogin";
+import { UserLoginInfoRequest, UserLoginInfoResponse } from "../../Redux/features/user/PayloadTypes/userLogin";
 import { useInput } from "../../hooks/useInput"
 import { login } from "../../Redux/features/user/userSlice";
 import { appAxios } from "../../appAxios/appAxios";
@@ -17,7 +17,7 @@ export const useSignInForm = () => {
             PhoneNumber: "+380"+phoneInput.value,
         }
 
-        const response = await appAxios.post<userLoginInfoResponse>("/user/login", loginData, {
+        const response = await appAxios.post<UserLoginInfoResponse>("/user/login", loginData, {
             headers: {
                 "Content-Type": "application/json"
             }

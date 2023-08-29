@@ -1,18 +1,25 @@
 import { Col, Row } from "react-bootstrap"
 import { Record } from "../../types/User"
 import { TablePagination } from "./TablePagination"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Status } from "../../types/dayInfoType"
 import { PersonDash, PersonFillCheck, PersonFillExclamation, PersonLock } from "react-bootstrap-icons"
+import { ConvertStatusToString } from "../../utils/convertStatusNumberToString"
+// import { useAppDispatch } from "../../Redux/storehooks"
 
 interface RecordTableProps {
     records: Record[]
 }
 
 export const Recordtable = ({ records }: RecordTableProps) => {
+    // const dispatch = useAppDispatch();
     const row = 5;
     const amountPage = Math.ceil(records.length / row)
     const [offSet, setOffset] = useState(0);
+
+    useEffect(() => {
+
+    }, []);
 
     const changeOffset = (newOffset: number) => {
         if (newOffset <= 0) {
@@ -81,7 +88,7 @@ export const Recordtable = ({ records }: RecordTableProps) => {
                                         className=""
                                     >
                                         <span className="md:inline-block hidden">
-                                            {item.status}
+                                            {ConvertStatusToString(item.status)}
                                         </span>
                                         <span className="md:hidden inline-block">
                                             {getIconFromStatus(item.status)}

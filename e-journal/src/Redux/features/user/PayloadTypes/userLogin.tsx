@@ -5,7 +5,7 @@ export interface UserLoginInfoRequest {
     Password: string
 }
 
-export interface userLoginInfoResponse {
+export interface UserLoginInfoResponse {
     name: string,
     surname: string,
     phoneNumber: string,

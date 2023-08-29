@@ -3,6 +3,11 @@ import { Button, ButtonGroup, Col, Form, InputGroup, Row } from "react-bootstrap
 import { User } from "../../types/User";
 import { PenFill, CheckSquareFill, XSquareFill } from 'react-bootstrap-icons';
 import { useInput } from '../../hooks/useInput';
+import { useAppDispatch, useAppSelector } from '../../Redux/storehooks';
+import { RootState } from '../../Redux/store';
+import { UpdateUserInfoRequest, UpdateUserInfoResponse } from '../../Redux/features/user/PayloadTypes/UserUpdate';
+import { updateUser } from '../../Redux/features/user/userSlice';
+import { appAxios } from '../../appAxios/appAxios';
 
 interface ProfileItemProps {
     title: string,
@@ -12,7 +17,8 @@ interface ProfileItemProps {
 }
 
 export const ProfileItem = ({ title, value, isEditable }: ProfileItemProps) => {
-
+    const user = useAppSelector((state: RootState) => state.user)
+    const dispatch = useAppDispatch();
     const [isUpdating, setIsUpdating] = useState(false)
     const firstnameInput = useInput(value.split(' ')[0], "firstName")
     const secondNameInput = useInput(value.split(' ')[1], "secondName")
@@ -21,10 +27,21 @@ export const ProfileItem = ({ title, value, isEditable }: ProfileItemProps) => {
         setIsUpdating(isEdit);
     }
 
-    const handleSubmit = (e : React.FormEvent) => {
+    const handleSubmit = async (e : React.FormEvent) => {
         e.preventDefault();
-        console.log(firstnameInput.value)
-        console.log(secondNameInput.value)
+        const infoToUpdate : UpdateUserInfoRequest = {
+            firstName: firstnameInput.value,
+            surname: secondNameInput.value,
+            phoneNumber: user.PhoneNumber
+        }
+
+        const response = await appAxios.post<UpdateUserInfoResponse>("/user/update-information", JSON.stringify(infoToUpdate), {
+            headers:{
+                "Authorization": "Bearer " + user.JwtToken
+            }
+        });
+
+        dispatch(updateUser(response.data))
         setIsUpdating(false);
     }
 
