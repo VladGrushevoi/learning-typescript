@@ -24,33 +24,38 @@ export const NavBar = () => {
                             </Offcanvas.Header>
                             <Offcanvas.Body >
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                                    <NavLink
+                                    <Nav.Link
+                                        as={NavLink}
                                         to={"/"}
                                     >
                                         ГОЛОВНА
-                                    </NavLink>
-                                    <NavLink
+                                    </Nav.Link>
+                                    <Nav.Link
+                                        as={NavLink}
                                         to="/profile/1111"
-                                        >
+                                    >
                                         МІЙ ПРОФІЛЬ
-                                    </NavLink>
-                                    <NavLink
+                                    </Nav.Link>
+                                    <Nav.Link
+                                        as={NavLink}
                                         to="/admin/2222">
                                         АДМІНКА
-                                    </NavLink>
+                                    </Nav.Link>
                                     {
                                         !user.isLogin ?
-                                            <NavLink
+                                            <Nav.Link
+                                                as={NavLink}
                                                 className="rounded-xl shadow-lg shadow-blue-500"
                                                 to="/auth">
                                                 АВТОРИЗУВАТИСЯ
-                                            </NavLink>
+                                            </Nav.Link>
                                             :
-                                            <NavLink
+                                            <Nav.Link
+                                                as={NavLink}
                                                 className="rounded-xl shadow-lg shadow-blue-500"
                                                 to="">
-                                                {user.Name +" "+ user.Surname[0]}.
-                                            </NavLink>
+                                                {user.Name + " " + user.Surname[0]}.
+                                            </Nav.Link>
                                     }
                                 </Nav>
                             </Offcanvas.Body>

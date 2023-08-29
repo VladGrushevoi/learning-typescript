@@ -2,6 +2,7 @@ import { Button, Col, Row, Tab } from "react-bootstrap"
 import { Status } from "../../types/dayInfoType"
 import { PersonPlusFill, PersonFillSlash } from "react-bootstrap-icons"
 import { WorkTime } from "../../types/work-hour"
+import { ConvertStatusToString } from "../../utils/convertStatusNumberToString"
 
 interface DayInfoTableProps {
     data: {
@@ -39,8 +40,8 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
                                     item.times.map(item => {
                                         return (
                                                 <Row key={Math.random()} className={`${typeTimeColor(item)} rounded-md items-center py-2`}>
-                                                    <Col xs={2} sm={2} md={2} className="m-auto">{item.time}</Col>
-                                                    <Col className="m-auto">{item.status}</Col>
+                                                    <Col xs={2} sm={2} md={2} className="m-auto">{item.time.split(' ')[1]}</Col>
+                                                    <Col className="m-auto">{ConvertStatusToString(item.status)}</Col>
                                                     <Col xs={2} sm={2} md={4}>
                                                         <Button
                                                         disabled={isFreeTime(item)}

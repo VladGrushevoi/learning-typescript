@@ -39,7 +39,7 @@ export const MainPage = ({} : MainPaheProps) => {
             <Row className=' px-3 py-8 text-center gap-3 md:h-[90vh] h-[150vh]'>
                 <Col className='border-2 rounded-2xl border-orange-300 shadow-lg'>
                     <Row className="">
-                        <Tab.Container defaultActiveKey={days.workDays[0].dayOfWeek}>
+                        <Tab.Container defaultActiveKey={days.workDays.length === 0 ? 1 : days.workDays.filter(x => x.isWorkDay)[0].dayOfWeek}>
                             <Row className="gap-3 py-3 m-0">
                                 <Col  className="border-2 m-auto rounded-md  border-blue-400">
                                     <Nav variant="pills" className="md:flex-col" key={Math.random()}>
