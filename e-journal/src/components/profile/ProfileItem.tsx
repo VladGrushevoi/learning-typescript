@@ -1,27 +1,19 @@
 import { useState } from 'react'
 import { Button, ButtonGroup, Col, Form, InputGroup, Row } from "react-bootstrap"
-import { User } from "../../types/User";
 import { PenFill, CheckSquareFill, XSquareFill } from 'react-bootstrap-icons';
-import { useInput } from '../../hooks/useInput';
-import { useAppDispatch, useAppSelector } from '../../Redux/storehooks';
-import { RootState } from '../../Redux/store';
-import { UpdateUserInfoRequest, UpdateUserInfoResponse } from '../../Redux/features/user/PayloadTypes/UserUpdate';
-import { updateUser } from '../../Redux/features/user/userSlice';
-import { appAxios } from '../../appAxios/appAxios';
+import { InputHook } from '../../hooks/useInput';
 
 interface ProfileItemProps {
     title: string,
     value: string,
     isEditable: boolean,
-    updateUser: (newUserData: User) => void
+    firstNameHook: InputHook | null,
+    surnameHook: InputHook | null,
+    handleUpdate: () => void
 }
 
-export const ProfileItem = ({ title, value, isEditable }: ProfileItemProps) => {
-    const user = useAppSelector((state: RootState) => state.user)
-    const dispatch = useAppDispatch();
+export const ProfileItem = ({ title,value, isEditable, firstNameHook, surnameHook, handleUpdate }: ProfileItemProps) => {
     const [isUpdating, setIsUpdating] = useState(false)
-    const firstnameInput = useInput(value.split(' ')[0], "firstName")
-    const secondNameInput = useInput(value.split(' ')[1], "secondName")
 
     const onEditClick = (isEdit: boolean) => {
         setIsUpdating(isEdit);
@@ -29,19 +21,8 @@ export const ProfileItem = ({ title, value, isEditable }: ProfileItemProps) => {
 
     const handleSubmit = async (e : React.FormEvent) => {
         e.preventDefault();
-        const infoToUpdate : UpdateUserInfoRequest = {
-            firstName: firstnameInput.value,
-            surname: secondNameInput.value,
-            phoneNumber: user.PhoneNumber
-        }
+        handleUpdate()
 
-        const response = await appAxios.post<UpdateUserInfoResponse>("/user/update-information", JSON.stringify(infoToUpdate), {
-            headers:{
-                "Authorization": "Bearer " + user.JwtToken
-            }
-        });
-
-        dispatch(updateUser(response.data))
         setIsUpdating(false);
     }
 
@@ -76,12 +57,12 @@ export const ProfileItem = ({ title, value, isEditable }: ProfileItemProps) => {
                                         <Form.Control
                                             aria-label="Small"
                                             aria-describedby="inputGroup-sizing-sm"
-                                            {...firstnameInput}
+                                            {...firstNameHook}
                                         />
                                         <Form.Control
                                             aria-label="Small"
                                             aria-describedby="inputGroup-sizing-sm"
-                                            {...secondNameInput}
+                                            {...surnameHook}
                                         />
                                         <Button 
                                             className='bg-transparent p-0 m-0 px-1 border-0'

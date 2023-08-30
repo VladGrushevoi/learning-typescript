@@ -37,10 +37,11 @@ export const UserSlice = createSlice({
             state.isLogin = action.payload.jwtToken ? true : false;
         },
         updateUser: (state, action: PayloadAction<UpdateUserInfoResponse>) => {
+            console.log(action.payload)
             var [firstName, surname] = action.payload.fullName.split(" ");
             state.Name = firstName;
             state.Surname = surname;
-            state.PhoneNumber = action.payload.phoneNumber.at(3)!
+            state.PhoneNumber = action.payload.phoneNumber
         },
         // getUserInfo: (state, action: PayloadAction<UpdateUserInfoResponse>) => {
 

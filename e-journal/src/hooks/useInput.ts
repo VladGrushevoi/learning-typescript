@@ -1,6 +1,12 @@
 import { useState } from "react"
 
-export const useInput = (init: string, name: string) => {
+export interface InputHook {
+    name: string,
+    value: string,
+    onChange: (e : React.ChangeEvent<HTMLInputElement>) => void,
+}
+
+export const useInput = (init: string, name: string) : InputHook => {
     const [value, setValue] = useState(init);
 
     return {

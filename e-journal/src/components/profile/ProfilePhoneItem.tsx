@@ -1,26 +1,18 @@
-import { Button, ButtonGroup, Col, Form, InputGroup, Row } from "react-bootstrap"
-import { User } from "../../types/User"
+import { Button, ButtonGroup, Col, Form, InputGroup, Row } from "react-bootstrap";
 import { PenFill, CheckSquareFill, XSquareFill } from 'react-bootstrap-icons';
 import { useState } from "react";
-import { useInput } from "../../hooks/useInput";
-import { UpdateUserInfoRequest, UpdateUserInfoResponse } from "../../Redux/features/user/PayloadTypes/UserUpdate";
-import { appAxios } from "../../appAxios/appAxios";
-import { useAppDispatch, useAppSelector } from "../../Redux/storehooks";
-import { RootState } from "../../Redux/store";
-import { updateUser } from "../../Redux/features/user/userSlice";
+import { InputHook } from "../../hooks/useInput";
 
 interface ProfilePhoneItemProps {
     title: string,
     value: string,
     isEditable: boolean,
-    updateUser: (newUserData: User) => void
+    phoneHook: InputHook,
+    handleUpdate: () => void
 }
 
-export const ProfilePhoneItem = ({ title, value, isEditable } : ProfilePhoneItemProps) => {
-    const user = useAppSelector((state: RootState) => state.user)
-    const dispatch = useAppDispatch();
+export const ProfilePhoneItem = ({ title, value, isEditable, handleUpdate, phoneHook } : ProfilePhoneItemProps) => {
     const [isUpdating, setIsUpdating] = useState(false)
-    const phoneInput = useInput(value, "phoneNumber");
 
     const onEditClick = (isEdit: boolean) => {
         setIsUpdating(isEdit);
@@ -28,19 +20,7 @@ export const ProfilePhoneItem = ({ title, value, isEditable } : ProfilePhoneItem
 
     const handleSubmit = async (e : React.FormEvent) => {
         e.preventDefault();
-        const infoToUpdate : UpdateUserInfoRequest = {
-            firstName: user.Name,
-            surname: user.Surname,
-            phoneNumber: phoneInput.value
-        }
-
-        const response = await appAxios.post<UpdateUserInfoResponse>("/user/update-information", infoToUpdate,{
-            headers:{
-                "Authorization": "Bearer " + user.JwtToken
-            }
-        });
-
-        dispatch(updateUser(response.data))
+        handleUpdate()
         setIsUpdating(false);
     }
 
@@ -75,7 +55,7 @@ export const ProfilePhoneItem = ({ title, value, isEditable } : ProfilePhoneItem
                                         <Form.Control
                                             aria-label="Small"
                                             aria-describedby="inputGroup-sizing-sm"
-                                            {...phoneInput}
+                                            {...phoneHook}
                                         />
                                         <Button 
                                             className='bg-transparent p-0 m-0 px-1 border-0'

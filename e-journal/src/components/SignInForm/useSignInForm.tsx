@@ -17,11 +17,7 @@ export const useSignInForm = () => {
             PhoneNumber: "+380"+phoneInput.value,
         }
 
-        const response = await appAxios.post<UserLoginInfoResponse>("/user/login", loginData, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+        const response = await appAxios.post<UserLoginInfoResponse>("/user/login", loginData)
 
         dispatch(login(response.data));
     }

@@ -18,6 +18,8 @@ export const ConfiGuratorWorkDays = ({ days, addNewWorkHour }: ConfiGuratorWorkD
         setDayIndex(dayIndex)
     }
 
+    console.log(days)
+
     return (
         <>
             <Row className="gap-2">

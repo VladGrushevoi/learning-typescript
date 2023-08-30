@@ -28,7 +28,6 @@ export const MainPage = ({} : MainPaheProps) => {
             console.log(response);
             dispatch(getActaulWeeklySchedule(response.data))
         }
-        console.log("ALLLOOOOO")
         fetchActualWeeklySchedule();
     }, [])
 
