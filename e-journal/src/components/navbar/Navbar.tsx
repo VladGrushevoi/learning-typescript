@@ -54,7 +54,7 @@ export const NavBar = () => {
                                                 as={NavLink}
                                                 className="rounded-xl shadow-lg shadow-blue-500"
                                                 to="">
-                                                {user.Name + " " + user.Surname[0]}.
+                                                {user.user.firstName + " " + user.user.lastName[0]}.
                                             </Nav.Link>
                                     }
                                 </Nav>

@@ -3,16 +3,18 @@ import { Status } from "./dayInfoType"
 export interface User {
     id: string,
     firstName: string,
-    secondName: string,
+    lastName: string,
     phoneNumber: string,
-    isActiveRecords: Record[],
-    isDoneRecords: Record[]
+    role: UserRole,
+    recordHistoryItems: Record[]
 }
 
 export interface Record {
-    time: string,
+    workTimeId: string,
     date: string,
-    status: Status
+    dayOfWeek: number,
+    status: Status,
+    id: string,
 }
 
 export enum UserRole{

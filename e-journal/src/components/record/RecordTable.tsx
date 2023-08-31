@@ -14,7 +14,7 @@ interface RecordTableProps {
 export const Recordtable = ({ records }: RecordTableProps) => {
     // const dispatch = useAppDispatch();
     const row = 5;
-    const amountPage = Math.ceil(records.length / row)
+    const amountPage = Math.ceil(records.length ? records.length / row : 0)
     const [offSet, setOffset] = useState(0);
 
     useEffect(() => {
@@ -44,6 +44,8 @@ export const Recordtable = ({ records }: RecordTableProps) => {
                 return "bg-yellow-600";
             case Status.TemporaryHold:
                 return "bg-orange-400";
+            case Status.Canceled:
+                return "bg-red-400";
         }
     }
 
@@ -82,8 +84,8 @@ export const Recordtable = ({ records }: RecordTableProps) => {
                                                 ${getColorFromStatus(item.status)}
                                                 `}>
                                     <Col xs={1} sm={1} md={1} lg={1}>{offSet * row + index + 1}</Col>
-                                    <Col xs={4} sm={4} md={2} lg={2}>{item.time}</Col>
-                                    <Col xs={5} sm={5} md={4} lg={4}>{item.date}</Col>
+                                    <Col xs={4} sm={4} md={2} lg={2}>{item.date.split(" ")[0]}</Col>
+                                    <Col xs={5} sm={5} md={4} lg={4}>{item.date.split(" ")[1]}</Col>
                                     <Col xs={2} sm={2} md={5} lg={5}
                                         className=""
                                     >

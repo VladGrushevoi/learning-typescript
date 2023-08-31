@@ -14,9 +14,9 @@ interface ProfileProps {
 export const Profile = ({ }: ProfileProps) => {
     const user = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
-    const firstNameHook = useInput(user.Name, "Name");
-    const surnameHook = useInput(user.Surname, "Surname");
-    const phoneHook = useInput(user.PhoneNumber, "Phone");
+    const firstNameHook = useInput(user.user.firstName, "Name");
+    const surnameHook = useInput(user.user.lastName, "Surname");
+    const phoneHook = useInput(user.user.phoneNumber, "Phone");
 
     const handleUpdate = () => {
         const infoToUpdate: UpdateUserInfoRequest = {
@@ -41,7 +41,7 @@ export const Profile = ({ }: ProfileProps) => {
 
             <ProfileItem
                 title="Ім'я"
-                value={user.Name + ' ' + user.Surname}
+                value={user.user.firstName + ' ' + user.user.lastName}
                 firstNameHook={firstNameHook}
                 surnameHook={surnameHook}
                 handleUpdate={handleUpdate}
@@ -49,7 +49,7 @@ export const Profile = ({ }: ProfileProps) => {
             />
             <ProfilePhoneItem
                 title="Моб. номер"
-                value={user.PhoneNumber}
+                value={user.user.phoneNumber}
                 handleUpdate={handleUpdate}
                 phoneHook={phoneHook}
                 isEditable={true}
@@ -59,7 +59,7 @@ export const Profile = ({ }: ProfileProps) => {
                     <span>Кількість сеансів :</span>
                 </Col>
                 <Col className="md:text-left text-center">
-                    {user.RecordHistory.length}
+                    {user.user.recordHistoryItems.length}
                 </Col>
             </Row>
         </>

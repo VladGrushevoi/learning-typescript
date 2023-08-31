@@ -1,7 +1,12 @@
 import { Col, Row } from "react-bootstrap"
 import { Profile } from "../../profile/Profile"
-import { useFakeUser } from "../../../fake-data/faka_users"
 import { Recordtable } from "../../record/RecordTable"
+import { useAppDispatch, useAppSelector } from "../../../Redux/storehooks"
+import { RootState } from "../../../Redux/store"
+import { useEffect } from "react"
+import { appAxios } from "../../../appAxios/appAxios"
+import { UserInformationResponse } from "../../../Redux/features/user/PayloadTypes/getFullInformation"
+import { getUserInfo } from "../../../Redux/features/user/userSlice"
 
 interface ProfilePageProps {
 
@@ -9,7 +14,20 @@ interface ProfilePageProps {
 
 export const ProfilePage = ({ }: ProfilePageProps) => {
 
-    const { fakeUser } = useFakeUser();
+    const user = useAppSelector((state: RootState) => state.user)
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            const response = await appAxios.get<UserInformationResponse>("/user/info", {
+                headers: {
+                    Authorization: "Bearer " + user.JwtToken,
+                }
+            })
+            dispatch(getUserInfo(response.data))
+        }
+
+        fetchUserInfo()
+    }, []);
 
     return (
         <>
@@ -24,7 +42,7 @@ export const ProfilePage = ({ }: ProfilePageProps) => {
                         >
                             ІСТОРІЯ ЗАПИСІВ
                         </h1>
-                            <Recordtable records={[...fakeUser.isDoneRecords, ...fakeUser.isActiveRecords]} />
+                            <Recordtable records={user.user.recordHistoryItems} />
                     </Col>
                 </Row>
         </>
