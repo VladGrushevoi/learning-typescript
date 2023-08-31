@@ -20,7 +20,7 @@ export const ListWorkHour = ({ workHours }: ListWorkHourProps) => {
                                     {index + 1}
                                 </Col>
                                 <Col>
-                                    {item.time}
+                                    {item.time.split(" ")[1]}
                                 </Col>
                                 <Col xs={3} sm={3} md={3} className="flex gap-4">
                                     <PencilSquare size={18} className="hover:fill-orange-500 cursor-pointer" />

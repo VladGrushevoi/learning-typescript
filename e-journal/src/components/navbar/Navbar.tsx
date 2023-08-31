@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap"
+import { Nav, Navbar, Offcanvas } from "react-bootstrap"
 import { RootState } from "../../Redux/store";
 import { useAppSelector } from "../../Redux/storehooks";
 import { NavLink } from "react-router-dom";
@@ -9,7 +9,7 @@ export const NavBar = () => {
         <>
             {['md'].map((expand) => (
                 <Navbar key={Math.random()} expand={expand} className="">
-                    <Container fluid>
+                    {/* <Container fluid> */}
                         <Navbar.Brand as={NavLink} to="/">ЛІЧИТЬ ЗУБИ</Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                         <Navbar.Offcanvas
@@ -60,7 +60,7 @@ export const NavBar = () => {
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>
-                    </Container>
+                    {/* </Container> */}
                 </Navbar>
             ))}
         </>

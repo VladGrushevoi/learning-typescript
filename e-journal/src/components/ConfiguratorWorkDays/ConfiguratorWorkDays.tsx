@@ -32,7 +32,7 @@ export const ConfiGuratorWorkDays = ({ days, addNewWorkHour }: ConfiGuratorWorkD
                                     className=""
                                     variant={chooseDayIndex !== index ? 'secondary' : 'success'}
                                 >
-                                    {day.day}
+                                    {day.dayOfWeek + 1}
                                 </Button>
                             </Col>
                         )
