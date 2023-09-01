@@ -7,6 +7,8 @@ import { RootState } from "../../../Redux/store"
 import { ActualWeeklyScheduleRsponse } from '../../../Redux/features/WorkDays/PayloadTypes/ActaulWeeklySchedule'
 import { appAxios } from '../../../appAxios/appAxios'
 import { getActaulWeeklySchedule } from '../../../Redux/features/WorkDays/workDaysSlice'
+import { UserInStorage } from '../../../localStorageManager/types/userInStorage'
+import { setUserFromStorage } from '../../../Redux/features/user/userSlice'
 
 
 interface MainPaheProps {
@@ -16,7 +18,7 @@ interface MainPaheProps {
 
 export const MainPage = ({} : MainPaheProps) => {
     const user = useAppSelector((state: RootState) => state.user);
-    console.log(user)
+    const days = useAppSelector((state: RootState) => state.schedule);
     const dispatch = useAppDispatch();
     useEffect(() => {
         async function fetchActualWeeklySchedule(){
@@ -28,11 +30,18 @@ export const MainPage = ({} : MainPaheProps) => {
             console.log(response);
             dispatch(getActaulWeeklySchedule(response.data))
         }
-        fetchActualWeeklySchedule();
+        if(user.isLogin){
+            fetchActualWeeklySchedule();
+        }
+    }, [user.isLogin])
+
+    useEffect(() => {
+        const userFromStorage : UserInStorage = JSON.parse(localStorage.getItem("user")!);
+        if(!user.isLogin){
+            dispatch(setUserFromStorage(userFromStorage))
+        }
     }, [])
 
-    const days = useAppSelector((state: RootState) => state.schedule);
-    console.log(days, "from redux")
     return (
         <>
             <Row className=' px-3 py-8 text-center gap-3 md:h-[90vh] h-[150vh]'>
