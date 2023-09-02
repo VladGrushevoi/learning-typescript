@@ -27,8 +27,9 @@ export const MainPage = ({} : MainPaheProps) => {
                     "Authorization": "Bearer " + user.JwtToken
                 }
             })
-            console.log(response);
-            dispatch(getActaulWeeklySchedule(response.data))
+            if(response.status === 200){
+                dispatch(getActaulWeeklySchedule(response.data))
+            }
         }
         if(user.isLogin){
             fetchActualWeeklySchedule();
@@ -37,9 +38,18 @@ export const MainPage = ({} : MainPaheProps) => {
 
     useEffect(() => {
         const userFromStorage : UserInStorage = JSON.parse(localStorage.getItem("user")!);
-        if(!user.isLogin){
-            dispatch(setUserFromStorage(userFromStorage))
+        async function checkToken(token : string) {
+            const response = await appAxios.post<boolean>("/user/check-auth-token", {}, {
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            });
+            if(!user.isLogin && response.data){
+                dispatch(setUserFromStorage(userFromStorage))
+            }
         }
+
+        checkToken(userFromStorage.jwtToken)
     }, [])
 
     return (
