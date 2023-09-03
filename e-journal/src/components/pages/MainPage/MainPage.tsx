@@ -74,14 +74,7 @@ export const MainPage = ({} : MainPaheProps) => {
                                 </Col>
                                 <Col xs={12} sm={12} md={9} xl={9} className="p-0">
                                     <Tab.Content className="m-0">
-                                        <DayInfoTable data={
-                                            days.workDays.map(item => {
-                                                return {
-                                                    name: item.dayOfWeek,
-                                                    times: item.times
-                                                }
-                                            })
-                                        }
+                                        <DayInfoTable data={days.workDays}
                                         />
                                     </Tab.Content>
                                 </Col>

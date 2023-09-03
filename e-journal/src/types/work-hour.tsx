@@ -4,5 +4,6 @@ export interface WorkTime {
     id: number,
     time: string,
     status: Status,
-    userId: string | null
+    userId: string | null,
+    userMessage: string | null
 }
