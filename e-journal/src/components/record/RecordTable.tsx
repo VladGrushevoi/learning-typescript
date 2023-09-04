@@ -3,7 +3,7 @@ import { Record } from "../../types/User"
 import { TablePagination } from "./TablePagination"
 import { useState, useEffect } from "react"
 import { Status } from "../../types/dayInfoType"
-import { PersonDash, PersonFillCheck, PersonFillExclamation, PersonLock } from "react-bootstrap-icons"
+import { PersonDash, PersonFillCheck, PersonFillExclamation, PersonLock, XCircleFill } from "react-bootstrap-icons"
 import { ConvertStatusToString } from "../../utils/convertStatusNumberToString"
 // import { useAppDispatch } from "../../Redux/storehooks"
 
@@ -59,6 +59,8 @@ export const Recordtable = ({ records }: RecordTableProps) => {
                 return <PersonFillExclamation size={25} />;
             case Status.TemporaryHold:
                 return <PersonLock size={25} />;
+            case Status.Canceled:
+                return <XCircleFill size={25} />
         }
     }
 
