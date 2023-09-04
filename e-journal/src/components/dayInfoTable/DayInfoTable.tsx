@@ -5,9 +5,11 @@ import { WorkTime } from "../../types/work-hour"
 import { ConvertStatusToString } from "../../utils/convertStatusNumberToString"
 import { WriteToWorkTimeModal } from "../modals/WriteToWorkTimeModal"
 import { useState } from "react"
+import { appAxios } from "../../appAxios/appAxios"
+import { useAppSelector } from "../../Redux/storehooks"
 
 interface DayInfoTableProps {
-    data: DayInfoType[]
+    data: DayInfoType[],
 }
 
 interface SelectedWorkTime {
@@ -18,6 +20,7 @@ interface SelectedWorkTime {
 }
 
 export const DayInfoTable = ({ data }: DayInfoTableProps) => {
+    const userToken = useAppSelector(state => state.user.JwtToken);
     const [selectWorkTime, setSelectedWorkTime] = useState<SelectedWorkTime>({
         isShow: false,
         date: "",
@@ -39,6 +42,32 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
 
     const isFreeTime = (item: WorkTime): boolean => {
         return item.status !== Status.Free
+    }
+
+    const closeModal = () => {
+        setSelectedWorkTime(prev => {
+            return {
+                ...prev,
+                isShow: false
+            }
+        })
+    }
+
+    const handleWriteUserToWorkTime = async (userMessage: string) => {
+        const reqData = JSON.stringify({
+            dayOfWeek: selectWorkTime.dayOfweek,
+            timeId: selectWorkTime.workTime.id,
+            userMessage: userMessage
+        });
+        const response = await appAxios.post("/user/recording-to-work-time", reqData, {
+            headers: {
+                Authorization: "Bearer " + userToken,
+            }
+        });
+        if(response.status === 200){
+            console.log("RECORDING OK")
+        }
+        closeModal();
     }
 
     return (
@@ -97,12 +126,9 @@ export const DayInfoTable = ({ data }: DayInfoTableProps) => {
                 date={selectWorkTime.date}
                 workTime={selectWorkTime.workTime}
                 isShow={selectWorkTime.isShow}
-                onClose={() => setSelectedWorkTime(prev => {
-                    return {
-                        ...prev,
-                        isShow: false
-                    }
-                })}
+                onClose={closeModal}
+                dayOfWeek={selectWorkTime.dayOfweek}
+                createUserRocordToWorkTime={handleWriteUserToWorkTime}
             />
         </>
     )
