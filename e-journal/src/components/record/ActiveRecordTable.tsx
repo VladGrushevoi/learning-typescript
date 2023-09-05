@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
-import { Button, Col, Row, Modal } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 import { ChatLeftText, CheckSquareFill, PersonCircle, XSquareFill } from "react-bootstrap-icons"
 import { useAppSelector } from "../../Redux/storehooks"
 import { useActiveRecords } from "./useActiveRecords"
 import { convertDayOfWeekToNameDay } from "../../utils/convertDayOfWeekToNameDay"
 import { ActiveRecord } from "../../types/activeRecords"
+import { ActiveRecordInfoModal } from "../modals/activeRecordInfoModal"
 
 interface ActiveRecordsTableProps {
 
@@ -91,25 +92,10 @@ export const ActiveRecordsTable = ({  } : ActiveRecordsTableProps) => {
                     )
                 })
             }
-
-            <Modal show={selectedRecord.workTimeId !== ""} onHide={closeModalInfoUser}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Детальна інформація про запис</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>Ім'я: {selectedRecord.user.firstName + " " + selectedRecord.user.lastName}</p>
-                    <p>Номер телефону: {selectedRecord.user.phoneNumber}</p>
-                    <p>Коментар: {selectedRecord.userMessage}</p>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={closeModalInfoUser}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={closeModalInfoUser}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <ActiveRecordInfoModal 
+                selectedRecord={selectedRecord} 
+                onClose={closeModalInfoUser}
+            />
         </>
     )
 }
