@@ -6,6 +6,7 @@ import { useActiveRecords } from "./useActiveRecords"
 import { convertDayOfWeekToNameDay } from "../../utils/convertDayOfWeekToNameDay"
 import { ActiveRecord } from "../../types/activeRecords"
 import { ActiveRecordInfoModal } from "../modals/activeRecordInfoModal"
+import { Status } from "../../types/dayInfoType"
 
 interface ActiveRecordsTableProps {
 
@@ -13,7 +14,7 @@ interface ActiveRecordsTableProps {
 
 export const ActiveRecordsTable = ({  } : ActiveRecordsTableProps) => {
     const userToken = useAppSelector(state => state.user.JwtToken);
-    const {activeRecords, fetchActiveRecords} = useActiveRecords(userToken);
+    const {activeRecords, fetchActiveRecords, updateRecordStatus} = useActiveRecords(userToken);
 
     useEffect(() => {
         fetchActiveRecords();
@@ -43,20 +44,22 @@ export const ActiveRecordsTable = ({  } : ActiveRecordsTableProps) => {
     return (
         <>
             <Row className="text-center">
-                <Col xs={2} sm={2} md={5}>ПАЦІЄНТ</Col>
+                <Col xs={1} sm={1} md={1}>#</Col>
+                <Col xs={1} sm={1} md={5}>ПАЦІЄНТ</Col>
                 <Col xs={5} sm={3} md={3}>ДАТА</Col>
-                <Col>ЧАС</Col>
-                <Col ></Col>
+                <Col xs={2} sm={1} md={1}>ЧАС</Col>
+                <Col></Col>
             </Row>
             {
                 activeRecords.map((rec, index) => {
                     return (
                             <Row key={index+index*2} className="my-2 text-center justify-center items-center">
-                                <Col xs={2} sm={2} md={5}>
+                                <Col xs={1} sm={1} md={1}>{index + 1}</Col>
+                                <Col xs={1} sm={1} md={5}>
                                     <Col md={10} className="md:inline-block hidden">
                                         <Row md={8} className="justify-center items-center">
                                             <Col md={10}>
-                                                <Row>{`${index + 1} ${rec.user.firstName + " " + rec.user.lastName}`}</Row>
+                                                <Row>{`${rec.user.firstName + " " + rec.user.lastName}`}</Row>
                                                 <Row>{rec.user.phoneNumber}</Row>
                                             </Col>
                                             <Col
@@ -81,12 +84,30 @@ export const ActiveRecordsTable = ({  } : ActiveRecordsTableProps) => {
                                         rec.date
                                     }
                                 </Col>
-                                <Col>
+                                <Col xs={2} sm={1} md={1}>
                                     {rec.time.split(" ")[1]}
                                 </Col>
                                 <Col className="flex gap-2  items-center">
-                                    <CheckSquareFill size={20} className="hover:fill-green-400" />
-                                    <XSquareFill size={20} className="hover:fill-red-400" />
+                                    <CheckSquareFill 
+                                        size={20} 
+                                        onClick={
+                                            () => updateRecordStatus({
+                                                dayofWeek: rec.dayOfWeek, 
+                                                status: Status.Reserv,
+                                                workTimeId: rec.workTimeId
+                                            })
+                                        } 
+                                        className="hover:fill-green-400" />
+                                    <XSquareFill 
+                                    size={20} 
+                                    onClick={
+                                        () => updateRecordStatus({
+                                            dayofWeek: rec.dayOfWeek, 
+                                            status: Status.Free,
+                                            workTimeId: rec.workTimeId
+                                        })
+                                    } 
+                                    className="hover:fill-red-400" />
                                 </Col>
                             </Row>
                     )

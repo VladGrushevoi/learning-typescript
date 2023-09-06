@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ActiveRecord, ActiveRecords } from '../../types/activeRecords';
 import { appAxios } from '../../appAxios/appAxios';
+import { Status } from '../../types/dayInfoType';
 
 export const useActiveRecords = (userToken: string) => {
     const [activeRecords, setactiveRecords] = useState<ActiveRecord[]>([{
@@ -30,8 +31,20 @@ export const useActiveRecords = (userToken: string) => {
         }
     }
 
+    const updateRecordStatus = async (data : {dayofWeek: number, status: Status, workTimeId: string}) => {
+        const response = await appAxios.post("/schedule/update-work-time-status", JSON.stringify(data), {
+            headers: {
+                Authorization: "Bearer " + userToken
+            }
+        });
+        if(response.status === 200){
+            setactiveRecords(prev => prev.filter(x => x.workTimeId !== data.workTimeId))
+        }
+    }
+
     return {
         activeRecords,
-        fetchActiveRecords
+        fetchActiveRecords,
+        updateRecordStatus
     }
 }
