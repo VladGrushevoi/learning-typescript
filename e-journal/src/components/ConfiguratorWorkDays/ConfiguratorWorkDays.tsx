@@ -4,6 +4,7 @@ import { ListWorkHour } from "./ListWorkHour";
 import { AddWorkHourForm } from "./AddWorkHourForm";
 import { WorkTime } from "../../types/work-hour";
 import { DayInfoType } from "../../types/dayInfoType";
+import { convertDayOfWeekToNameDay } from "../../utils/convertDayOfWeekToNameDay";
 
 interface ConfiGuratorWorkDaysProps {
     days: DayInfoType[],
@@ -32,7 +33,7 @@ export const ConfiGuratorWorkDays = ({ days, addNewWorkHour }: ConfiGuratorWorkD
                                     className=""
                                     variant={chooseDayIndex !== index ? 'secondary' : 'success'}
                                 >
-                                    {day.dayOfWeek + 1}
+                                    {convertDayOfWeekToNameDay(day.dayOfWeek)}
                                 </Button>
                             </Col>
                         )

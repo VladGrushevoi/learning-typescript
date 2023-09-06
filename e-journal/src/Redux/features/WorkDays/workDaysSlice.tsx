@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { DayInfoType } from "../../../types/dayInfoType";
+import { DayInfoType, Status } from "../../../types/dayInfoType";
 import { ActualWeeklyScheduleRsponse } from "./PayloadTypes/ActaulWeeklySchedule";
 import { RootState } from "../../store";
 
@@ -11,7 +11,19 @@ interface WeeklySchedule {
 const initialState : WeeklySchedule = {
     id:"",
     weekId:"",
-    workDays: []
+    workDays: [{
+        date: "",
+        day: "",
+        dayOfWeek: 1,
+        isWorkDay: true,
+        times: [{
+            id: 1,
+            status: Status.Canceled,
+            time: "00:00",
+            userId: "",
+            userMessage: ""
+        }]
+    }]
 }
 
 export const weeklyScheduleSlice = createSlice({

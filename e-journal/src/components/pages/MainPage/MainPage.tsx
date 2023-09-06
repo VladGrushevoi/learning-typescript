@@ -7,51 +7,36 @@ import { RootState } from "../../../Redux/store"
 import { ActualWeeklyScheduleRsponse } from '../../../Redux/features/WorkDays/PayloadTypes/ActaulWeeklySchedule'
 import { appAxios } from '../../../appAxios/appAxios'
 import { getActaulWeeklySchedule } from '../../../Redux/features/WorkDays/workDaysSlice'
-import { UserInStorage } from '../../../localStorageManager/types/userInStorage'
-import { setUserFromStorage } from '../../../Redux/features/user/userSlice'
 
 
 interface MainPaheProps {
-    
+
 }
 
 
-export const MainPage = ({} : MainPaheProps) => {
+export const MainPage = ({ }: MainPaheProps) => {
     const user = useAppSelector((state: RootState) => state.user);
     const days = useAppSelector((state: RootState) => state.schedule);
     const dispatch = useAppDispatch();
     useEffect(() => {
-        async function fetchActualWeeklySchedule(){
+        async function fetchActualWeeklySchedule() {
             const response = await appAxios.get<ActualWeeklyScheduleRsponse>("/schedule/actual-schedule", {
                 headers: {
                     "Authorization": "Bearer " + user.JwtToken
                 }
             })
-            if(response.status === 200){
+            if (response.status === 200) {
                 dispatch(getActaulWeeklySchedule(response.data))
             }
         }
-        if(user.isLogin){
+        if (user.isLogin) {
             fetchActualWeeklySchedule();
         }
     }, [user.isLogin])
 
-    useEffect(() => {
-        const userFromStorage : UserInStorage = JSON.parse(localStorage.getItem("user")!);
-        async function checkToken(token : string) {
-            const response = await appAxios.post<boolean>("/user/check-auth-token", {}, {
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
-            });
-            if(!user.isLogin && response.data){
-                dispatch(setUserFromStorage(userFromStorage))
-            }
-        }
-
-        checkToken(userFromStorage.jwtToken)
-    }, [])
-
+    if (!user.isLogin) {
+        return "Авторизуйтеся для початку"
+    }
     return (
         <>
             <Row className=' px-3 py-8 text-center gap-3 md:h-[90vh] h-[150vh]'>
@@ -59,16 +44,16 @@ export const MainPage = ({} : MainPaheProps) => {
                     <Row className="">
                         <Tab.Container defaultActiveKey={days.workDays.length === 0 ? 1 : days.workDays.filter(x => x.isWorkDay)[0].dayOfWeek}>
                             <Row className="gap-3 py-3 m-0">
-                                <Col  className="border-2 m-auto rounded-md  border-blue-400">
+                                <Col className="border-2 m-auto rounded-md  border-blue-400">
                                     <Nav variant="pills" className="md:flex-col" key={Math.random()}>
-                                        <DateButton  
-                                        workingDays={days.workDays.map(item => {
-                                            return {
-                                                eventKey: item.dayOfWeek,
-                                                name: item.date,
-                                                isWorking: item.isWorkDay
-                                            }
-                                        })}
+                                        <DateButton
+                                            workingDays={days.workDays.map(item => {
+                                                return {
+                                                    eventKey: item.dayOfWeek,
+                                                    name: item.date,
+                                                    isWorking: item.isWorkDay
+                                                }
+                                            })}
                                         />
                                     </Nav>
                                 </Col>

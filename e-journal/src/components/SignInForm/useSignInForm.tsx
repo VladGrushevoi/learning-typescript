@@ -18,7 +18,7 @@ export const useSignInForm = () => {
 
         const loginData : UserLoginInfoRequest = {
             Password: passwordInput.value,
-            PhoneNumber: "+380"+phoneInput.value,
+            PhoneNumber: "+38"+phoneInput.value,
         }
 
         const response = await appAxios.post<UserLoginInfoResponse>("/user/login", loginData)

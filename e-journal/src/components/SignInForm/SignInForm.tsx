@@ -9,7 +9,7 @@ export const SignInForm = () => {
                 <Form.Label>Номер мобільного телефону</Form.Label>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <InputGroup>
-                        <InputGroup.Text id="basic-addon1">+380</InputGroup.Text>
+                        <InputGroup.Text id="basic-addon1">+38</InputGroup.Text>
                         <Form.Control 
                             type="text" 
                             placeholder="Мобільний номер"
