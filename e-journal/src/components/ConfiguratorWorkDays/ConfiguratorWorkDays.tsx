@@ -1,31 +1,33 @@
 import { Button, Col, Row } from "react-bootstrap";
-import { useState } from "react";
+import { useState,  useEffect } from "react";
 import { ListWorkHour } from "./ListWorkHour";
 import { AddWorkHourForm } from "./AddWorkHourForm";
-import { WorkTime } from "../../types/work-hour";
-import { DayInfoType } from "../../types/dayInfoType";
 import { convertDayOfWeekToNameDay } from "../../utils/convertDayOfWeekToNameDay";
+import { useAppSelector } from "../../Redux/storehooks";
+import { useConfiguratorWorkDay } from "./useConfoguratorWorkDays";
 
 interface ConfiGuratorWorkDaysProps {
-    days: DayInfoType[],
-    addNewWorkHour: (dayIndex: number, newWorkHour: WorkTime) => void, 
+
 }
 
 
-export const ConfiGuratorWorkDays = ({ days, addNewWorkHour }: ConfiGuratorWorkDaysProps) => {
-
+export const ConfiGuratorWorkDays = ({}: ConfiGuratorWorkDaysProps) => {
+    const userToken = useAppSelector(state => state.user.JwtToken);
+    const {workDays, fetchWorkDaysInfo} = useConfiguratorWorkDay(userToken)
     const [chooseDayIndex, setDayIndex] = useState(0);
+
+    useEffect(() => {
+        fetchWorkDaysInfo()
+    }, [])
     const handleChooseDay = (dayIndex: number) => {
         setDayIndex(dayIndex)
     }
-
-    console.log(days)
 
     return (
         <>
             <Row className="gap-2">
                 {
-                    days.map((day, index) => {
+                    workDays && workDays.map((day, index) => {
                         return (
                             <Col key={Math.random()}>
                                 <Button  
@@ -41,8 +43,13 @@ export const ConfiGuratorWorkDays = ({ days, addNewWorkHour }: ConfiGuratorWorkD
                 }
             </Row>
             <Row>
-                <ListWorkHour workHours={days[chooseDayIndex].times} />
-                <AddWorkHourForm addNewHour={addNewWorkHour} dayIndex={chooseDayIndex} />
+                {
+                    workDays && 
+                    <>
+                        <ListWorkHour workHours={workDays[chooseDayIndex].times} />
+                        <AddWorkHourForm  />
+                    </>
+                }
             </Row>
         </>
     )

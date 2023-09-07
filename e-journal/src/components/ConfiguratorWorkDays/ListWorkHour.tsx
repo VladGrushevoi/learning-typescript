@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap"
-import { WorkTime } from "../../types/work-hour"
+import { WorkTime } from "./useConfoguratorWorkDays"
 import { PencilSquare, Trash3Fill } from "react-bootstrap-icons"
 
 interface ListWorkHourProps {
