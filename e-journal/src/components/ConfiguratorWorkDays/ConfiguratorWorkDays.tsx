@@ -15,7 +15,6 @@ export const ConfiGuratorWorkDays = ({}: ConfiGuratorWorkDaysProps) => {
     const userToken = useAppSelector(state => state.user.JwtToken);
     const {workDays, fetchWorkDaysInfo} = useConfiguratorWorkDay(userToken)
     const [chooseDayIndex, setDayIndex] = useState(0);
-
     useEffect(() => {
         fetchWorkDaysInfo()
     }, [])
@@ -47,7 +46,7 @@ export const ConfiGuratorWorkDays = ({}: ConfiGuratorWorkDaysProps) => {
                     workDays && 
                     <>
                         <ListWorkHour workHours={workDays[chooseDayIndex].times} />
-                        <AddWorkHourForm  />
+                        <AddWorkHourForm isWorkDay={workDays[chooseDayIndex].isWorkDay} />
                     </>
                 }
             </Row>
