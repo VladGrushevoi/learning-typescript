@@ -23,7 +23,6 @@ export interface WorkTime {
 
 export const useConfiguratorWorkDay = (userToken: string) => {
     const [workDays, setWorkDays] = useState<WorkDay[]>();
-
     const fetchWorkDaysInfo = async () => {
         const response = await appAxios.get<{workDays: WorkDay[]}>("/schedule/work-days", {
             headers: {
@@ -34,8 +33,16 @@ export const useConfiguratorWorkDay = (userToken: string) => {
             setWorkDays(response.data.workDays)
         }
     }
+
+    const replaceWorkDay = (workDay: WorkDay) => {
+        const filteredWorkDays = workDays?.filter(d => d.id !== workDay.id);
+        const sortedWorkDays = [...filteredWorkDays!, workDay].sort((a,b) => a.dayOfWeek - b.dayOfWeek)
+        setWorkDays(sortedWorkDays)
+    }
+
     return {
         workDays,
         fetchWorkDaysInfo,
+        replaceWorkDay
     }
 }

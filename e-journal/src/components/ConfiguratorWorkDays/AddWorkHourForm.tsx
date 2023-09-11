@@ -1,28 +1,29 @@
 import { Button, Col, Form, InputGroup } from "react-bootstrap"
 import { CheckSquareFill, PlusCircle, XSquareFill } from "react-bootstrap-icons"
 import { useInput } from "../../hooks/useInput"
-import { useCheckbox } from "../../hooks/useCheckbox";
+//import { useCheckbox } from "../../hooks/useCheckbox";
 
 interface AddWorkHourFormProps {
-    isWorkDay: boolean
+    isWorkDay: boolean,
+    changeIsWorkDay: () => void,
 }
 
-export const AddWorkHourForm = ({ isWorkDay }: AddWorkHourFormProps) => {
+export const AddWorkHourForm = ({ isWorkDay, changeIsWorkDay }: AddWorkHourFormProps) => {
 
     const timeInput = useInput("", "time");
     const minutesInput = useInput("", "minutes");
-    console.log(isWorkDay)
-    const isWorkDayHook = useCheckbox(isWorkDay, "isWorkDay")
-    console.log(isWorkDayHook)
+    const handleIsWorkDayCheck = () => {
+        changeIsWorkDay()
+    }
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
     }
 
     return (
         <>
-            <Form.Check className="ml-3" label="Робочий день" {...isWorkDayHook.hook} />
+            <Form.Check className="ml-3" label="Робочий день" checked={isWorkDay} onClick={handleIsWorkDayCheck} />
             {
-                isWorkDayHook.hook.checked && 
+                isWorkDay && 
                 <Form className="justify-center items-center" onSubmit={handleSubmit}>
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">ЧАС</InputGroup.Text>

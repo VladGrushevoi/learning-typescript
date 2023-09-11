@@ -4,7 +4,8 @@ import { ListWorkHour } from "./ListWorkHour";
 import { AddWorkHourForm } from "./AddWorkHourForm";
 import { convertDayOfWeekToNameDay } from "../../utils/convertDayOfWeekToNameDay";
 import { useAppSelector } from "../../Redux/storehooks";
-import { useConfiguratorWorkDay } from "./useConfoguratorWorkDays";
+import { WorkDay, useConfiguratorWorkDay } from "./useConfoguratorWorkDays";
+import { appAxios } from "../../appAxios/appAxios";
 
 interface ConfiGuratorWorkDaysProps {
 
@@ -13,13 +14,27 @@ interface ConfiGuratorWorkDaysProps {
 
 export const ConfiGuratorWorkDays = ({}: ConfiGuratorWorkDaysProps) => {
     const userToken = useAppSelector(state => state.user.JwtToken);
-    const {workDays, fetchWorkDaysInfo} = useConfiguratorWorkDay(userToken)
+    const {workDays, fetchWorkDaysInfo, replaceWorkDay} = useConfiguratorWorkDay(userToken)
     const [chooseDayIndex, setDayIndex] = useState(0);
     useEffect(() => {
         fetchWorkDaysInfo()
     }, [])
     const handleChooseDay = (dayIndex: number) => {
         setDayIndex(dayIndex)
+    }
+    const changeIsWorkDay = async () => {
+        const response = await appAxios.patch<{workDay: WorkDay}>("/schedule/set-work-day", {
+            workDayId: workDays![chooseDayIndex].id,
+            isWorkDay: !workDays![chooseDayIndex].isWorkDay
+        }, {
+            headers: {
+                Authorization: "Bearer " + userToken
+            }
+        });
+
+        if(response.status === 200){
+            replaceWorkDay(response.data.workDay)
+        }
     }
 
     return (
@@ -46,7 +61,10 @@ export const ConfiGuratorWorkDays = ({}: ConfiGuratorWorkDaysProps) => {
                     workDays && 
                     <>
                         <ListWorkHour workHours={workDays[chooseDayIndex].times} />
-                        <AddWorkHourForm isWorkDay={workDays[chooseDayIndex].isWorkDay} />
+                        <AddWorkHourForm 
+                            isWorkDay={workDays[chooseDayIndex].isWorkDay} 
+                            changeIsWorkDay={changeIsWorkDay}
+                            />
                     </>
                 }
             </Row>

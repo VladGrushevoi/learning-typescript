@@ -27,7 +27,7 @@ function App() {
             dispatch(setUserFromStorage(userFromStorage))
         }
     }
-    if(user.JwtToken){
+    if(user.JwtToken === ""){
       checkToken(userFromStorage.jwtToken)
     }
 }, [])
