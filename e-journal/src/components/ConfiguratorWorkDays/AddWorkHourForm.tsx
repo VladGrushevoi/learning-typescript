@@ -6,17 +6,22 @@ import { useInput } from "../../hooks/useInput"
 interface AddWorkHourFormProps {
     isWorkDay: boolean,
     changeIsWorkDay: () => void,
+    addWorkTime: (hour: string, minutes: string) => void,
 }
 
-export const AddWorkHourForm = ({ isWorkDay, changeIsWorkDay }: AddWorkHourFormProps) => {
+export const AddWorkHourForm = ({ isWorkDay, changeIsWorkDay, addWorkTime }: AddWorkHourFormProps) => {
 
     const timeInput = useInput("", "time");
     const minutesInput = useInput("", "minutes");
+
     const handleIsWorkDayCheck = () => {
         changeIsWorkDay()
     }
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if(timeInput.value !== '' && minutesInput.value !== ''){
+            addWorkTime(timeInput.value, minutesInput.value)
+        }
     }
 
     return (

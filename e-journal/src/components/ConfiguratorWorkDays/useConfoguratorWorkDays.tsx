@@ -40,9 +40,22 @@ export const useConfiguratorWorkDay = (userToken: string) => {
         setWorkDays(sortedWorkDays)
     }
 
+    const addWorkTimeToDay = (dayOfWeek: number, workTime: WorkTime) => {
+        const workDayWithNewWorkTime = workDays?.map(wd => {
+            if(wd.dayOfWeek === dayOfWeek){
+                wd.times = [...wd.times, workTime]
+                return wd;
+            }
+            return wd;
+        })
+
+        setWorkDays(workDayWithNewWorkTime)
+    }
+
     return {
         workDays,
         fetchWorkDaysInfo,
-        replaceWorkDay
+        replaceWorkDay,
+        addWorkTimeToDay
     }
 }
