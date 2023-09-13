@@ -45,17 +45,17 @@ export const ActiveRecordsTable = ({  } : ActiveRecordsTableProps) => {
         <>
             <Row className="text-center">
                 <Col xs={1} sm={1} md={1}>#</Col>
-                <Col xs={1} sm={1} md={5}>ПАЦІЄНТ</Col>
-                <Col xs={5} sm={3} md={3}>ДАТА</Col>
+                <Col xs={2} sm={4} md={4}>ПАЦІЄНТ</Col>
+                <Col xs={4} sm={3} md={3}>ДАТА</Col>
                 <Col xs={2} sm={1} md={1}>ЧАС</Col>
-                <Col></Col>
+                <Col md={3}></Col>
             </Row>
             {
                 activeRecords.map((rec, index) => {
                     return (
                             <Row key={index+index*2} className="my-2 text-center justify-center items-center">
                                 <Col xs={1} sm={1} md={1}>{index + 1}</Col>
-                                <Col xs={1} sm={1} md={5}>
+                                <Col xs={2} sm={4} md={4}>
                                     <Col md={10} className="md:inline-block hidden">
                                         <Row md={8} className="justify-center items-center">
                                             <Col md={10}>
@@ -77,7 +77,7 @@ export const ActiveRecordsTable = ({  } : ActiveRecordsTableProps) => {
                                         <PersonCircle size={20} />
                                     </Col>
                                 </Col>
-                                <Col xs={5} sm={3} md={3}>
+                                <Col xs={4} sm={3} md={3}>
                                     {
                                         convertDayOfWeekToNameDay(rec.dayOfWeek)
                                         + ", " + 
@@ -87,7 +87,7 @@ export const ActiveRecordsTable = ({  } : ActiveRecordsTableProps) => {
                                 <Col xs={2} sm={1} md={1}>
                                     {rec.time.split(" ")[1]}
                                 </Col>
-                                <Col className="flex gap-2  items-center">
+                                <Col xs={3} sm={3} md={3} className="flex gap-2 items-center justify-center">
                                     <CheckSquareFill 
                                         size={20} 
                                         onClick={

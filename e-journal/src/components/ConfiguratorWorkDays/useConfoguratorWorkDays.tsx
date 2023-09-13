@@ -51,11 +51,23 @@ export const useConfiguratorWorkDay = (userToken: string) => {
 
         setWorkDays(workDayWithNewWorkTime)
     }
+    const deleteWorkTime = (dayOfWeek: number, workTimeId: string) => {
+        const workDayWithoutWorkTime = workDays!.map(d => {
+            if(d.dayOfWeek === dayOfWeek){
+                d.times = d.times.filter(t => t.id !== workTimeId)
+                return d;
+            }
+            return d;
+        })
+
+        setWorkDays(workDayWithoutWorkTime)
+    }
 
     return {
         workDays,
         fetchWorkDaysInfo,
         replaceWorkDay,
-        addWorkTimeToDay
+        addWorkTimeToDay,
+        deleteWorkTime
     }
 }

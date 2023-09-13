@@ -1,5 +1,5 @@
-import { Button, Col, Form, InputGroup } from "react-bootstrap"
-import { CheckSquareFill, PlusCircle, XSquareFill } from "react-bootstrap-icons"
+import { Button, Form, InputGroup } from "react-bootstrap"
+import { CheckSquareFill } from "react-bootstrap-icons"
 import { useInput } from "../../hooks/useInput"
 //import { useCheckbox } from "../../hooks/useCheckbox";
 
@@ -48,15 +48,7 @@ export const AddWorkHourForm = ({ isWorkDay, changeIsWorkDay, addWorkTime }: Add
                     <Button type="submit" className="bg-transparent px-1 py-0 border-0">
                         <CheckSquareFill className="hover:fill-green-600" size={40} />
                     </Button>
-                    <Button className="bg-transparent px-1 py-0 border-0">
-                        <XSquareFill className="hover:fill-red-600" size={40} />
-                    </Button>
                 </InputGroup>
-                <Col className="text-center">
-                    <Button className="">
-                        <PlusCircle />
-                    </Button>
-                </Col>
             </Form>
             }
         </>

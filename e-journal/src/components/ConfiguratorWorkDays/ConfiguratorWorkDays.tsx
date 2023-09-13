@@ -14,7 +14,7 @@ interface ConfiGuratorWorkDaysProps {
 
 export const ConfiGuratorWorkDays = ({}: ConfiGuratorWorkDaysProps) => {
     const userToken = useAppSelector(state => state.user.JwtToken);
-    const {workDays, fetchWorkDaysInfo, replaceWorkDay, addWorkTimeToDay} = useConfiguratorWorkDay(userToken)
+    const {workDays, fetchWorkDaysInfo, replaceWorkDay, addWorkTimeToDay, deleteWorkTime} = useConfiguratorWorkDay(userToken)
     const [chooseDayIndex, setDayIndex] = useState(0);
     useEffect(() => {
         fetchWorkDaysInfo()
@@ -55,6 +55,21 @@ export const ConfiGuratorWorkDays = ({}: ConfiGuratorWorkDaysProps) => {
         }
     }
 
+    const deleteWorkTimeHandler = async (workTimeId: string) => {
+        const response = await appAxios.patch<{httpStatusCode: number}>("/schedule/delete-time", {
+            dayOfWeek: workDays![chooseDayIndex].dayOfWeek,
+            workTimeId: workTimeId
+        },{
+            headers: {
+                Authorization: "Bearer " + userToken,
+            }
+        })
+
+        if(response.data.httpStatusCode === 200){
+            deleteWorkTime(workDays![chooseDayIndex].dayOfWeek, workTimeId)
+        }
+    }
+
     return (
         <>
             <Row className="gap-2">
@@ -78,7 +93,10 @@ export const ConfiGuratorWorkDays = ({}: ConfiGuratorWorkDaysProps) => {
                 {
                     workDays && 
                     <>
-                        <ListWorkHour workHours={workDays[chooseDayIndex].times} />
+                        <ListWorkHour 
+                            workHours={workDays[chooseDayIndex].times} 
+                            deleteWorkTime={deleteWorkTimeHandler}
+                            />
                         <AddWorkHourForm 
                             isWorkDay={workDays[chooseDayIndex].isWorkDay} 
                             changeIsWorkDay={changeIsWorkDay}
