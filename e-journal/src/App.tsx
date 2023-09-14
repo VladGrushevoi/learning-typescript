@@ -27,7 +27,7 @@ function App() {
             dispatch(setUserFromStorage(userFromStorage))
         }
     }
-    if(user.JwtToken === ""){
+    if(user.JwtToken === "" && userFromStorage){
       checkToken(userFromStorage.jwtToken)
     }
 }, [])
@@ -40,8 +40,8 @@ function App() {
             <Routes>
               <Route path='/' element={<MainPage />}/>
               <Route path='/main' element={<MainPage />}/>
-              <Route path='/admin/:id' element={<AdminPage />}/>
-              <Route path='/profile/:id' element={<ProfilePage />}/>
+              <Route path='/admin' element={<AdminPage />}/>
+              <Route path='/profile' element={<ProfilePage />}/>
               <Route path='/auth' element={<AuthPage />}/>
             </Routes>
           </BrowserRouter>
