@@ -1,7 +1,8 @@
-import { Button, Col, Form, InputGroup, Modal, Row } from "react-bootstrap"
+import { Button, Col, Form, InputGroup, Modal, Row, Spinner } from "react-bootstrap"
 import { WorkTime } from "../../types/work-hour"
 import { convertDayOfWeekToNameDay } from "../../utils/convertDayOfWeekToNameDay"
 import { useInput } from "../../hooks/useInput"
+import { useState } from "react"
 
 interface WriteToworkTimeModalProps {
     date: string,
@@ -14,6 +15,15 @@ interface WriteToworkTimeModalProps {
 
 export const WriteToWorkTimeModal = ({ date, workTime, isShow, dayOfWeek, onClose, createUserRocordToWorkTime }: WriteToworkTimeModalProps) => {
     const messageInput = useInput("", "message")
+    const [isLoading, setLoading] = useState<boolean>(false)
+    const handleWrite = () => {
+        setLoading(true)
+        createUserRocordToWorkTime(messageInput.value)
+        setTimeout(() => {
+            setLoading(false)
+        }, 1500)
+    }
+
     return (
         <>
             <Modal show={isShow} onHide={onClose}>
@@ -49,9 +59,18 @@ export const WriteToWorkTimeModal = ({ date, workTime, isShow, dayOfWeek, onClos
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => createUserRocordToWorkTime(messageInput.value)}>
-                        Записатися
-                    </Button>
+                    {
+                        isLoading ?
+                            <>
+                                <Spinner animation="grow" variant="success" />
+                            </>
+                            :
+                            <>
+                                <Button variant="secondary" onClick={handleWrite}>
+                                    Записатися
+                                </Button>
+                            </>
+                    }
                     <Button variant="primary" onClick={onClose}>
                         Закрити
                     </Button>
